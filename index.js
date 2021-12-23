@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
+const dbConnection = require("./lib/db")
 //morgan middleware
 app.use(morgan("dev"));
 
@@ -16,6 +18,6 @@ app.get('/',(req,res) => {
   res.render("index")
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`)
 })
