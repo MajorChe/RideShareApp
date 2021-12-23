@@ -4,7 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const PORT = process.env.PORT || 3000;
 
-const dbConnection = require("./lib/db")
+const dbConnection = require("./lib/db");
 //morgan middleware
 app.use(morgan("dev"));
 
@@ -15,9 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get('/',(req,res) => {
-  res.render("index")
+  res.render("index");
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`)
+  console.log(`App listening at http://localhost:${PORT}`)
 })
