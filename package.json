@@ -4,18 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app",
-    "local": "./node_modules/.bin/nodemon -L --ignore public/"
+    "start": "node index.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "db:reset": "node bin/resetdb.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.0.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "morgan": "^1.10.0",
-    "pg": "^8.7.1"
+    "node-gyp": "^8.4.1",
+    "pg": "^8.7.1",
+    "pg-native": "^3.0.0",
+    "rebuild": "^0.1.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
