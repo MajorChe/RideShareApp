@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 const dbConnection = require("./lib/db");
 //morgan middleware

@@ -9,9 +9,13 @@ module.exports = () => {
   });
 
   router.get("/login", (req, res) => {
-    const login_active = "is-active";
-    const register_active = null;
-    res.render("login", { login_active, register_active });
+    if (req.session.id) {
+      res.redirect("/");
+    } else {
+      const login_active = "is-active";
+      const register_active = null;
+      res.render("login", { login_active, register_active });
+    }
   });
 
   router.post("/login", (req, res) => {
@@ -56,7 +60,7 @@ module.exports = () => {
       let register_active = "is-active";
       res.render("login", { errors, login_active, register_active });
     }
-    userfn.getUser(email).then(async(result) => {
+    userfn.getUser(email).then(async (result) => {
       if (result) {
         let login_active = null;
         let register_active = "is-active";
@@ -75,6 +79,11 @@ module.exports = () => {
           });
       }
     });
+  });
+
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
   });
 
   return router;
