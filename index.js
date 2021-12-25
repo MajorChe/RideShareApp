@@ -12,7 +12,9 @@ app.use(morgan("dev"));
 app.set("view engine", "ejs");
 
 //body parser middleware
-app.use(express.urlencoded({ extended: true }));
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 

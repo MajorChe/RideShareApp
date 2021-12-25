@@ -1,3 +1,3 @@
-INSERT INTO users (name,contact,email,password) VALUES ('Alice','900000011','alice@mail.com','a');
-INSERT INTO users (name,contact,email,password) VALUES ('Bentley','900000022','bentley@mail.com','b');
-INSERT INTO users (name,contact,email,password) VALUES ('Calvin','9000000033','calvin@mail.com','c');
+INSERT INTO users (email,name,contact,password) VALUES ('alice@mail.com','Alice','900000011','a');
+INSERT INTO users (email,name,contact,password) VALUES ('bentley@mail.com','Bentley','900000022','b');
+INSERT INTO users (email,name,contact,password) VALUES ('calvin@mail.com','Calvin','9000000033','c');
