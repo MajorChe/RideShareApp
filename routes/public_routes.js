@@ -40,6 +40,10 @@ module.exports = () => {
     }
 });
 
+router.get('/ridesShow',(req,res) => { 
+  res.render('getRides');
+});
+
   return router;
 }
 
