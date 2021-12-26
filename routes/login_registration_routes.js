@@ -8,9 +8,13 @@ module.exports = () => {
     res.render("index");
   });
 
+  router.get("/dashboard", (req, res) => {
+    res.render("dashboard");
+  });
+
   router.get("/login", (req, res) => {
     if (req.session.id) {
-      res.redirect("/");
+      res.redirect("dashboard");
     } else {
       const login_active = "is-active";
       const register_active = null;
@@ -26,7 +30,7 @@ module.exports = () => {
         bcrypt.compare(req.body.password, user.password).then((result) => {
           if (result) {
             req.session.id = user.id;
-            res.redirect("/");
+            res.redirect("dashboard");
           } else {
             let login_active = "is-active";
             let register_active = null;
@@ -72,7 +76,7 @@ module.exports = () => {
           .postUser(email, name, contact, hashedPassword)
           .then((response) => {
             req.session.id = response.id;
-            res.redirect("/");
+            res.redirect("dashboard");
           })
           .catch((err) => {
             console.log(err);
