@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+body{
+  display:flex;
+  flex-direction: column;
+  background-color:#EADEB8;   
+  /* //background: #bdc3c7;  fallback for old browsers */
+  /* background: #2C3E50;  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #4CA1AF, #2C3E50);  
+  background: linear-gradient(to right, #4CA1AF, #2C3E50);  */
+  flex-wrap: wrap;
+}
+
+.top{
+  height:57vh;
+
+  display: flex;
+  flex-direction: row;
+  /* background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;    */
+  /* flex-wrap: wrap; */
+  margin-bottom: 2rem;
+  /* justify-content: space-around; */
+}
+.container1{
+  margin-top: 5rem;
+  /* padding:1rem; */
+  width:25%;
+   margin-left: 18rem;
+  /* margin-right: 3rem;  */
+}
+.container2{
+  margin-top: 5rem;
+  /* padding:1rem; */
+  width:40%; 
+   margin-left: 5rem; 
+}
+.form-horizontal{
+  display:flex;
+  flex-direction: column;
+}
+#googleMap{
+  width:100%;
+  height:25rem;
+  border: 2px solid black;
+  margin-bottom: 1rem;
+  
+}
+.rideTopContainer{
+  width :70%;
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
+ flex-wrap: wrap;
+}
+.rideContainer{ 
+  display:flex;
+  flex-direction: row;
+  /* border:1px solid black; */
+  width :70%;
+  margin-top:2rem;
+  margin-left: auto;
+  margin-right:auto;
+  height : 15rem;
+  justify-content:space-evenly;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family:'Lato';
+  padding-top: 2rem;
+}
+
+
+.driverInfo{
+/* border:2px solid black; */
+display: flex;
+direction: row;
+width :20%;
+justify-content: space-around;
+}
+#avatar{
+  border-radius: 100%;
+  height: 90%;
+}
+.rideInfo{
+  /* border:2px solid black; */
+ 
+  width :25%
+}
+.detailsInfo{
+  /* border:2px solid black; */
+  width :45%;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+
+ 
+}
+#car{
+  height: 90%;
+}
+@media only screen and (max-width: 1700px){
+  .container2{
+     width:95%;
+     margin-left: 4rem;
+     margin-right: 4rem;    
+    }
+
+  .rideTopContainer{
+    margin-top: 15rem;
+    margin-left: 4rem;
+    margin-right: 4rem
+  }
+
+}
