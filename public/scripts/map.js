@@ -22,27 +22,27 @@ let directionsDisplay=new google.maps.DirectionsRenderer();
 
 //Bind direction renderer to the map
 directionsDisplay.setMap(map);
-
+calcRoute();
 
 function calcRoute(){
     let request = {
-      origin: document.getElementById("from").value,
-      destination: document.getElementById("to").value,
-      
-      travelMode: google.maps.DirectionsTravelMode.DRIVING,
-      unitSystem : google.maps.UnitSystem.METRIC,
+        origin: document.getElementById("from").value,
+        destination: document.getElementById("to").value,      
+        travelMode: google.maps.DirectionsTravelMode.DRIVING,
+        unitSystem : google.maps.UnitSystem.METRIC,
 
     }
 
     directionsService.route(request,(result,status)=>{
-      if(status===google.maps.DirectionsStatus.OK){
+        if(status===google.maps.DirectionsStatus.OK){
         //get distance and time
-        const output = document.querySelector("#output");
-        output.innerHTML=
-            "<div>From: "+document.getElementById("from").value  + 
-            "<br/>To: "+document.getElementById("to").value +
-            "<br/> Driving Distance :"+result.routes[0].legs[0].distance.text +
-            "<br/>Estimated Time : "+result.routes[0].legs[0].duration.text+"</div>";
+            const output = document.querySelector("#output");
+            output.innerHTML=
+            // "<div>From: "+document.getElementById("from").value  + 
+            // "<br/>To: "+document.getElementById("to").value +
+            "<span><h5> Driving Distance :"+result.routes[0].legs[0].distance.text +
+            " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp &nbspEstimated Time : "
+            +result.routes[0].legs[0].duration.text+"</h5></span>";
 
  
         //display route
