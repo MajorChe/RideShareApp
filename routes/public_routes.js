@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const userfn = require("../lib/queries/01_loginRegister")
+require('dotenv').config()
 
 module.exports = () => {
   router.get('/',(req,res) => {
@@ -41,7 +42,40 @@ module.exports = () => {
 });
 
 router.get('/ridesShow',(req,res) => { 
-  res.render('getRides');
+  let api_key =  process.env.API_KEY;
+  console.log("api",api_key);
+  const from = null;
+  const to= null;
+  const seats=0;
+  userfn.getRides(from,to,seats)
+  .then(result => {
+    let rides=result;
+    console.log(rides);
+    res.render('getRides',{ api_key ,rides ,from,to});
+  }) 
+  .catch(err => {
+    console.log(err)
+  })
+ 
+});
+router.post('/search',(req,res) => { 
+  let api_key =  process.env.API_KEY;
+  console.log("api",api_key);
+  const from = req.body.from;
+  const to= req.body.to;
+  const seats = req.body.seats;
+  console.log("post f,t,s",from)
+  userfn.getRides(from,to,seats)
+  .then(result => {
+    let rides=result;
+    console.log("in post",rides);
+   
+    res.render('getRides',{ api_key ,rides,from,to});
+  }) 
+  .catch(err => {
+    console.log(err)
+  })
+ 
 });
 
   return router;
