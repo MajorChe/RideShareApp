@@ -29,7 +29,7 @@
                 <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Find Rides</a>
+                <a class="nav-link" href="/ridesShow">Find Rides</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Post Rides</a>
@@ -43,7 +43,7 @@
 
 <div class="top">
   <div class="container1">
-    <form class="form-horizontal" action="/search" method="POST">
+    <form class="form-horizontal" action="/ridesShow" method="POST">
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="far fa-dot-circle"></i></span>
         <input type="text" class="form-control" value="<%=from%>" id="from" name="from" placeholder="From">
@@ -60,6 +60,7 @@
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-users"></i></span>
         <input type="text" name=seats id="seats" class="form-control" placeholder="Number Of Passengers">
       </div>
+      
       <input type="submit" class="btn btn-dark" onClick="calcRoute();"> </input>
         
     </form>
@@ -76,10 +77,11 @@
 </div>
 <div class="rideTopContainer"></div>
 <% for(let ride of rides) { %>
+
   <div class="rideContainer">    
     <div class="driverInfo">
       
-      <img id="avatar" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+      <img id="avatar" src=<%=ride.avatar%> alt="">
       <div>         
         <br>
       <h2><%=ride.name%></h2><br>
@@ -89,17 +91,20 @@
     </div>
     <div class="rideInfo">      
       <br>
-      <h2><%=ride.origin%> to <%=ride.destination%></h2><br>
-      <h4><%=ride.pick_up%> to <%=ride.drop_off%></h4>
-    </div>
+      <p><b><%=ride.date%></b>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<b><%=ride.time_of_ride%></b></p>
+      <h6><b>Origin:</b><%=ride.origin%> </h6>
+      <h6><b>Destination:</b> <%=ride.destination%></h6>
+      <h6><b>Pick Up:</b><%=ride.pick_up%> </h6>
+      <h6><b>Drop Off:</b><%=ride.drop_off%></h6>
+      </div>
     <div class="detailsInfo">    
       
       <div>        
         <br>
-        <h5>Base Tariff:<%=ride.cost%>$</h5>
-        <h5>Seats Available:<%=ride.available_seats%></h5>
+        <h6><b>Base Tariff:</b><%=ride.cost%>$</h6>
+        <h6><b>Seats Available:</b><%=ride.available_seats%></h6>
       </div>
-      <img id="car" src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+      <img id="car" src=<%=ride.ride_image%> alt="">
     </div>
   </div>
   <% } %>
@@ -110,6 +115,7 @@
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
           crossorigin="anonymous"></script>
   <script src="scripts/map.js"></script> 
+  <script src="scripts/distance.js"></script> 
 </body>
 
 </html>
