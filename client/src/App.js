@@ -5,11 +5,7 @@ function App() {
   return (
     <>
     <Navbar/>
-    {/* <Routes>
-      <Route>
-        <Link to ="/login"></Link>
-      </Route>
-    </Routes> */}
+    <Views />
     </>
   );
 }
