@@ -9,19 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-
-const Links = ["Find Ride", "Post Ride", "Sign In", "Register"];
+import { Link as ReachLink } from "react-router-dom";
 
 const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
+  <Link px={2} py={1} rounded={"md"}
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
   >
     {children}
   </Link>
@@ -36,27 +31,21 @@ export default function Navbar() {
           <HStack spacing="1300px">
             <Box>RideShare LOGO</Box>
 
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+            <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+              
+              <Link as={ReachLink} to="/"><NavLink>Find Ride</NavLink></Link>
+              <Link as={ReachLink} to="/"><NavLink>Post Ride</NavLink></Link>
+              <Link as={ReachLink} to="/login"><NavLink>Login</NavLink></Link>
+              <Link as={ReachLink} to="/register"><NavLink>Register</NavLink></Link>
+
               <Button onClick={() => toggleColorMode()} m="1rem">
-                {colorMode === "dark" ? (
-                  <SunIcon color="orange.200" />
-                ) : (
-                  <MoonIcon color="blue.700" />
-                )}
+                {colorMode === "dark" ? (<SunIcon color="orange.200" />) : (<MoonIcon color="blue.700" />)}
               </Button>
+
             </HStack>
           </HStack>
         </Flex>
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </>
   );
 }
