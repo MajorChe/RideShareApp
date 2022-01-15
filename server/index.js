@@ -4,10 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const PORT = process.env.PORT || 8888;
 const app = express();
-const auth = require("./routes/auth")
-const rideRoute = require("./routes/ride");
-const users = require("./routes/user");
-const dbConnection = require("./db/db");
+const auth = require("./routes/auth");
 
 app.use(
   cors({
@@ -20,10 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/auth", auth)
-
-app.use("/ride", rideRoute(dbConnection));
-app.use("/", users(dbConnection));
+app.use("/auth", auth);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);

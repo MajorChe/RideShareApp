@@ -22,7 +22,6 @@ const validateForm = (req, res) => {
     })
     .then(valid => {
       if (valid) {
-        res.status(200).send()
         console.log("form is good");
       }
     });
