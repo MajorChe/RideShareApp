@@ -1,51 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../public/styles/nav.css";
-import logo from "../public/images/logo.png";
-function Navbar() {
+import { ReactNode } from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Link,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { useColorMode } from "@chakra-ui/color-mode";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+
+const Links = ["Find Ride", "Post Ride", "Sign In", "Register"];
+
+const NavLink = ({ children }) => (
+  <Link
+    px={2}
+    py={1}
+    rounded={"md"}
+    _hover={{
+      textDecoration: "none",
+      bg: useColorModeValue("gray.200", "gray.700"),
+    }}
+    href={"#"}
+  >
+    {children}
+  </Link>
+);
+
+export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <div>
-      <nav class="navbar sticky-top navbar-expand-lg navbar-light">
-        <Link to="/">
-          <img src={logo} />
-        </Link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <Link class="nav-link" to="/about">
-                About
-              </Link>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Find Rides
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Post Rides
-              </a>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/login">
-                Sign in
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <>
+      <Box px={4}>
+        <Flex h={20} alignItems={"center"} justifyContent={"space-between"}>
+          <HStack spacing="1300px">
+            <Box>RideShare LOGO</Box>
+
+            <HStack
+              as={"nav"}
+              spacing={4}
+              display={{ base: "none", md: "flex" }}
+            >
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+              <Button onClick={() => toggleColorMode()} m="1rem">
+                {colorMode === "dark" ? (
+                  <SunIcon color="orange.200" />
+                ) : (
+                  <MoonIcon color="blue.700" />
+                )}
+              </Button>
+            </HStack>
+          </HStack>
+        </Flex>
+      </Box>
+
+      <Box p={4}>Main Content Here</Box>
+    </>
   );
 }
-export default Navbar;
