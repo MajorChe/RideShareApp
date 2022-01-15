@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import TextField from "./TextField";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +25,22 @@ const Login = () => {
           .max(28, "Password too long!"),
       })}
       onSubmit={(values, actions) => {
-        alert(JSON.stringify(values, null, 2));
+        const vals = { ...values };
+          actions.resetForm();
+          axios.post("/auth/login", {username: vals.username,password: vals.password})
+          .catch(err => {
+            return;
+          })
+          .then(res => {
+            if(!res || !res.ok || res.status >=400) {
+              return;
+            }
+            return res.json();
+          })
+          .then(data => {
+            if(!data) return;
+            console.log(data);
+          });
         actions.resetForm();
       }}
     >
