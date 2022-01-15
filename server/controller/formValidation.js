@@ -13,14 +13,14 @@ const formSchema = Yup.object({
 
 const validateForm = (req, res) => {
   const formData = req.body;
-  console.log(req.body)
+  console.log(req.body);
   formSchema
     .validate(formData)
-    .catch(err => {
+    .catch((err) => {
       res.status(422).send();
       console.log(err.errors);
     })
-    .then(valid => {
+    .then((valid) => {
       if (valid) {
         console.log("form is good");
       }

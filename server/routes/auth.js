@@ -16,7 +16,11 @@ router.post("/register", (req, res) => {
       res.json({ loggedIn: false, status: "Username exists!! Please login" });
     } else {
       const hashedpassword = await bcrypt.hash(req.body.password, 12);
-      userfn.postUser(req.body.username, hashedpassword).then(() => {
+      userfn.postUser(req.body.username, hashedpassword).then((response) => {
+        req.session.user = {
+          username: req.body.username,
+          id: response.id
+        }
         res.json({ loggedIn: true, username: req.body.username });
       });
     }
