@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Navbar from "../Navbar";
-import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, Heading, VStack, Text} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { AccountContext } from "../hooks/AccountContext";
 
 const Login = () => {
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const {setUser} = useContext(AccountContext)
   return (
@@ -40,9 +41,14 @@ const Login = () => {
               return res.data;
             })
             .then(data => {
-              setUser({...data})
-              navigate("/dashboard");
-              console.log(data);
+              if(!data) return;
+              setUser({...data});
+              if(!data.loggedIn) {
+                setError(data.status)
+              } else if (data.loggedIn) {
+                navigate("/dashboard");
+                console.log(data);
+              }
             })
             .catch((err) => {
               console.log(err);
@@ -59,6 +65,7 @@ const Login = () => {
           spacing="1rem"
         >
           <Heading>Log In</Heading>
+          <Text as="p" color="red.500">{error}</Text>
           <TextField
             name="username"
             placeholder="Enter username"

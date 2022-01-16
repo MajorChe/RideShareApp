@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../Navbar";
-import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
@@ -9,9 +9,11 @@ import TextField from "./TextField";
 import axios from "axios";
 import { useContext } from "react";
 import { AccountContext } from "../hooks/AccountContext";
+import { useState } from "react";
 
 const Register = () => {
-  const {setUser} = useContext(AccountContext)
+  const {setUser} = useContext(AccountContext);
+  const [error,setError] = useState(null);
   const navigate = useNavigate();
   return (
     <>
@@ -42,9 +44,14 @@ const Register = () => {
               return res.data;
             })
             .then(data => {
-              setUser({...data})
-              navigate("/dashboard");
-              console.log(data);
+              if(!data) return;
+              setUser({...data});
+              if(data.status) {
+                setError(data.status)
+              } else if (data.loggedIn) {
+                navigate("/dashboard");
+                console.log(data);
+              }
             })
             .catch((err) => {
               console.log(err);
@@ -61,6 +68,7 @@ const Register = () => {
           spacing="1rem"
         >
           <Heading>Register</Heading>
+          <Text as="p" color="red.500">{error}</Text>
           <TextField
             name="username"
             placeholder="Enter username"
