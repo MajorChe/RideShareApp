@@ -4,10 +4,11 @@ const logger = require("morgan");
 // const bodyParser = require('body-parser');
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 8000;
 const app = express();
 const rideRoute = require("./routes/ride");
 const users = require("./routes/user");
+const listRidesRoute= require("./routes/listRides");
 const dbConnection = require("./db/db");
 
 app.use(cors());
@@ -24,6 +25,7 @@ app.use(
   })
 );
 
+app.use("/getRides", listRidesRoute(dbConnection));
 app.use("/ride", rideRoute(dbConnection));
 app.use("/", users(dbConnection));
 
