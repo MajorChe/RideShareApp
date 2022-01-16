@@ -7,6 +7,7 @@
     "db:reset": "node db/resetdb.js"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "cookie-session": "^2.0.0",
