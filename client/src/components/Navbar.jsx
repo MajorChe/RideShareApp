@@ -27,8 +27,8 @@ export default function Navbar() {
   return (
     <>
       <Box px={4}>
-        <Flex h={20} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing="1300px">
+        <Flex h={24} alignItems={"center"} justifyContent={"space-between"}>
+          <HStack spacing="800px">
             <Box>RideShare LOGO</Box>
 
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
