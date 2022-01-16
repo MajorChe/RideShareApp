@@ -6,9 +6,11 @@ import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import TextField from "./TextField";
 import axios from "axios";
+import { AccountContext } from "../hooks/AccountContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const {setUser} = useContext(AccountContext)
   return (
     <>
       <Navbar />
@@ -38,6 +40,7 @@ const Login = () => {
               return res.data;
             })
             .then(data => {
+              setUser({...data})
               navigate("/dashboard");
               console.log(data);
             })

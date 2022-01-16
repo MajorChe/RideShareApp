@@ -7,8 +7,11 @@ import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import TextField from "./TextField";
 import axios from "axios";
+import { useContext } from "react";
+import { AccountContext } from "../hooks/AccountContext";
 
 const Register = () => {
+  const {setUser} = useContext(AccountContext)
   const navigate = useNavigate();
   return (
     <>
@@ -39,6 +42,8 @@ const Register = () => {
               return res.data;
             })
             .then(data => {
+              setUser({...data})
+              navigate("/dashboard");
               console.log(data);
             })
             .catch((err) => {

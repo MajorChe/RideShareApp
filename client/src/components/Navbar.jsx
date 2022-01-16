@@ -34,7 +34,7 @@ export default function Navbar() {
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               
               <Link as={ReachLink} to="/"><NavLink>Find Ride</NavLink></Link>
-              <Link as={ReachLink} to="/"><NavLink>Post Ride</NavLink></Link>
+              <Link as={ReachLink} to="/about"><NavLink>Post Ride</NavLink></Link>
               <Link as={ReachLink} to="/login"><NavLink>Login</NavLink></Link>
               <Link as={ReachLink} to="/register"><NavLink>Register</NavLink></Link>
 

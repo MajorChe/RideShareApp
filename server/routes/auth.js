@@ -4,7 +4,17 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userfn = require("../db/queries/user");
 
-router.post("/login", (req, res) => {
+router
+.route("/login")
+.get(async (req,res) => {
+  if(req.session.user && req.session.user.username) {
+    console.log("loggedin")
+    res.json({ loggedIn: true, username: req.session.user.username})
+  } else {
+    res.json({ loggedIn: false})
+  }
+})
+.post((req, res) => {
   validateForm(req, res);
   userfn.getUser(req.body.username).then(async(result) => {
     if (result) {
