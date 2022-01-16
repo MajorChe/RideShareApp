@@ -75,7 +75,7 @@ export default function Dashboard() {
         </Flex>
       </Box>
 
-      <Box p={4}>Main Content Here</Box>
+      <Box p={4}>Dashboard Page</Box>
     </>
   );
 }

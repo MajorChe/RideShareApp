@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import TextField from "./TextField";
 import axios from "axios";
 
-function Register() {
+const Register = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -28,20 +28,23 @@ function Register() {
         onSubmit={(values, actions) => {
           const vals = { ...values };
           actions.resetForm();
-          axios.post("/auth/register", {username: vals.username,password: vals.password})
-          .catch(err => {
-            return;
-          })
-          .then(res => {
-            if(!res || !res.ok || res.status >=400) {
+          axios
+            .post("/auth/register", {
+              username: vals.username,
+              password: vals.password,
+            })
+            .then((res) => {
+              if (!res) return;
+              console.log(res.data);
+              return res.data;
+            })
+            .then(data => {
+              console.log(data);
+            })
+            .catch((err) => {
+              console.log(err);
               return;
-            }
-            return res.json();
-          })
-          .then(data => {
-            if(!data) return;
-            console.log(data);
-          });
+            });
         }}
       >
         <VStack
