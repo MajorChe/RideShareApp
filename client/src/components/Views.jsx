@@ -10,17 +10,20 @@ import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
 
 function Views() {
-  const {user} = useContext(AccountContext)
-  return user.loggedIn === null ? "" : (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-      </Routes>
+  const { user } = useContext(AccountContext);
+  return user.loggedIn === null ? (
+    ""
+  ) : (
+    <Routes>
+      {user.loggedIn && <Route path= "/" element={<Dashboard />} />}
+      {!user.loggedIn && <Route path="/" element={<Home />} />}
+      {!user.loggedIn && <Route path="/login" element={<Login />} />}
+      {!user.loggedIn && <Route path="/register" element={<Register />} />}
+      <Route element={<PrivateRoutes />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+    </Routes>
   );
 }
 

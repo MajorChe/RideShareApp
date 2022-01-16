@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 import {
   Box,
   Button,
@@ -10,6 +10,7 @@ import {
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link as ReachLink } from "react-router-dom";
+import { AccountContext } from "./hooks/AccountContext";
 
 const NavLink = ({ children }) => (
   <Link px={2} py={1} rounded={"md"}
@@ -23,6 +24,7 @@ const NavLink = ({ children }) => (
 );
 
 export default function Navbar() {
+  const {user} = useContext(AccountContext)
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
