@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon index.js",
-    "db:reset": "node db/resetdb.js"
+    "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
