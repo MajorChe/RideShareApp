@@ -4,7 +4,7 @@ const userfn = require("../db/queries/user");
 const checkCookies = async (req,res) => {
   if(req.session.user && req.session.user.email) {
     console.log("loggedin")
-    await res.json({ loggedIn: true, email: req.session.user.email})
+    await res.json({ loggedIn: true, email: req.session.user.email, name: req.session.user.name, id: req.session.user.id})
   } else {
     await res.json({ loggedIn: false})
   }
@@ -18,8 +18,9 @@ const handleLogin = async (req,res) => {
         req.session.user = {
           email: req.body.email,
           id: result.id,
+          name: result.name
         };
-        res.json({ loggedIn: true, status: req.body.email });
+        res.json({ loggedIn: true, email: req.body.email, name: result.name });
       } else {
         console.log("password doesnt match");
         res.json({ loggedIn: false, status: "Wrong email or password" });
@@ -41,8 +42,9 @@ const handleRegister = async (req,res) => {
         req.session.user = {
           email: req.body.email,
           id: result.id,
+          name: result.name
         };
-        res.json({ loggedIn: true, email: req.body.email });
+        res.json({ loggedIn: true, email: req.body.email, name: result.name });
       });
     }
   });

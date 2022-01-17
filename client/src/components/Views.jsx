@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
+import Rides from "./rides/Rides";
+import Ride from "./rides/Ride";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import Dashboard from "../components/user/Dashboard";
@@ -16,10 +18,12 @@ function Views() {
     ""
   ) : (
     <Routes>
-      {user.loggedIn && <Route path= "/" element={<Dashboard />} />}
+      {user.loggedIn && <Route path="/" element={<Dashboard />} />}
       {!user.loggedIn && <Route path="/" element={<Home />} />}
       {!user.loggedIn && <Route path="/login" element={<Login />} />}
       {!user.loggedIn && <Route path="/register" element={<Register />} />}
+      <Route path="/rides" element={<Rides />} />
+      <Route path="/ride/:ride_id" element={<Ride />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<Dashboard />} />

@@ -1,0 +1,48 @@
+.item_container{     
+    width :70%;
+    margin-top:4rem;
+    margin-left: auto;
+    margin-right:auto;
+    
+    height:80vh;
+  }
+  
+  /* h2,h6{
+    line-height: 2;
+  } */
+ 
+  #image{    
+    height:12rem;
+    margin-right:2rem ;
+  }
+  #driver-info{
+    margin-top:2rem;
+    margin-left: 2rem;
+    display: flex;
+    height : 15rem;
+    justify-content:space-evenly;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-family:'Lato';
+    padding-top: 2rem;
+    line-height: 3;
+    margin-bottom: 2rem;
+    width:50%
+   
+  }
+  #ride-info{
+    
+    margin-top:2rem;
+    margin-left: 2rem;
+    display: flex;
+    height : 18rem;
+    justify-content:space-evenly;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-family:'Lato';
+    padding-top: 2rem;
+    line-height:3;
+
+  }

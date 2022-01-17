@@ -10,6 +10,8 @@ function UserSettings() {
       <Navbar />
       <h1> This is settings page</h1>
       <h1>{user.email}</h1>
+      <h1>{user.name}</h1>
+      <h1>{user.id}</h1>
     </>
   )
 }

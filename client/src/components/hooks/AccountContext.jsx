@@ -10,7 +10,7 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     axios.get("/auth/login").then((res) => {
       if (res.data.loggedIn) {
-        // console.log(res.data)
+        console.log("hello",res.data)
         setUser({ ...res.data });
       } else {
         setUser({ loggedIn: false });

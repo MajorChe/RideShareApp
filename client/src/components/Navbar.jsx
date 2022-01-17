@@ -32,7 +32,7 @@ const NavLinks = () => {
   const {user, setUser} = useContext(AccountContext)
   return (
     <>
-      <Link as={ReachLink} to="/"><NavLink>Find Ride</NavLink></Link>
+      <Link as={ReachLink} to="/rides"><NavLink>Find Ride</NavLink></Link>
       <Link as={ReachLink} to="/about"><NavLink>Post Ride</NavLink></Link>
       {!user.loggedIn && <Link as={ReachLink} to="/login"><NavLink>Login</NavLink></Link>}
       {!user.loggedIn && <Link as={ReachLink} to="/register"><NavLink>Register</NavLink></Link>}
