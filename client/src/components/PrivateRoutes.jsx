@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
 
-const { Outlet, Navigate } = require("react-router-dom");
+const { Outlet, Navigate, useLocation } = require("react-router-dom");
 
 const useAuth = () => {
   const {user} = useContext(AccountContext)
@@ -9,8 +9,9 @@ const useAuth = () => {
 };
 
 const PrivateRoutes = () => {
+  const location = useLocation();
   const isAuth = useAuth();
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuth ? <Outlet /> : <Navigate to="/login" replace state={{from: location}}/>;
 };
 
 

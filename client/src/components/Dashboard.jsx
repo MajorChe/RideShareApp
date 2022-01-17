@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link as ReachLink } from "react-router-dom";
 import { useColorMode } from "@chakra-ui/color-mode";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon, SettingsIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -14,7 +14,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -66,10 +65,8 @@ export default function Dashboard() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Settings <SettingsIcon ml={6}/></MenuItem>
+                <MenuItem>Logout</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

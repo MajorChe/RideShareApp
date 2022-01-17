@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Navbar from "../Navbar";
 import { Button, ButtonGroup, Heading, VStack, Text} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
 import * as Yup from "yup";
 import TextField from "./TextField";
 import axios from "axios";
@@ -11,17 +11,16 @@ import { AccountContext } from "../hooks/AccountContext";
 const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const {setUser} = useContext(AccountContext)
+  const location = useLocation();
+  const {setUser} = useContext(AccountContext);
   return (
     <>
       <Navbar />
       <Formik
-        initialValues={{ username: "", password: "" }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
-          username: Yup.string()
-            .required("Username required!")
-            .min(6, "Username too short!")
-            .max(28, "Username too long!"),
+          email: Yup.string()
+            .required("Email required!"),
           password: Yup.string()
             .required("Password required!")
             .min(6, "Password too short!")
@@ -32,7 +31,7 @@ const Login = () => {
           actions.resetForm();
           axios
             .post("/auth/login", {
-              username: vals.username,
+              email: vals.email,
               password: vals.password,
             })
             .then((res) => {
@@ -46,7 +45,11 @@ const Login = () => {
               if(!data.loggedIn) {
                 setError(data.status)
               } else if (data.loggedIn) {
-                navigate("/dashboard");
+                if (location.state?.from) {
+                navigate(location.state.from);
+                } else {
+                  navigate("/dashboard");
+                }
                 console.log(data);
               }
             })
@@ -67,10 +70,11 @@ const Login = () => {
           <Heading>Log In</Heading>
           <Text as="p" color="red.500">{error}</Text>
           <TextField
-            name="username"
-            placeholder="Enter username"
+            name="email"
+            placeholder="Enter your email"
             autoComplete="off"
-            label="Username"
+            label="Email"
+            type="email"
           />
 
           <TextField
