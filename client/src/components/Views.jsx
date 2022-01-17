@@ -8,6 +8,7 @@ import Dashboard from "../components/user/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
+import UserSettings from "./user/UserSettings";
 
 function Views() {
   const { user } = useContext(AccountContext);
@@ -22,6 +23,7 @@ function Views() {
       <Route element={<PrivateRoutes />}>
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<UserSettings />} />
       </Route>
     </Routes>
   );
