@@ -64,7 +64,7 @@ const Login = () => {
           w={{ base: "90%", md: "500px" }}
           m="auto"
           justify="center"
-          h="100vh"
+          h="50vh"
           spacing="1rem"
         >
           <Heading>Log In</Heading>

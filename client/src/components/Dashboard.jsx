@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
-import { Link as ReachLink } from "react-router-dom";
+import { ReactNode, useContext } from "react";
+import { Link as ReachLink} from "react-router-dom";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon, SettingsIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router";
 import {
   Box,
   Flex,
@@ -16,6 +17,8 @@ import {
   MenuItem,
   useColorModeValue,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { AccountContext } from "./hooks/AccountContext";
 
 const NavLink = ({ children }) => (
   <Text px={2} py={1} rounded={"md"}
@@ -30,6 +33,9 @@ const NavLink = ({ children }) => (
 
 export default function Dashboard() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate()
+
+  const {user, setUser} = useContext(AccountContext)
   return (
     <>
       <Box px={4}>
@@ -66,7 +72,12 @@ export default function Dashboard() {
               </MenuButton>
               <MenuList>
                 <MenuItem>Settings <SettingsIcon ml={6}/></MenuItem>
-                <MenuItem>Logout</MenuItem>
+                <MenuItem onClick={async() => {
+                  await axios.post("/auth/logout").then(() => {
+                    setUser({loggedIn: false})
+                    navigate("/login");
+                  })
+                }}>Logout</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

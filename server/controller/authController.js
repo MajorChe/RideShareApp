@@ -48,4 +48,9 @@ const handleRegister = async (req,res) => {
   });
 }
 
-module.exports = {handleLogin,handleRegister,checkCookies}
+const handleLogout = (req,res) => {
+  res.clearCookie("sid");
+  res.json({loggedIn: false})
+}
+
+module.exports = {handleLogin, handleRegister, checkCookies, handleLogout}
