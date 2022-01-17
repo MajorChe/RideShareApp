@@ -1,0 +1,19 @@
+.item_container{     
+    width :50%;
+    margin-top:4rem;
+    margin-left: auto;
+    margin-right:auto;
+    height : 15rem;
+    justify-content:space-evenly;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-family:'Lato';
+    padding-top: 2rem;
+    line-height: 200%;
+    height:80vh;
+  }
+
+  #avatar{    
+    height:12rem;
+  }
