@@ -35,7 +35,7 @@ function Map(props) {
 
   const onSubmit = (e) => {
     // Get directions
-
+    props.updateSearch("clicked");
     const google = window.google;
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -69,6 +69,7 @@ function Map(props) {
   }
 
   const handleSelect = async value => {
+    props.updateSearch("");
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
@@ -79,18 +80,21 @@ function Map(props) {
     
   };
   const handleSelect2 = async value => {
+    props.updateSearch("");
     const results2 = await geocodeByAddress(value);
     const latLng2 = await getLatLng(results2[0]);
     setAddress2(value);   
     setCoordinates2(latLng2);  
-    props.updateAdress2(value);  
+    props.updateAdress2(value); 
+    
   };
 
   return (
 
     <div className="top">
       <div className="container1">
-        <PlacesAutocomplete
+        <div class="form-horizontal">
+        <PlacesAutocomplete  class="input-group mb-3"
           value={address}
           onChange={setAddress}
           onSelect={handleSelect}
@@ -101,7 +105,7 @@ function Map(props) {
               {/* <p>Latitude: {coordinates.lat}</p>
             <p>Longitude: {coordinates.lng}</p> */}
 
-              <input {...getInputProps({ placeholder: "From" })} />
+              <input class="form-control" {...getInputProps({ placeholder: "From" })} />
            
               <div>
                 {loading ? <div>...loading</div> : null}
@@ -121,7 +125,8 @@ function Map(props) {
             </div>
           )}
         </PlacesAutocomplete>
-        <PlacesAutocomplete
+        <br/>
+        <PlacesAutocomplete class="input-group mb-3"
           value={address2}
           onChange={setAddress2}
           onSelect={handleSelect2}
@@ -131,7 +136,7 @@ function Map(props) {
               {/* <p>Latitude: {coordinates2.lat}</p>
             <p>Longitude: {coordinates2.lng}</p> */}
 
-              <input {...getInputProps({ placeholder: "To" })} />
+              <input class="form-control" {...getInputProps({ placeholder: "To" })} required/>
 
               <div>
                 {loading ? <div>...loading</div> : null}
@@ -151,14 +156,18 @@ function Map(props) {
             </div>
           )}
         </PlacesAutocomplete>
-        <div>Distance: {distance}</div>
-        <div>Duration: {duration}</div>
-        <button id="submit" onClick={onSubmit}>
+        <br/>
+        <button id="submit" class="btn btn-dark" onClick={onSubmit}>
           Search
         </button>
-      </div>
+        <br/>
+        <br/> <br/>
+        <br/>
 
-      <div id="map" style={{ height: "400px", width: "40%" }} >
+        <p>Distance: {distance} Duration: {duration}</p>
+      </div>
+      </div>
+      <div id="map" style={{ height: "300px" }} >
 
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -171,7 +180,9 @@ function Map(props) {
           onGoogleApiLoaded={({ map, maps }) => onLoad(map, maps)}
         >
         </GoogleMapReact>
-
+        <br/>
+       
+        
       </div>
 
     </div>
