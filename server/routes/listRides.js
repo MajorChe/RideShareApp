@@ -39,7 +39,7 @@ module.exports = () => {
                   {
                     var config = {
                         method: 'get',
-                        url: `https://maps.googleapis.com/maps/api/directions/json?origin=${ride.origin}&destination=${from}&units=metric&mode=driving&key=AIzaSyBnoR42T2Mlxti728TT6tx04NqSwwMgsik`,
+                        url: `https://maps.googleapis.com/maps/api/directions/json?origin=${ride.origin}&destination=${from}&units=metric&mode=driving&key=${process.env.KEY}`,
                         headers: {}
                         };
                     axios(config)
