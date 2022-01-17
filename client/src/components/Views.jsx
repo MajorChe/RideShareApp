@@ -5,7 +5,7 @@ import Login from "./login/login";
 import Register from "./login/register";
 import Rides from "./rides/Rides";
 import Ride from "./rides/Ride";
-
+import PostRide from "./rides/PostRide";
 function Views() {
   return (
     <>
@@ -15,6 +15,7 @@ function Views() {
         <Route path="/register" element={<Register />} />
         <Route path="/rides" element={<Rides />} />
         <Route path="/ride/:ride_id" element={<Ride />} />
+        <Route path="/postRide" element={<PostRide />} />
       </Routes>
     </>
   );
