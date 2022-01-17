@@ -4,7 +4,7 @@ import Home from "./Home";
 import About from "./About";
 import Login from "./login/Login";
 import Register from "./login/Register";
-import Dashboard from "./Dashboard";
+import Dashboard from "../components/user/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
