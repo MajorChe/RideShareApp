@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
+import { Link as ReachLink } from "react-router-dom";
+import { useColorMode } from "@chakra-ui/color-mode";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
   Avatar,
   HStack,
+  Text,
   Link,
   Button,
   Menu,
@@ -14,38 +18,33 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const Links = ["Dashboard","Find Ride", "Post Ride"];
-
 const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
+  <Text px={2} py={1} rounded={"md"}
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"/about"}
   >
     {children}
-  </Link>
+  </Text>
 );
 
 export default function Dashboard() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Box px={4}>
-        <Flex h={20} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={1400} alignItems={"center"}>
+        <Flex h={20} alignItems={"center"} >
+          <HStack spacing={1300} alignItems={"center"}>
             <Box>RideShare LOGO</Box>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <Link as={ReachLink} to="/"><NavLink>Find Ride</NavLink></Link>
+              <Link as={ReachLink} to="/about"><NavLink>Post Ride</NavLink></Link>
+              <Link as={ReachLink} to="/inbox"><NavLink>Inbox</NavLink></Link>
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -54,6 +53,8 @@ export default function Dashboard() {
                 as={Button}
                 rounded={"full"}
                 variant={"link"}
+                ml={4}
+                mr={6}
                 cursor={"pointer"}
                 minW={0}
               >
@@ -72,6 +73,9 @@ export default function Dashboard() {
               </MenuList>
             </Menu>
           </Flex>
+          <Button onClick={() => toggleColorMode()} m="0.5rem">
+                {colorMode === "dark" ? (<SunIcon color="orange.200" />) : (<MoonIcon color="blue.700" />)}
+              </Button>
         </Flex>
       </Box>
 

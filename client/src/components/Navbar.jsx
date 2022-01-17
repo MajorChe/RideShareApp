@@ -5,6 +5,7 @@ import {
   Flex,
   HStack,
   Link,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/color-mode";
@@ -13,14 +14,14 @@ import { Link as ReachLink } from "react-router-dom";
 import { AccountContext } from "./hooks/AccountContext";
 
 const NavLink = ({ children }) => (
-  <Link px={2} py={1} rounded={"md"}
+  <Text px={2} py={1} rounded={"md"}
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
   >
     {children}
-  </Link>
+  </Text>
 );
 
 export default function Navbar() {
