@@ -10,7 +10,8 @@ function RidesList(props) {
       return (
 
         <RidesListItem
-          name={ride.ride}
+          ride_id ={ride.ride_id}
+          name={ride.name}
           avatar={ride.avatar}
           contact={ride.contact}
           date={ride.date}
@@ -32,7 +33,7 @@ function RidesList(props) {
   return (
     <div>
       {createRideItems()}
-      <h1>createlist</h1>
+     
     </div>
   );
 }
