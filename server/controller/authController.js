@@ -38,7 +38,7 @@ const handleRegister = async (req,res) => {
       res.json({ loggedIn: false, status: "email exists!! Please login" });
     } else {
       const hashedpassword = await bcrypt.hash(req.body.password, 12);
-      userfn.postUser(req.body.email, hashedpassword).then((result) => {
+      userfn.postUser(req.body.name,req.body.email, hashedpassword).then((result) => {
         req.session.user = {
           email: req.body.email,
           id: result.id,

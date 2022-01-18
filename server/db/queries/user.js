@@ -7,11 +7,11 @@ const getUser = (email) => {
     .catch((err) => console.log("Error is:", err));
 };
 
-const postUser = (email, password) => {
+const postUser = (name,email, password) => {
   return pool
     .query(
-      `INSERT INTO users (contact,name,email,password) VALUES ($1,$2,$3,$4) RETURNING *;`,
-      [1,"test",email, password]
+      `INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;`,
+      [name,email, password]
     )
     .then((response) => {
       console.log(response.rows[0]);

@@ -1,6 +1,7 @@
 const Yup = require("yup");
 
 const formSchema = Yup.object({
+  name: Yup.string(),
   email: Yup.string()
     .required("email required"),
   password: Yup.string()

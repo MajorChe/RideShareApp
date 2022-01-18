@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import axios from 'axios';
 import RidesList from './RidesList';
+import {Flex} from "@chakra-ui/react";
 
 function Rides() {
 
@@ -53,14 +54,12 @@ function Rides() {
   }
 
   return (
-    <div>
+    <Flex flexDirection={"column"} bgColor={"yellow.100"}>
       <Map updateAdress1={updateAdress1} updateAdress2={updateAdress2} adresss1={address1} adresss2={address2} 
       updateSearch={updateSearch}/>
 
       <RidesList rides={rides} />
-
-    </div>
-
+    </Flex>
   );
 }
 
