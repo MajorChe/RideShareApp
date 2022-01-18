@@ -3,6 +3,7 @@ const userfn = require("../db/queries/user");
 
 const checkCookies = async (req,res) => {
   if(req.session.user && req.session.user.email) {
+    console.log(req.session.user)
     console.log("loggedin")
     await res.json({ loggedIn: true, email: req.session.user.email, name: req.session.user.name, id: req.session.user.id, contact: req.session.user.contact})
   } else {

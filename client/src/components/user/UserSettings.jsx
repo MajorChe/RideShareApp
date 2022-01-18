@@ -22,7 +22,7 @@ function UserSettings() {
     <>
       <Navbar />
       <Formik
-        initialValues={{ name: user.name, email: user.email, password: "", contact: user.contact }}
+        initialValues={{ name: user.name, email: user.email, password: "", contact: user.contact}}
         onSubmit={(values, actions) => {
           const vals = { ...values };
           actions.resetForm();
@@ -51,7 +51,6 @@ function UserSettings() {
           <Heading mt={"50px"}>Profile Page</Heading>
           <Flex flexDirection={"column"} alignContent={"center"}>
             <Avatar alignSelf={"center"} mt={"50px"} mb={"40px"}size={"2xl"} src={"https://bit.ly/ryan-florence"} />
-            <Text ml={"150px"}><Input id="file-upload" name="avatar" type="file" border={"none"} size={"lg"}/></Text>
             <VStack
               as={Form}
               w={{ base: "90%", md: "500px" }}
@@ -64,13 +63,15 @@ function UserSettings() {
                 autoComplete="off"
                 label="Name"
                 type="text"
+                required
               />
-              <TextField name="email" autoComplete="off" label="Email" />
+              <TextField name="email" autoComplete="off" label="Email" required/>
               <TextField
                 name="password"
                 autoComplete="off"
                 label="Password"
                 type="password"
+                required
               />
               <TextField
                 name="contact"
@@ -79,7 +80,7 @@ function UserSettings() {
                 label="Contact"
                 type="tel"
               />
-              <Button colorScheme="teal" type="submit">
+              <Button colorScheme="blue" type="submit">
                 Update Details
               </Button>
             </VStack>
