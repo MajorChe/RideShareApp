@@ -1,11 +1,20 @@
-import React from 'react'
+import { Heading, SimpleGrid } from "@chakra-ui/react";
+import React from "react";
+import Navbar from "../Navbar";
+import TripCard from "./TripCard";
 
 const ViewTrips = () => {
   return (
     <>
-    <h1>View trips page</h1>
+      <Navbar />
+      <Heading mt={"50px"} textAlign={"center"}>Upcoming Trips</Heading>
+      <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
+      <TripCard />
+      <TripCard />
+      <TripCard />
+      </SimpleGrid>
     </>
-  )
-}
+  );
+};
 
-export default ViewTrips
+export default ViewTrips;
