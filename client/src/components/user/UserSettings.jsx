@@ -3,12 +3,10 @@ import { AccountContext } from "../hooks/AccountContext";
 import Navbar from "../Navbar";
 import {
   Heading,
-  Text,
   Button,
   VStack,
   Flex,
   Avatar,
-  Input,
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import TextField from "../login/TextField";
@@ -30,7 +28,7 @@ function UserSettings() {
             name: vals.name,
             email: vals.email,
             password: vals.password,
-            contact: vals.contact
+            contact: vals.contact,
           })
           .then((res) => {
             if (!res) return;

@@ -73,8 +73,10 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack display={"flex"} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
-            <Box ><Link as={ReachLink} to="/">RIDESHARE LOGO</Link></Box>
-
+            <Flex>
+              <Link as={ReachLink} to="/">RIDESHARE LOGO</Link>
+              <Link ml={"30px"} as={ReachLink} to="/trips">Trips</Link>
+            </Flex>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               
               <NavLinks />

@@ -7,7 +7,6 @@ function Dashboard() {
   return (
     <>
       <Navbar />
-      <h1> This is Dashboard</h1>
       <UserMetrics />
     </>
   )
