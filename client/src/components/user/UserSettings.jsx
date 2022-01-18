@@ -4,54 +4,47 @@ import Navbar from "../Navbar";
 import {
   Heading,
   Text,
-  ButtonGroup,
   Button,
   VStack,
   Flex,
   Avatar,
   Input,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { Form, Formik } from "formik";
 import TextField from "../login/TextField";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function UserSettings() {
+  const {user,setUser} = useContext(AccountContext);
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: user.name, email: user.email, password: "", contact: user.contact }}
         onSubmit={(values, actions) => {
           const vals = { ...values };
           actions.resetForm();
-          // axios
-          //   .post("/auth/login", {
-          //     email: vals.email,
-          //     password: vals.password,
-          //   })
-          //   .then((res) => {
-          //     if (!res) return;
-          //     console.log(res.data);
-          //     return res.data;
-          //   })
-          //   .then(data => {
-          //     if(!data) return;
-          //     setUser({...data});
-          //     if(!data.loggedIn) {
-          //       setError(data.status)
-          //     } else if (data.loggedIn) {
-          //       if (location.state?.from) {
-          //       navigate(location.state.from);
-          //       } else {
-          //         navigate("/dashboard");
-          //       }
-          //       console.log(data);
-          //     }
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //     return;
-          //   });
+          axios.put("/user/update", {
+            name: vals.name,
+            email: vals.email,
+            password: vals.password,
+            contact: vals.contact
+          })
+          .then((res) => {
+            if (!res) return;
+            return res.data;
+          })
+          .then ((data) => {
+            if (!data) return;
+            setUser({...data});
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+            return;
+          })
         }}
       >
         <VStack>
@@ -70,7 +63,7 @@ function UserSettings() {
                 name="name"
                 autoComplete="off"
                 label="Name"
-                type="email"
+                type="text"
               />
               <TextField name="email" autoComplete="off" label="Email" />
               <TextField
