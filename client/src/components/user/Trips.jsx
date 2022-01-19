@@ -12,7 +12,7 @@ const Trips = () => {
       <Flex justifyContent={"center"} mt={"50px"}>
         <ButtonGroup>
           <Button onClick={() => navigate("/trips/view")}>View Rides</Button>
-          <Button onClick={() => navigate("/about")}>View Ride Postings</Button>
+          <Button onClick={() => navigate("/trips/postings")}>View Ride Postings</Button>
           <Button onClick={() => navigate("/settings")}>Ride History</Button>
         </ButtonGroup>
       </Flex>
