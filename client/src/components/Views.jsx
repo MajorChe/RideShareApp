@@ -8,6 +8,7 @@ import Login from "./login/Login";
 import Register from "./login/Register";
 import Dashboard from "../components/user/Dashboard";
 import ViewTrips from "./user/ViewTrips";
+import PostRide from "./rides/PostRide"
 import PrivateRoutes from "./PrivateRoutes";
 import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
@@ -35,6 +36,7 @@ function Views() {
         <Route path="/trips" element={<Trips />} />
         <Route path="/trips/view" element={<ViewTrips />} />
         <Route path="/trips/postings" element={<ViewRidePostings />} />
+        <Route path="/postRide" element={<PostRide />} />
       </Route>
       <Route path="/*" element={<ErrorPage />}/>
     </Routes>

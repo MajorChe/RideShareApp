@@ -1,3 +1,4 @@
+import { SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import RidesListItem from './RidesListItem';
 
@@ -8,7 +9,7 @@ function RidesList(props) {
     return props.rides.map(ride => {
       console.log("props in list");
       return (
-
+      
         <RidesListItem
           ride_id ={ride.ride_id}
           name={ride.name}
@@ -26,14 +27,16 @@ function RidesList(props) {
           ride_description=""
           ride_image={ride.ride_image}
         />
+     
       )
     })
   }
 
   return (
     <div>
+      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
       {createRideItems()}
-     
+      </SimpleGrid>
     </div>
   );
 }

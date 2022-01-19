@@ -33,7 +33,7 @@ const NavLinks = () => {
   return (
     <>
       <Link as={ReachLink} to="/rides"><NavLink>Find Ride</NavLink></Link>
-      <Link as={ReachLink} to="/about"><NavLink>Post Ride</NavLink></Link>
+      <Link as={ReachLink} to="/postRide"><NavLink>Post Ride</NavLink></Link>
       {!user.loggedIn && <Link as={ReachLink} to="/login"><NavLink>Login</NavLink></Link>}
       {!user.loggedIn && <Link as={ReachLink} to="/register"><NavLink>Register</NavLink></Link>}
       {user.loggedIn && <Link as={ReachLink} to="/inbox"><NavLink>Inbox</NavLink></Link>}
