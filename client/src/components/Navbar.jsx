@@ -17,7 +17,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 const NavLink = ({ children }) => (
-  <Text px={2} py={1} rounded={"md"}
+  <Text px={2} py={1} rounded={"md"} fontSize={"20px"}
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
@@ -74,8 +74,8 @@ export default function Navbar() {
           />
           <HStack display={"flex"} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
-              <Link as={ReachLink} to="/">RIDESHARE LOGO</Link>
-              <Link ml={"30px"} as={ReachLink} to="/trips">Trips</Link>
+              <Link as={ReachLink} to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
+              <Link ml={"30px"} as={ReachLink} to="/trips"><NavLink>Trips</NavLink></Link>
             </Flex>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               

@@ -1,10 +1,11 @@
 import { Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 
 const Trips = () => {
   const navigate = useNavigate();
+   
   return (
     <>
       <Navbar />

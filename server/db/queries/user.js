@@ -37,4 +37,21 @@ const updateUser = (id, name, email, password, contact) => {
     });
 };
 
-module.exports = { getUser, postUser, updateUser };
+const getRidesforUser = async (id) => {
+  return await pool
+    .query(
+      `SELECT rides.ride_id as booked_ride_id, rides.ride_image as ride_image, rides.origin as origin,
+        rides.destination as destination, rides.cost as cost, rides.date_of_ride as date,
+          rides.time_of_ride as time, bookings.booking_status as status FROM bookings
+            JOIN rides ON bookings.ride_id = rides.ride_id WHERE bookings.rider_id = $1;`,
+      [id]
+    )
+    .then((response) => {
+      return response.rows; //response is an array of items
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+module.exports = { getUser, postUser, updateUser, getRidesforUser };

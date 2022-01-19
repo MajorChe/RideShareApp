@@ -42,21 +42,21 @@ const CardComponentHorizontal = (props) => {
   )
 }
 
-const TripCard = () => {
+const TripCard = (props) => {
   return (
     <>
     <Center pb={20}>
       <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <Stack direction={"row"} spacing={10}>
         <Image borderRadius='full' boxSize='150px' src={"https://bit.ly/ryan-florence"} alt={'Profile picture'} mb={4} pos={'relative'}/>
-        <Image borderRadius='2xl' boxSize='150px' src={"https://tinyurl.com/2s3kna33"} alt={'Car'} mb={4} pos={'relative'}/>
+        <Image borderRadius='2xl' boxSize='150px' src={props.ride_image} alt={'Car'} mb={4} pos={'relative'}/>
         </Stack>
-        <CardComponentVertical name="Pick Up: " value="Toronto, ON, Canada"/>
-        <CardComponentVertical name="Drop off: " value="Hamilton, ON, Canada"/>
-        <CardComponentHorizontal name= "Cost: " value="$20"/>
-        <CardComponentHorizontal name= "Date: " value="25 Feb 2022"/>
+        <CardComponentVertical name="Origin: " value={props.origin}/>
+        <CardComponentVertical name="Destination: " value={props.destination}/>
+        <CardComponentHorizontal name= "Cost: " value={props.cost}/>
+        <CardComponentHorizontal name= "Date: " value={props.date}/>
         <CardComponentHorizontal name= "Seats Booked: " value="2"/>
-        <CardComponentHorizontal name= "Status: " value="Approved"/>
+        <CardComponentHorizontal name= "Status: " value={props.status}/>
         <Button
             mt={5}
             fontSize={'xl'}

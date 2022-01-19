@@ -22,7 +22,7 @@ const handleLogin = async (req,res) => {
           name: result.name,
           contact: result.contact
         };
-        res.json({ loggedIn: true, email: req.body.email, name: result.name, contact: result.contact});
+        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name, contact: result.contact});
       } else {
         console.log("password doesnt match");
         res.json({ loggedIn: false, status: "Wrong email or password" });
@@ -46,7 +46,7 @@ const handleRegister = async (req,res) => {
           id: result.id,
           name: result.name
         };
-        res.json({ loggedIn: true, email: req.body.email, name: result.name });
+        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name });
       });
     }
   });
