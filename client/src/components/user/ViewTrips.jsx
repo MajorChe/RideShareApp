@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AccountContext } from "../hooks/AccountContext";
 import Navbar from "../Navbar";
 import TripCard from "./TripCard";
-import Moment from "react-moment"
+import Moment from "react-moment";
 
 const ViewTrips = () => {
   const {user, setUser} = useContext(AccountContext);
@@ -25,7 +25,7 @@ const ViewTrips = () => {
     ride_image={trip.ride_image}
     origin={trip.origin}
     destination={trip.destination}
-    cost={trip.cost}
+    cost={"$" + trip.cost}
     date={date}
     status={trip.status}
     />
@@ -35,9 +35,6 @@ const ViewTrips = () => {
       <Navbar />
       <Heading mt={"50px"} textAlign={"center"}>Upcoming Trips</Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
-        {/* <TripCard />
-        <TripCard />
-        <TripCard /> */}
         {ListTrips}
       </SimpleGrid>
     </>
