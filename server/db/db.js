@@ -11,7 +11,7 @@ const config = {
 const pool = new Pool(config);
 
 pool.connect(() => {
-  console.log("Connected to database on port 5432");
+  console.log(`Connected to database on port ${config.port}`);
 });
 
 module.exports = pool;

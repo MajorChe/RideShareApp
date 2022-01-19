@@ -55,7 +55,7 @@ const TripCard = (props) => {
         <CardComponentVertical name="Destination: " value={props.destination}/>
         <CardComponentHorizontal name= "Cost: " value={props.cost}/>
         <CardComponentHorizontal name= "Date: " value={props.date}/>
-        <CardComponentHorizontal name= "Seats Booked: " value="2"/>
+        <CardComponentHorizontal name= "Seats Booked: " value={props.seats_booked}/>
         <CardComponentHorizontal name= "Status: " value={props.status}/>
         <Button
             mt={5}

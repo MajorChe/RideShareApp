@@ -42,7 +42,7 @@ const getRidesforUser = async (id) => {
     .query(
       `SELECT rides.ride_id as booked_ride_id, rides.ride_image as ride_image, rides.origin as origin,
         rides.destination as destination, rides.cost as cost, rides.date_of_ride as date,
-          rides.time_of_ride as time, bookings.booking_status as status FROM bookings
+          rides.time_of_ride as time,bookings.seats_booked as seats_booked, bookings.booking_status as status FROM bookings
             JOIN rides ON bookings.ride_id = rides.ride_id WHERE bookings.rider_id = $1;`,
       [id]
     )

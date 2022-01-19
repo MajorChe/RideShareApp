@@ -27,6 +27,7 @@ const ViewTrips = () => {
     destination={trip.destination}
     cost={"$" + trip.cost}
     date={date}
+    seats_booked = {trip.seats_booked}
     status={trip.status}
     />
   })
