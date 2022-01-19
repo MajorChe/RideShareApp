@@ -50,7 +50,7 @@ function RidesListItem(props) {
             <Text color={'teal.800'}><b>From :</b> {props.origin}</Text>
             <Text color={'teal.800'}><b>To   :</b> {props.destination}</Text>
             <Text color={'teal.800'}><b>Date :</b> <Moment format="D MMM YYYY">{props.date_of_ride}</Moment></Text>
-            <Text color={'teal.800'}><b>Time :</b> <Moment format="HH:mm">{props.time_of_ride}</Moment><b> Seats:</b> {props.available_seats}</Text>
+            <Text color={'teal.800'}><b>Time :</b> {props.time_of_ride}<b> Seats:</b> {props.available_seats}</Text>
             <Text color={'teal.800'}></Text>
           </Stack>
 
