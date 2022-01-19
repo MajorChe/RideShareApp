@@ -24,7 +24,7 @@ function Rides() {
         console.log("rides", res.data);
         setRides(res.data);
 
-      });
+      }).catch(console.log("error in finding rides"));
 
   }, [search]);
   useEffect(() => {

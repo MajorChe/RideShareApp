@@ -61,6 +61,8 @@ module.exports = () => {
                           console.log(typeof(rides));                          
                           res.json(rides);   
                         }                      
+                      }).catch((err) => {
+                      console.log(err.message);
                     })  //axios    
                   }//for 
               
