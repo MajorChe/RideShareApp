@@ -3,6 +3,15 @@ import './RidesListItem.css';
 import {Link} from "react-router-dom";
 
 function RidesListItem(props) {
+
+
+  let format= new Date(props.date_of_ride).toUTCString();
+  console.log(format);
+  var month =  new Date(props.date_of_ride).getUTCMonth() + 1; //months from 1-12
+  var day =  new Date(props.date_of_ride).getUTCDate();
+  var year =  new Date(props.date_of_ride).getUTCFullYear();
+  let formatted = day + "-" + month + "-" + year;
+  console.log(formatted);
   return (
 
     <div class="rideContainer">
@@ -18,9 +27,9 @@ function RidesListItem(props) {
       </div>
       <div class="rideInfo">
         <br />
-        <p><b>{props.date_of_ride}</b>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<b>{props.time_of_ride}</b></p>
-        <h6><b>Origin:</b>{props.origin} </h6>
-        <h6><b>Destination:</b> {props.destination}</h6>
+        <p><b>Date :</b>{formatted}&nbsp;&nbsp; &nbsp; <b>Time :</b>{props.time_of_ride}</p>
+        <h6><b>From:</b>{props.origin} </h6>
+        <h6><b>To:</b> {props.destination}</h6>
         <h6><b>Pick Up:</b>{props.pick_up} </h6>
         <h6><b>Drop Off:</b>{props.drop_off}</h6>
 

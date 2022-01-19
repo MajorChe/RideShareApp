@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import axios from 'axios';
 import RidesList from './RidesList';
+import { Flex } from "@chakra-ui/react";
+import Navbar from '../Navbar';
 
 function Rides() {
 
@@ -12,30 +14,32 @@ function Rides() {
 
   useEffect(() => {
     axios.get("/getRides",
-      { params:
-            {
-              from: address1,
-              to: address2
-            }
+      {
+        params:
+        {
+          from: address1,
+          to: address2
+        }
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
-        
+
       });
 
   }, [search]);
   useEffect(() => {
     axios.get("/getRides",
-      { params:
-            {
-              from:"",
-              to: "",
-            }
+      {
+        params:
+        {
+          from: "",
+          to: "",
+        }
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
       });
-    
+
   }, []);
 
   function updateAdress1(address) {
@@ -53,13 +57,17 @@ function Rides() {
   }
 
   return (
-    <div>
-      <Map updateAdress1={updateAdress1} updateAdress2={updateAdress2} adresss1={address1} adresss2={address2} 
-      updateSearch={updateSearch}/>
+    <Flex flexDirection={"column"} bgColor={"yellow.50"}>
 
+      <Navbar />
+      <Map
+        updateAdress1={updateAdress1}
+        updateAdress2={updateAdress2}
+        adresss1={address1} adresss2={address2}
+        updateSearch={updateSearch} />
       <RidesList rides={rides} />
 
-    </div>
+    </Flex>
 
   );
 }
