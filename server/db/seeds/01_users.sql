@@ -1,0 +1,4 @@
+INSERT INTO users (email,name,contact,password,avatar) VALUES ('alice@mail.com','Alice','900000011','123456','https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO users (email,name,contact,password,avatar) VALUES ('bentley@mail.com','Bentley','900000022','b','https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO users (email,name,contact,password,avatar) VALUES ('calvin@mail.com','Calvin','9000000033','c','https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO users (email,name,contact,password,avatar) VALUES ('a@a.com','Alice','900000011',123456,'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');

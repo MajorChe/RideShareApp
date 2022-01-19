@@ -9,7 +9,7 @@ function Ride({ props }) {
   console.log(ride_id);
   const [rides, setRides] = useState({});
   useEffect(() => {
-    axios.get("http://localhost:8000/ride",
+    axios.get("/ride",
       {
         params:
         {
@@ -61,4 +61,4 @@ function Ride({ props }) {
       );
 }
 
-      export default Ride;
+export default Ride;

@@ -11,7 +11,7 @@ function Rides() {
   const [rides, setRides] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/getRides",
+    axios.get("/getRides",
       { params:
             {
               from: address1,
@@ -25,7 +25,7 @@ function Rides() {
 
   }, [search]);
   useEffect(() => {
-    axios.get("http://localhost:8000/getRides",
+    axios.get("/getRides",
       { params:
             {
               from:"",
