@@ -21,6 +21,8 @@ const Register = () => {
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
+          name: Yup.string()
+            .required("name required!"),
           email: Yup.string()
             .required("email required!"),
           password: Yup.string()
@@ -33,6 +35,7 @@ const Register = () => {
           actions.resetForm();
           axios
             .post("/auth/register", {
+              name: vals.name,
               email: vals.email,
               password: vals.password,
             })
@@ -67,6 +70,12 @@ const Register = () => {
         >
           <Heading>Register</Heading>
           <Text as="p" color="red.500">{error}</Text>
+          <TextField
+            name="name"
+            placeholder="Enter name"
+            autoComplete="off"
+            label="Name"
+          />
           <TextField
             name="email"
             placeholder="Enter email"

@@ -6,9 +6,9 @@ const postRideHandler = async (req,res) => {
 
     console.log(req.body.params);    
 
-    const {owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image}= req.body.params;
+    const {owner_id,origin,destination,available_seats,date_of_ride,time_of_ride}= req.body.params;
 
-    PostRideFn.postRide(owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
+    PostRideFn.postRide(owner_id,origin,destination,available_seats,date_of_ride,time_of_ride)
     
     .then(result=>{
 

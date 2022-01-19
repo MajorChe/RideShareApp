@@ -1,13 +1,13 @@
 const pool = require("../db");
 
 
-const postRide = (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image) => {
+const postRide = (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride) => {
   return pool
     .query(
       `INSERT INTO rides 
-            (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
-             VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *;`, 
-             [owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image]
+            (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride)
+             VALUES ($1,$2,$3,$4,$5,$6) RETURNING *;`, 
+             [owner_id,origin,destination,available_seats,date_of_ride,time_of_ride]
                
     )
     .then((response) => {

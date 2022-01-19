@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8888;
 const app = express();
 const rideRoute = require("./routes/ride");
 const auth = require("./routes/auth");
+const user = require("./routes/user");
 const post = require("./routes/postRoute");
 const session = require("express-session");
 const listRidesRoute = require("./routes/listRides");
@@ -13,7 +14,7 @@ const dbConnection = require("./db/db");
 
 app.use(
   cors({
-    origin: "http://localhost:3002",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -41,6 +42,8 @@ app.use(
 app.use("/getRides", listRidesRoute(dbConnection));
 app.use("/ride", rideRoute(dbConnection));
 app.use("/auth", auth);
+app.use("/user",user)
+
 app.use("/postRide", post);
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
