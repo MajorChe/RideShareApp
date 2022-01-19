@@ -21,7 +21,6 @@ function Views() {
     ""
   ) : (
     <Routes>
-      <Route path="*" element={<ErrorPage />}/>
       {user.loggedIn && <Route path="/" element={<Dashboard />} />}
       {!user.loggedIn && <Route path="/" element={<Home />} />}
       {!user.loggedIn && <Route path="/login" element={<Login />} />}
@@ -35,6 +34,7 @@ function Views() {
         <Route path="/trips" element={<Trips />} />
         <Route path="/trips/view" element={<ViewTrips />} />
       </Route>
+      <Route path="/*" element={<ErrorPage />}/>
     </Routes>
   );
 }

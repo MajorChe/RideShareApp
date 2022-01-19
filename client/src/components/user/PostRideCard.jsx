@@ -48,8 +48,8 @@ const TripCard = () => {
     <Center pb={20}>
       <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <Stack direction={"row"} spacing={10}>
-        <Image borderRadius='full' boxSize='150px' src={"https://bit.ly/ryan-florence"} alt={'Profile picture'} mb={4} pos={'relative'}/>
-        <Image borderRadius='2xl' boxSize='150px' src={"https://tinyurl.com/2s3kna33"} alt={'Car'} mb={4} pos={'relative'}/>
+        <Image borderRadius='full' boxSize='150px' src={"https://bit.ly/ryan-florence"} alt={'Avatar Alt'} mb={4} pos={'relative'}/>
+        <Image borderRadius='2xl' boxSize='150px' src={"https://tinyurl.com/2s3kna33"} alt={'Avatar Alt'} mb={4} pos={'relative'}/>
         </Stack>
         <CardComponentVertical name="Pick Up: " value="Toronto, ON, Canada"/>
         <CardComponentVertical name="Drop off: " value="Hamilton, ON, Canada"/>
