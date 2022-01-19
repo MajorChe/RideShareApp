@@ -2,28 +2,42 @@ import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import axios from 'axios';
 import RidesList from './RidesList';
-import { Flex } from "@chakra-ui/react";
+import Moment from 'react-moment';
 import Navbar from '../Navbar';
-
+import { Flex, Spacer } from '@chakra-ui/react'
 function Rides() {
 
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const [search, setSearch] = useState("");
   const [rides, setRides] = useState([]);
+  const [selectedDate,setSelectedDate]=useState(null);
+  // const [checked, setChecked] = React.useState(false);
+  let format = "";
+  if(selectedDate){
+  let month = selectedDate.getUTCMonth() + 1; //months from 1-12
+  let day = selectedDate.getUTCDate();
+  let year = selectedDate.getUTCFullYear();
+   format = selectedDate.toUTCString();
+   console.log(format);
+ }else{
+   format = "";
 
+ }
   useEffect(() => {
     axios.get("/getRides",
       {
         params:
         {
           from: address1,
-          to: address2
+          to: address2,
+          date :format,
+          
         }
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
-
+         
       }).catch(console.log("error in finding rides"));
 
   }, [search]);
@@ -34,10 +48,12 @@ function Rides() {
         {
           from: "",
           to: "",
+          date:"",
         }
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
+       
       });
 
   }, []);
@@ -55,20 +71,25 @@ function Rides() {
     setSearch(search);
     console.log(search);
   }
-
+  function updateSelectedDate(date) {    
+    setSelectedDate(date);
+    console.log(date);
+  }
+  
   return (
-    <Flex flexDirection={"column"} bgColor={"yellow.50"}>
-
+      <>
+   
       <Navbar />
       <Map
         updateAdress1={updateAdress1}
         updateAdress2={updateAdress2}
         adresss1={address1} adresss2={address2}
-        updateSearch={updateSearch} />
+        selectedDate={selectedDate} updateSelectedDate={updateSelectedDate}
+        updateSearch={updateSearch} />          
       <RidesList rides={rides} />
-
-    </Flex>
-
+      
+      
+      </>
   );
 }
 

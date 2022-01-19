@@ -5,7 +5,10 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import "./Map.css"
-
+import { Checkbox, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, Stack } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
 function Map(props) {
   console.log(props);
   const [distance, setDistance] = useState(0);
@@ -20,7 +23,9 @@ function Map(props) {
     lat: null,
     lng: null
   });
-
+  // const handleChange = () => {
+  //   props.updateSetChecked(!props.checked);
+  // };
   const onLoad = useCallback(function callback(map) {
 
     const google = window.google;
@@ -31,11 +36,11 @@ function Map(props) {
     };
     new google.maps.Map(document.getElementById('map'), mapProp);
   }, []);
-
-
+  
   const onSubmit = (e) => {
     // Get directions
-    props.updateSearch("clicked");
+    props.updateSearch("clicked"); 
+    
     const google = window.google;
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -66,6 +71,7 @@ function Map(props) {
         }
       }
     );
+    
   }
 
   const handleSelect = async value => {
@@ -76,96 +82,113 @@ function Map(props) {
     setCoordinates(latLng);
     console.log(value);
     props.updateAdress1(value);
-    
-    
+
+
   };
   const handleSelect2 = async value => {
     props.updateSearch("");
     const results2 = await geocodeByAddress(value);
     const latLng2 = await getLatLng(results2[0]);
-    setAddress2(value);   
-    setCoordinates2(latLng2);  
-    props.updateAdress2(value); 
-    
+    setAddress2(value);
+    setCoordinates2(latLng2);    
+
   };
+  const isError1 = address === '';
+  const isError2 = address2 === '';
 
   return (
 
     <div className="top">
       <div className="container1">
-        <div class="form-horizontal">
-        <PlacesAutocomplete  class="input-group mb-3"
-          value={address}
-          onChange={setAddress}
-          onSelect={handleSelect}
-        >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            
-            <div>
-              {/* <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p> */}
+        <div  class="form-horizontal">
+          
+          <PlacesAutocomplete class="input-group mb-3" 
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 
-              <input class="form-control" {...getInputProps({ placeholder: "From" })} />
-           
-              <div>
-                {loading ? <div>...loading</div> : null}
+              <div>                
+                <FormControl isInvalid={isError1} >
+                  <Input  value={props.address1} class="form-control" {...getInputProps({ placeholder: "From" })} />
+                  {!isError1 ? (
+                    <FormHelperText>
+                      Enter your pick up point
+                    </FormHelperText>
+                  ) : (
+                    <FormErrorMessage>From is required.</FormErrorMessage>
+                  )}
+                  <div>
+                    {loading ? <div>...loading</div> : null}
 
-                {suggestions.map(suggestion => {
-                  const style = {
-                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                  };
+                    {suggestions.map(suggestion => {
+                      const style = {
+                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                      };
 
-                  return (
-                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                      {suggestion.description}
-                    </div>
-                  );
-                })}
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </FormControl>
               </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
-        <br/>
-        <PlacesAutocomplete class="input-group mb-3"
-          value={address2}
-          onChange={setAddress2}
-          onSelect={handleSelect2}
-        >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div>
-              {/* <p>Latitude: {coordinates2.lat}</p>
-            <p>Longitude: {coordinates2.lng}</p> */}
+            )}
+          </PlacesAutocomplete>
+          <br />
+          <PlacesAutocomplete class="input-group mb-3"
+            value={address2}
+            onChange={setAddress2}
+            onSelect={handleSelect2}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div >              
+                <FormControl isInvalid={isError2}>
+                  <Input class="form-control" {...getInputProps({ placeholder: "To" })} required />
+                  {!isError2 ? (
+                    <FormHelperText>
+                      Enter your {props.place} point
+                    </FormHelperText>
+                  ) : (
+                    <FormErrorMessage> To is required.</FormErrorMessage>
+                  )}
 
-              <input class="form-control" {...getInputProps({ placeholder: "To" })} required/>
+                  <div>
+                    {loading ? <div>...loading</div> : null}
 
-              <div>
-                {loading ? <div>...loading</div> : null}
+                    {suggestions.map(suggestion => {
+                      const style = {
+                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                      };
 
-                {suggestions.map(suggestion => {
-                  const style = {
-                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                  };
-
-                  return (
-                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                      {suggestion.description}
-                    </div>
-                  );
-                })}
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </FormControl>
               </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
-        <br/>
-        <button id="submit" class="btn btn-dark" onClick={onSubmit}>
-          Search
-        </button>
-        <br/>
-        <br/> <br/>
-        <br/>
+            )}
+          </PlacesAutocomplete>
+          <br />
+          <Stack direction='row'>
+          <DatePicker placeholderText="Date"selected={props.selectedDate} onChange={date => props.updateSelectedDate(date)} minDate={new Date()} />
+        
+          </Stack>
+          <button id="submit" class="btn btn-dark" onClick={onSubmit}>
+            Search
+          </button>
+          <br />
+          <br /> <br />
+          <br />
 
-        <p>Distance: {distance} Duration: {duration}</p>
-      </div>
+          <p>Distance: {distance} Duration: {duration}</p>
+        </div>
       </div>
       <div id="map" style={{ height: "300px" }} >
 
@@ -180,9 +203,9 @@ function Map(props) {
           onGoogleApiLoaded={({ map, maps }) => onLoad(map, maps)}
         >
         </GoogleMapReact>
-        <br/>
-       
-        
+        <br />
+
+
       </div>
 
     </div>

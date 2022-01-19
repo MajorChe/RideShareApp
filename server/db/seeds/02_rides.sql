@@ -8,4 +8,16 @@ INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,
 INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
             VALUES (2,'Churchville, Brampton, ON, Canada','Brampton, ON, Canada',3,'126,Camilo Street','123,Kempstreet','2022-02-02','12:00:00','https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
-            VALUES (3,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','3:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');    
+            VALUES (3,'Toronto, ON, Canada','Niagara Falls, ON, Canada',0,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','3:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+ INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+ INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-03','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+INSERT INTO rides (owner_id,origin,destination,available_seats,pick_up,drop_off,date_of_ride,time_of_ride,ride_image)
+            VALUES (1,'Toronto, ON, Canada','Niagara Falls, ON, Canada',3,'126,Brook Street','2nd Avenue Niagra Falls City','2022-02-04','8:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');         
