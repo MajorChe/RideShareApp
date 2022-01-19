@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
 import UserSettings from "./user/UserSettings";
 import Trips from "./user/Trips";
+import ErrorPage from "./ErrorPage";
 
 function Views() {
   const { user } = useContext(AccountContext);
@@ -20,6 +21,7 @@ function Views() {
     ""
   ) : (
     <Routes>
+      <Route path="*" element={<ErrorPage />}/>
       {user.loggedIn && <Route path="/" element={<Dashboard />} />}
       {!user.loggedIn && <Route path="/" element={<Home />} />}
       {!user.loggedIn && <Route path="/login" element={<Login />} />}

@@ -4,13 +4,43 @@ import {
   Image,
   Box,
   Center,
-  Text,
+  Text,Flex,
   Stack,
   Button,
   Link,
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react';
+
+const CardComponentVertical = (props) => {
+  return(
+    <Flex direction={"column"}>
+        <Badge
+            px={5}
+            bg={useColorModeValue('gray.50', 'gray.800')}
+            fontWeight={'800'}
+            fontSize={"xl"}>
+            {props.name} 
+          </Badge>
+          <Text fontSize={"2xl"}>{props.value}</Text>
+        </Flex>
+  )
+}
+
+const CardComponentHorizontal = (props) => {
+  return(
+    <Flex direction={"row"} pt={3}>
+      <Badge
+        px={5}
+        bg={useColorModeValue('gray.50', 'gray.800')}
+        fontWeight={'800'}
+        fontSize={"2xl"}>
+        {props.name} 
+      </Badge>
+      <Text fontSize={"2xl"}>{props.value}</Text>
+    </Flex>
+  )
+}
 
 const TripCard = () => {
   return (
@@ -19,59 +49,17 @@ const TripCard = () => {
       <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <Stack direction={"row"} spacing={10}>
         <Image borderRadius='full' boxSize='150px' src={"https://bit.ly/ryan-florence"} alt={'Avatar Alt'} mb={4} pos={'relative'}/>
-        <Image borderRadius='full' boxSize='150px' src={"https://tinyurl.com/2s3kna33"} alt={'Avatar Alt'} mb={4} pos={'relative'}/>
+        <Image borderRadius='2xl' boxSize='150px' src={"https://tinyurl.com/2s3kna33"} alt={'Avatar Alt'} mb={4} pos={'relative'}/>
         </Stack>
-        <Heading fontSize={'2xl'} fontFamily={'body'}>Lindsey James</Heading>
-        <Text fontWeight={600} color={'gray.500'} mb={4}>
-          Pick up
-        </Text>
-        <Text fontWeight={600} color={'gray.500'} mb={4}>
-          drop off
-        </Text>
-        <Text
-          textAlign={'center'}
-          color={useColorModeValue('gray.700', 'gray.400')}
-          px={3}>
-          Ride details go here
-        </Text>
-
-        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Ride detail 1
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Ride detail 2
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            Ride detail 3
-          </Badge>
-        </Stack>
-
-        <Stack mt={8} direction={'row'} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            _focus={{
-              bg: 'gray.200',
-            }}>
-            Update Ride
-          </Button>
-          <Button
-            flex={1}
-            fontSize={'sm'}
+        <CardComponentVertical name="Pick Up: " value="Toronto, ON, Canada"/>
+        <CardComponentVertical name="Drop off: " value="Hamilton, ON, Canada"/>
+        <CardComponentHorizontal name= "Cost: " value="$20"/>
+        <CardComponentHorizontal name= "Date: " value="25 Feb 2022"/>
+        <CardComponentHorizontal name= "Seats Booked: " value="2"/>
+        <CardComponentHorizontal name= "Status: " value="Approved"/>
+        <Button
+            mt={5}
+            fontSize={'xl'}
             rounded={'full'}
             bg={'blue.400'}
             color={'white'}
@@ -86,7 +74,6 @@ const TripCard = () => {
             }}>
             Cancel Ride
           </Button>
-        </Stack>
       </Box>
     </Center>
     </>

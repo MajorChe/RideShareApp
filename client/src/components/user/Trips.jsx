@@ -11,9 +11,9 @@ const Trips = () => {
       <Heading textAlign={"center"} fontSize={"4xl"} pt={50} fontWeight={"bold"} >Your Trips</Heading>
       <Flex justifyContent={"center"} mt={"50px"}>
         <ButtonGroup>
-          <Button onClick={() => navigate("/trips/view")}>View Trips</Button>
-          <Button onClick={() => navigate("/about")}>Approve Ride</Button>
-          <Button onClick={() => navigate("/settings")}>Completed Rides</Button>
+          <Button onClick={() => navigate("/trips/view")}>View Rides</Button>
+          <Button onClick={() => navigate("/about")}>View Ride Postings</Button>
+          <Button onClick={() => navigate("/settings")}>Ride History</Button>
         </ButtonGroup>
       </Flex>
     </>
