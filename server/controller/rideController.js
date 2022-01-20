@@ -30,4 +30,12 @@ const userRideBookings = (req, res) => {
   });
 };
 
-module.exports = { userRidesViewer, userRidePostings, userRideBookings };
+const cancelRide = (req,res) => {
+  const { id } = req.params;
+  const new_id = parseInt(id);
+  userfn.cancelUserRide(new_id).then((result) => {
+    res.json({result});
+  })
+}
+
+module.exports = { userRidesViewer, userRidePostings, userRideBookings, cancelRide };

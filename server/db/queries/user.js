@@ -42,7 +42,7 @@ const getRidesforUser = async (id) => {
     .query(
       `SELECT rides.ride_id as booked_ride_id, rides.ride_image as ride_image,users.avatar as owner_image,users.name as owner_name, rides.origin as origin,
         rides.destination as destination, rides.cost as cost, rides.date_of_ride as date,
-          rides.time_of_ride as time,bookings.seats_booked as seats_booked, bookings.booking_status as status FROM bookings
+          rides.time_of_ride as time,bookings.booking_id, bookings.seats_booked as seats_booked, bookings.booking_status as status FROM bookings
             JOIN rides ON bookings.ride_id = rides.ride_id 
             JOIN users ON rides.owner_id = users.id
             WHERE bookings.rider_id = $1;`,
@@ -83,6 +83,21 @@ const getAllBookingsForOwner = (owner_id) => {
   .catch((err) => {
     console.log(err.message);
   })
+};
+
+const cancelUserRide = (booking_id) => {
+  return pool
+  .query(
+    `UPDATE bookings SET booking_status='cancelled' WHERE booking_id = $1 RETURNING *;`,[booking_id]
+  )
+  .then((response) => {
+    console.log("cancelboking response",response.rows[0])
+    return response.rows[0]
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
 }
 
-module.exports = { getUser, postUser, updateUser, getRidesforUser, getRidePostingsForUser, getAllBookingsForOwner };
+module.exports = { getUser, postUser, updateUser, getRidesforUser,
+   getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide };

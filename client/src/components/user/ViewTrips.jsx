@@ -11,8 +11,8 @@ const ViewTrips = () => {
   const {user, setUser} = useContext(AccountContext);
   const [trips, tripList] = useState([])
   console.log(user)
-  useEffect(() => {
-    axios.get(`/user/view/${user.id}`)
+  useEffect(async () => {
+    await axios.get(`/user/view/${user.id}`)
     .then((res) => {
       tripList(res.data.result)
       console.log("hello",res.data.result)
@@ -31,6 +31,8 @@ const ViewTrips = () => {
     status={trip.status}
     owner_image={trip.owner_image}
     owner_name={trip.owner_name}
+    booked_ride_id={trip.booked_ride_id}
+    booking_id={trip.booking_id}
     />
   })
   return (

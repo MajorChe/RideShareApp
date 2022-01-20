@@ -11,6 +11,7 @@ import {
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react';
+import axios from 'axios';
 
 const CardComponentVertical = (props) => {
   return(
@@ -43,6 +44,13 @@ const CardComponentHorizontal = (props) => {
 }
 
 const TripCard = (props) => {
+  const cancelRide = async () => {
+    await axios.put(`/user/cancelride/${props.booking_id}`)
+    .then((res) => {
+      console.log("response after:", res.data);
+      window.location.reload();
+    })
+  }
   return (
     <>
     <Center pb={20}>
@@ -58,7 +66,21 @@ const TripCard = (props) => {
         <CardComponentHorizontal name= "Date: " value={props.date}/>
         <CardComponentHorizontal name= "Seats Booked: " value={props.seats_booked}/>
         <CardComponentHorizontal name= "Status: " value={props.status}/>
-        <Button
+        {props.status === 'pending' && <Button
+            mt={5}
+            fontSize={'xl'}
+            rounded={'full'}
+            bg={'red.400'}
+            color={'white'}
+            boxShadow={
+              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+            }
+            _hover={{bg: 'red.500',}}
+            onClick={cancelRide}
+            >
+            CANCEL RIDE
+          </Button>}
+          {props.status === 'cancelled' && <Button
             mt={5}
             fontSize={'xl'}
             rounded={'full'}
@@ -69,8 +91,8 @@ const TripCard = (props) => {
             }
             _hover={{bg: 'red.500',}}
             >
-            CANCEL RIDE
-          </Button>
+            RIDE CANCELLED
+          </Button>}
       </Box>
     </Center>
     </>
