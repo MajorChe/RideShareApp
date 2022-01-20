@@ -54,4 +54,33 @@ const getRidesforUser = async (id) => {
     });
 };
 
-module.exports = { getUser, postUser, updateUser, getRidesforUser };
+const getRidePostingsForUser = (owner_id) => {
+  return pool
+  .query(
+    `SELECT ride_id, origin, destination FROM rides WHERE owner_id = $1;`,
+    [owner_id]
+  )
+  .then((response) => {
+    return response.rows;
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+}
+
+const getAllBookingsForOwner = (owner_id) => {
+  return pool
+  .query(
+    `SELECT bookings.booking_id, rides.ride_id, users.name, bookings.rider_id, bookings.seats_booked FROM bookings JOIN rides ON 
+    bookings.ride_id = rides.ride_id JOIN users ON bookings.rider_id = users.id WHERE owner_id = $1`,
+    [owner_id]
+  )
+  .then((response) => {
+    return response.rows;
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+}
+
+module.exports = { getUser, postUser, updateUser, getRidesforUser, getRidePostingsForUser, getAllBookingsForOwner };

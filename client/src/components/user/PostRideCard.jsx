@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import {
   Heading,
   Image,
@@ -47,8 +47,18 @@ const BookingComp = (props) => {
 }
 
 
-
 const PostRideCard = (props) => {
+  
+  const {bookings} = props
+  const bookingCompList = bookings.map((booking,index) => {
+    return(
+    <BookingComp
+      key={index}
+      id={index + 1}
+    />
+    )
+  })
+
   return (
     <>
     <Center pb={20}>
@@ -58,10 +68,9 @@ const PostRideCard = (props) => {
           <Heading>Post {props.id}</Heading>
           <ButtonComp color={"#ee6055"} name="Delete Ride"/>
         </Stack>
-        <BookingComp id={"1"}/>
-        <BookingComp id={"2"}/>
-        <BookingComp id={"3"}/>
-        <BookingComp id={"4"}/>
+          <Text fontSize={"20px"}>Origin: {props.origin}</Text>
+          <Text fontSize={"20px"}>Destination: {props.destination}</Text>
+        {bookingCompList}
         </VStack>
       </Box>
     </Center>
