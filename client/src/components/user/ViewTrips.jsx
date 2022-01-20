@@ -29,6 +29,8 @@ const ViewTrips = () => {
     date={date}
     seats_booked = {trip.seats_booked}
     status={trip.status}
+    owner_image={trip.owner_image}
+    owner_name={trip.owner_name}
     />
   })
   return (

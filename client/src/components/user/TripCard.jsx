@@ -48,11 +48,12 @@ const TripCard = (props) => {
     <Center pb={20}>
       <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <Stack direction={"row"} spacing={10}>
-        <Image borderRadius='full' boxSize='150px' src={"https://bit.ly/ryan-florence"} alt={'Profile picture'} mb={4} pos={'relative'}/>
+        <Image borderRadius='full' boxSize='150px' src={props.owner_image} alt={'Profile picture'} mb={4} pos={'relative'}/>
         <Image borderRadius='2xl' boxSize='150px' src={props.ride_image} alt={'Car'} mb={4} pos={'relative'}/>
         </Stack>
         <CardComponentVertical name="Origin: " value={props.origin}/>
         <CardComponentVertical name="Destination: " value={props.destination}/>
+        <CardComponentHorizontal name= "Name: " value={props.owner_name}/>
         <CardComponentHorizontal name= "Cost: " value={props.cost}/>
         <CardComponentHorizontal name= "Date: " value={props.date}/>
         <CardComponentHorizontal name= "Seats Booked: " value={props.seats_booked}/>
@@ -61,18 +62,14 @@ const TripCard = (props) => {
             mt={5}
             fontSize={'xl'}
             rounded={'full'}
-            bg={'blue.400'}
+            bg={'red.400'}
             color={'white'}
             boxShadow={
               '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
             }
-            _hover={{
-              bg: 'blue.500',
-            }}
-            _focus={{
-              bg: 'blue.500',
-            }}>
-            Cancel Ride
+            _hover={{bg: 'red.500',}}
+            >
+            CANCEL RIDE
           </Button>
       </Box>
     </Center>

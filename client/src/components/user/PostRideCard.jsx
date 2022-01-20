@@ -43,7 +43,7 @@ const BookingComp = (props) => {
 
   return (
     <>
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} motionPreset='slideInBottom' size={"sm"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Rider Details</ModalHeader>
@@ -71,8 +71,6 @@ const BookingComp = (props) => {
         <ButtonComp onClick={onOpen} color={"#3d9ad5"} name="VIEW" />
         <ButtonComp color={"green"} name="Approve" />
         <ButtonComp color={"#ee6055"} name="Cancel" />
-        {/* <Text>Name : {props.name}</Text>
-        <Text>Contact : 9876543210</Text> */}
       </HStack>
     </VStack>
     </>
@@ -88,7 +86,7 @@ const PostRideCard = (props) => {
   return (
     <>
     <Flex justifyContent={"space-around"}>
-      <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
+      <Box maxW={'400px'} w={'full'} bg={useColorModeValue('orange.100', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <VStack spacing={"30px"}>
         <Stack direction={"row"} spacing={20}>
           <Heading>POST: {props.id}</Heading>
