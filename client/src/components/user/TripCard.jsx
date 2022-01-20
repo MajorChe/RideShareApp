@@ -10,6 +10,13 @@ import {
   Link,
   Badge,
   useColorModeValue,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+  ModalHeader,
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -34,7 +41,7 @@ const CardComponentHorizontal = (props) => {
       <Badge
         px={5}
         bg={useColorModeValue('gray.50', 'gray.800')}
-        fontWeight={'800'}
+        fontWeight={'500'}
         fontSize={"2xl"}>
         {props.name} 
       </Badge>
@@ -44,6 +51,7 @@ const CardComponentHorizontal = (props) => {
 }
 
 const TripCard = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRide = async () => {
     await axios.put(`/user/cancelride/${props.booking_id}`)
     .then((res) => {
@@ -53,11 +61,21 @@ const TripCard = (props) => {
   }
   return (
     <>
+    <Modal isOpen={isOpen} onClose={onClose} motionPreset='slideInBottom' size={"xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            <br></br><br></br>
+            <Image src={props.ride_image}/>
+          </ModalBody>
+        </ModalContent>
+    </Modal>
     <Center pb={20}>
       <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
         <Stack direction={"row"} spacing={10}>
         <Image borderRadius='full' boxSize='150px' src={props.owner_image} alt={'Profile picture'} mb={4} pos={'relative'}/>
-        <Image borderRadius='2xl' boxSize='150px' src={props.ride_image} alt={'Car'} mb={4} pos={'relative'}/>
+        <Image onClick={onOpen} cursor={'pointer'} borderRadius='2xl' boxSize='150px' src={props.ride_image} alt={'Car'} mb={4} pos={'relative'}/>
         </Stack>
         <CardComponentVertical name="Origin: " value={props.origin}/>
         <CardComponentVertical name="Destination: " value={props.destination}/>
