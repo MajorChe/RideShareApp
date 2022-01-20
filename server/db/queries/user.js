@@ -97,7 +97,22 @@ const cancelUserRide = (booking_id) => {
   .catch((err) => {
     console.log(err.message)
   })
-}
+};
+
+const deleteUserRidePosting = (ride_id) => {
+  return pool
+  .query(
+    `UPDATE bookings SET booking_status='cancelled' WHERE ride_id = $1 RETURNING *;`,[ride_id]
+  )
+  .then((response) => {
+    console.log("cancelrideposting response",response.rows[0])
+    return response.rows[0]
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+};
+
 
 module.exports = { getUser, postUser, updateUser, getRidesforUser,
-   getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide };
+   getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide, deleteUserRidePosting };

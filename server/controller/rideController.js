@@ -36,6 +36,14 @@ const cancelRide = (req,res) => {
   userfn.cancelUserRide(new_id).then((result) => {
     res.json({result});
   })
+};
+
+const deleteRide = (req,res) => {
+  const { id } = req.params;
+  const new_id = parseInt(id);
+  userfn.deleteUserRidePosting(new_id).then((result) => {
+    res.json({result});
+  })
 }
 
-module.exports = { userRidesViewer, userRidePostings, userRideBookings, cancelRide };
+module.exports = { userRidesViewer, userRidePostings, userRideBookings, cancelRide, deleteRide };

@@ -51,14 +51,18 @@ const CardComponentHorizontal = (props) => {
 }
 
 const TripCard = (props) => {
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const trueStatus = props.status==='pending' ? true : props.status==='approved' ? true : false
+
   const cancelRide = async () => {
     await axios.put(`/user/cancelride/${props.booking_id}`)
     .then((res) => {
-      console.log("response after:", res.data);
       window.location.reload();
     })
-  }
+  };
+
   return (
     <>
     <Modal isOpen={isOpen} onClose={onClose} motionPreset='slideInBottom' size={"xl"}>
@@ -84,7 +88,7 @@ const TripCard = (props) => {
         <CardComponentHorizontal name= "Date: " value={props.date}/>
         <CardComponentHorizontal name= "Seats Booked: " value={props.seats_booked}/>
         <CardComponentHorizontal name= "Status: " value={props.status}/>
-        {props.status === 'pending' && <Button
+        {trueStatus && <Button
             mt={5}
             fontSize={'xl'}
             rounded={'full'}
@@ -98,7 +102,7 @@ const TripCard = (props) => {
             >
             CANCEL RIDE
           </Button>}
-          {props.status === 'cancelled' && <Button
+          {!trueStatus && <Button
             mt={5}
             fontSize={'xl'}
             rounded={'full'}

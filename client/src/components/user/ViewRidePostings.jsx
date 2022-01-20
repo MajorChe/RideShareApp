@@ -25,7 +25,7 @@ const ViewRidePostings = () => {
     })
   },[]);
 
-  const postListings = postingList.map((posting,index) => { //ride_id of 1 and ride_id of 3
+  const postListings = postingList.map((posting,index) => {
     const new_arr = [];
     for (let booking of bookings) {
       if(booking.ride_id === posting.ride_id) {
@@ -38,6 +38,7 @@ const ViewRidePostings = () => {
         id={index + 1}
         origin={posting.origin}
         destination={posting.destination}
+        ride_id = {posting.ride_id}
         bookings={new_arr}
       />
     );
