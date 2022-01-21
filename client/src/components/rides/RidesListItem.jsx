@@ -58,8 +58,10 @@ function RidesListItem(props) {
                 <h2>{props.origin}</h2>
                 <h2><b>Destination </b></h2>
                 <h2>{props.destination}</h2>
-                <h2><b>Seats </b></h2>
-                <h2>{props.available_seats}</h2>
+                <HStack>
+                <h2><b>Seats </b>{props.available_seats}</h2>
+                <h2><b>Base Tariff: </b>{props.cost}</h2>
+                </HStack>
                 <HStack>
                   <Text fontWeight={"small"} ><CalendarIcon />  <Moment format="D MMM YYYY">{props.date_of_ride}</Moment></Text>
                   <Text fontWeight={"small"}><TimeIcon />  {props.time_of_ride}</Text>
@@ -70,7 +72,7 @@ function RidesListItem(props) {
                   <Link to={{
                     pathname: "/ride/" + props.ride_id,
                   }}>
-                    <Button height='30px'
+                    <Button height='30px'color={'white'} _hover={{bg:'teal.400'}}
                       width='250px' bg={'teal'} mt={2} variant='outline'>View </Button>
                   </Link>
                 </FormControl>

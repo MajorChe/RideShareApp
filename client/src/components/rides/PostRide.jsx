@@ -29,6 +29,8 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Input,
+  useFormControl,
 } from '@chakra-ui/react';
 import { Button } from "@chakra-ui/react";
 import 'react-datepicker/dist/react-datepicker.css'
@@ -56,9 +58,13 @@ function PostRide() {
   const isError = selectedTime === '';
   const isErrorDate = selectedDate === '';
   const isErrorSeats = seats === '';
+
+  const isErrorAll= isError & isErrorDate && isErrorSeats ;
   const [successful, setSuccessful] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [price, setPrice] = useState('');  
+  const [value, setValue] = useState('');
+  
   const format = (val) => `$` + val;
   const parse = (val) => val.replace(/^\$/, '');
   console.log(selectedDate);
@@ -68,9 +74,11 @@ function PostRide() {
     setSuccessful(false);
     navigate('/rides');
   }
+  
   const post = (e) => {
     e.preventDefault();
     setLoading(true);
+
     var month = selectedDate.getUTCMonth() + 1; //months from 1-12
     var day = selectedDate.getUTCDate();
     var year = selectedDate.getUTCFullYear();
@@ -85,8 +93,9 @@ function PostRide() {
         destination: address2,
         available_seats: seats,
         date_of_ride: format,
-        time_of_ride: selectedTime,
-        ride_image: image,
+        time_of_ride: selectedTime,        
+        cost: price,
+        image: image
       }
     })
       .then((res) => {
@@ -108,6 +117,13 @@ function PostRide() {
     setAddress2(address2);
     console.log(address2);
   }
+  const handleImage = (event) => setImage(event.target.value);
+  const handlePrice = (event) => setPrice(event.target.value);
+  console.log("err",isError);
+  console.log("err",isErrorAll);
+  console.log("err",isErrorDate);
+  console.log("err",isErrorSeats);
+  
   return (
     <>
     <Navbar />   
@@ -117,11 +133,10 @@ function PostRide() {
     <Box  boxShadow ={'dark-lg'}
       rounded={'md'}
       p={6}
-      overflow={'hidden'}>
+      >
         
       <Container maxW='container.xl' centerContent>
-        <Box padding='5'  mt='5'>
-          
+        <Box padding='5'  mt='5'>          
 
             <FormControl >
               <Stack spacing={3}>                
@@ -129,24 +144,34 @@ function PostRide() {
                   updateAdress={updateAdress1} 
                   adresss1={address1} 
                   location={"from"} 
-                  place={"pick-up"} />
+                  place={"pick-up"} required/>
 
                 <Places 
                   updateAdress={updateAdress2} 
                   adresss1={address2} 
                   location={"to"} 
-                  place={"drop-off"} />
+                  place={"drop-off"} required/>
 
 
+                <HStack>  
+                
+                  <Input placeholder='Image' value={image}
+                   onChange={handleImage} >                 
+                  </Input>
+                  <Input placeholder='Price per Km' value={price} onChange={handlePrice}>                 
+                  </Input>
+                </HStack> 
+
+                <FormHelperText>Required</FormHelperText>
                 <HStack spacing='10px'>
                   <FormControl isInvalid={isErrorDate}>
                     <InputGroup>
-                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} minDate={new Date()} />
+                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" nDate={new Date()} />
                     </InputGroup>
                     <FormHelperText>Required</FormHelperText>
                   </FormControl>
 
-                  <FormControl isInvalid={isErrorSeats}>
+                  <FormControl isInvalid={isErrorSeats} >
                     <InputGroup>
                       <NumberInput size='sm' maxW={16} defaultValue={1} min={1}
                         onChange={seats => setSeats(seats)}
@@ -163,9 +188,8 @@ function PostRide() {
                     <FormHelperText>Seats</FormHelperText>
                   </FormControl>
 
-                  <FormControl isInvalid={isError}>
-
-                    <TimePicker
+                  <FormControl >
+                    <TimePicker isInvalid={isError}
                       placeholder="Select Time"
                       use24Hours
                       showSecond={false}
@@ -181,7 +205,9 @@ function PostRide() {
               <br />        
         
             </FormControl >
-            <Button onClick={post} disabled={loading} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
+            <Button onClick={!isError && post} 
+            
+            disabled={loading || isError} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
 
         <Modal onClose={closeEvent} isOpen={successful} isCentered>
         <ModalOverlay />
