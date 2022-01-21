@@ -35,7 +35,7 @@ function Rides() {
           
         }
       }).then((res) => {
-        console.log("rides", res.data);
+        console.log("rides in search", res.data);
         setRides(res.data);
          
       }).catch(console.log("error in finding rides"));
@@ -46,7 +46,7 @@ function Rides() {
       {
         params:
         {
-          from: "",
+          from: "initial",
           to: "",
           date:"",
         }

@@ -71,7 +71,8 @@ function Map(props) {
         }
       }
     );
-    
+    setAddress("");
+    setAddress2("");
   }
 
   const handleSelect = async value => {
@@ -91,7 +92,7 @@ function Map(props) {
     const latLng2 = await getLatLng(results2[0]);
     setAddress2(value);
     setCoordinates2(latLng2);    
-
+    props.updateAdress2(value);
   };
   const isError1 = address === '';
   const isError2 = address2 === '';
@@ -112,13 +113,13 @@ function Map(props) {
               <div>                
                 <FormControl isInvalid={isError1} >
                   <Input  value={props.address1} class="form-control" {...getInputProps({ placeholder: "From" })} />
-                  {!isError1 ? (
-                    <FormHelperText>
+                  {/* {/* {/* {!isError1 ? ( */}
+                    <FormHelperText> 
                       Enter your pick up point
-                    </FormHelperText>
-                  ) : (
+                     </FormHelperText>
+                  {/* ) : (
                     <FormErrorMessage>From is required.</FormErrorMessage>
-                  )}
+                  )} */}  
                   <div>
                     {loading ? <div>...loading</div> : null}
 
@@ -148,13 +149,13 @@ function Map(props) {
               <div >              
                 <FormControl isInvalid={isError2}>
                   <Input class="form-control" {...getInputProps({ placeholder: "To" })} required />
-                  {!isError2 ? (
+                  {/* {!isError2 ? ( */}
                     <FormHelperText>
-                      Enter your {props.place} point
+                      Enter your drop off point
                     </FormHelperText>
-                  ) : (
+                  {/* ) : (
                     <FormErrorMessage> To is required.</FormErrorMessage>
-                  )}
+                  )} */}
 
                   <div>
                     {loading ? <div>...loading</div> : null}

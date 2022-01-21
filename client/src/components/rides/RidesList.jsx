@@ -8,8 +8,7 @@ function RidesList(props) {
   function createRideItems() {
     return props.rides.map(ride => {
       console.log("props in list");
-      return (
-      
+      return (      
         <RidesListItem
           ride_id ={ride.ride_id}
           name={ride.name}
@@ -26,8 +25,7 @@ function RidesList(props) {
           drop_off={ride.drop_off}
           ride_description=""
           ride_image={ride.ride_image}
-        />
-     
+        />     
       )
     })
   }

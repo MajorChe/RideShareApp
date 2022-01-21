@@ -56,40 +56,8 @@ function RidesListItem(props) {
 
 
         </Stack>
-      </Box>
-      {/* <Stack>
-          <Text
-            color={'green.500'}
-            textTransform={'uppercase'}
-            fontWeight={800}
-            fontSize={'sm'}
-            letterSpacing={1.1}>
-            Blog
-          </Text>
-          <Heading
-            color={useColorModeValue('gray.700', 'white')}
-            fontSize={'2xl'}
-            fontFamily={'body'}>
-            Boost your conversion rate
-          </Heading>
-          <Text color={'gray.500'}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.
-          </Text>
-        </Stack>
-        <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-        <Avatar size='2xl'
-            src={props.avatar}
-            alt={'Driver'}
-          />
-          <Stack direction={'column'} spacing={10} fontSize={'md'}>
+      </Box>    
         
-            <Text fontWeight={600} color={'gray.500'}>{props.name}</Text>
-            <Text color={'gray.500'}>{props.contact}</Text>
-          </Stack>
-        </Stack> */}
 
     </Center >
   );

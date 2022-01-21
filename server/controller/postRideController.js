@@ -12,8 +12,18 @@ const postRideHandler = async (req,res) => {
     
     .then(result=>{
 
+      res.json(result);
+
       console.log("successfully inserted data");
-    })
+
+    }).catch((err) => {      
+
+      console.log(err.message);
+
+      res.send("failed",err.message);
+
+  })
+
 }
 
 module.exports = {postRideHandler}

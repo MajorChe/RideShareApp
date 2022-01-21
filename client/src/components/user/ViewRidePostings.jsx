@@ -10,8 +10,8 @@ const ViewRidePostings = () => {
       <Heading mt={"50px"} textAlign={"center"}>Your Ride Postings</Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
       <PostRideCard id ={"1"}/>
-      <PostRideCard id ={"2"}/>
-      <PostRideCard id ={"3"}/>
+      {/* <PostRideCard id ={"2"}/>
+      <PostRideCard id ={"3"}/> */}
       </SimpleGrid>
     </>
   );

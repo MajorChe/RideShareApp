@@ -8,6 +8,7 @@ const rideRoute = require("./routes/ride");
 const auth = require("./routes/auth");
 const user = require("./routes/user");
 const post = require("./routes/postRoute");
+const book = require("./routes/bookRoute");
 const session = require("express-session");
 const listRidesRoute = require("./routes/listRides");
 const dbConnection = require("./db/db");
@@ -42,9 +43,11 @@ app.use(
 app.use("/getRides", listRidesRoute(dbConnection));
 app.use("/ride", rideRoute(dbConnection));
 app.use("/auth", auth);
-app.use("/user",user)
+app.use("/user",user);
+
 
 app.use("/postRide", post);
+app.use("/book",book);
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
 });
