@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { Icon } from '@chakra-ui/react'
+import { FaDollarSign, FaCar, FaLocationArrow } from 'react-icons/fa'
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Stack,
-  FormLabel,
   FormControl,
   InputGroup,
   FormHelperText,
-  FormErrorMessage,
-  Heading,
   HStack,
   Container,
   Box,
@@ -26,11 +21,9 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
   ModalBody,
   Input,
-  useFormControl,
 } from '@chakra-ui/react';
 import { Button } from "@chakra-ui/react";
 import 'react-datepicker/dist/react-datepicker.css'
@@ -40,7 +33,6 @@ import DatePicker from "react-datepicker";
 import Navbar from '../Navbar';
 import TimePicker from "rc-time-picker";
 import 'rc-time-picker/assets/index.css';
-import { Select } from '@chakra-ui/react'
 import Places from './Places';
 import "./Post.css";
 import { useNavigate } from 'react-router-dom';
@@ -63,16 +55,16 @@ function PostRide() {
   const [successful, setSuccessful] = useState(false);
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState('');  
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
   
-  const format = (val) => `$` + val;
-  const parse = (val) => val.replace(/^\$/, '');
+  // const format = (val) => `$` + val;
+  // const parse = (val) => val.replace(/^\$/, '');
   console.log(selectedDate);
 
   function closeEvent()
   {
     setSuccessful(false);
-    navigate('/rides');
+    navigate('/trips/postings');
   }
   
   const post = (e) => {
@@ -129,7 +121,7 @@ function PostRide() {
     <Navbar />   
     <Center py={6}>
     <VStack> 
-    <Text fontSize='4xl' mt={5} mb={5}>Ride Details</Text> 
+    <Text fontSize='4xl' mt={5} mb={5}>POST A RIDE</Text> 
     <Box  boxShadow ={'dark-lg'}
       rounded={'md'}
       p={6}
@@ -139,26 +131,31 @@ function PostRide() {
         <Box padding='5'  mt='5'>          
 
             <FormControl >
-              <Stack spacing={3}>                
+              <Stack spacing={3}> 
+              <HStack>
+              <Icon as={FaLocationArrow} color={"red.300"} fontSize={"2xl"}/>               
                 <Places 
                   updateAdress={updateAdress1} 
                   adresss1={address1} 
                   location={"from"} 
                   place={"pick-up"} required/>
-
+              </HStack>
+              <HStack>
+              <Icon as={FaLocationArrow} color={"green.300"} fontSize={"2xl"}/>
                 <Places 
                   updateAdress={updateAdress2} 
                   adresss1={address2} 
                   location={"to"} 
                   place={"drop-off"} required/>
-
+              </HStack>
 
                 <HStack>  
-                
+                  <Icon as={FaCar}/>
                   <Input placeholder='Image' value={image}
                    onChange={handleImage} >                 
                   </Input>
-                  <Input placeholder='Price per Km' value={price} onChange={handlePrice}>                 
+                  <Icon as={FaDollarSign} />
+                  <Input placeholder='Enter total cost' value={price} onChange={handlePrice}>                 
                   </Input>
                 </HStack> 
 
@@ -166,7 +163,7 @@ function PostRide() {
                 <HStack spacing='10px'>
                   <FormControl isInvalid={isErrorDate}>
                     <InputGroup>
-                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" nDate={new Date()} />
+                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" minDate={new Date()} />
                     </InputGroup>
                     <FormHelperText>Required</FormHelperText>
                   </FormControl>
@@ -188,7 +185,7 @@ function PostRide() {
                     <FormHelperText>Seats</FormHelperText>
                   </FormControl>
 
-                  <FormControl >
+                  <FormControl>
                     <TimePicker isInvalid={isError}
                       placeholder="Select Time"
                       use24Hours

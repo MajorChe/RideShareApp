@@ -91,14 +91,14 @@ function Ride({ props }) {
   function closeEvent()
   {
     setSuccessful(false);
-    navigate('/rides');
+    navigate('/trips/view');
   }
   return (
     <>
       <Navbar />
       <Center>
         <VStack>
-          <Text fontSize='4xl' mt={5} mb={5}>Ride Details</Text>
+          <Text fontSize='50px' mt={5} mb={5}>RIDE DETAILS</Text>
           <Box mt={5} w={"50rem"} boxShadow='dark-lg' p={8} rounded='md' bg='white'>
             <Flex direction={"row"} mt={10}>
               <VStack textAlign={'left'} spacing={5}>

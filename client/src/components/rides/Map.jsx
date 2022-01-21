@@ -121,9 +121,9 @@ function Map(props) {
                 <FormControl isInvalid={isError1} >
                   <Input  value={props.address1} class="form-control" {...getInputProps({ placeholder: "From" })} />
                   {/* {/* {/* {!isError1 ? ( */}
-                    <FormHelperText> 
+                    {/* <FormHelperText> 
                       Enter your pick up point
-                     </FormHelperText>
+                     </FormHelperText> */}
                   {/* ) : (
                     <FormErrorMessage>From is required.</FormErrorMessage>
                   )} */}  
@@ -157,9 +157,9 @@ function Map(props) {
                 <FormControl isInvalid={isError2}>
                   <Input class="form-control" {...getInputProps({ placeholder: "To" })} required />
                   {/* {!isError2 ? ( */}
-                    <FormHelperText>
+                    {/* <FormHelperText>
                       Enter your drop off point
-                    </FormHelperText>
+                    </FormHelperText> */}
                   {/* //  ) : (
                   //   <FormErrorMessage> To is required.</FormErrorMessage>
                   // )}  */}
