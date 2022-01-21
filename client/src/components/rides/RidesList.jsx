@@ -32,7 +32,7 @@ function RidesList(props) {
 
   return (
     <div>
-      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} mt={"50px"}>
       {createRideItems()}
       </SimpleGrid>
     </div>

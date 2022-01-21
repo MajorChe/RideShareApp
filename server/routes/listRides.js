@@ -6,10 +6,11 @@ const pool = require("../db/db");
 var axios = require("axios");
 
 module.exports = () => {
-  router.get("/",async(req, res, next) => {
+  router.get("/", async (req, res, next) => {
     let from = req.query.from;
     let to = req.query.to;
     let date = req.query.date;
+    let only = req.query.only;
 
     console.log("from", from);
     console.log("to", to);
@@ -33,21 +34,35 @@ module.exports = () => {
       })
       .then(result => {
 
-        if (from==="initial") {
+        if (from === "initial") {
           // console.log("initial rendering type", typeof (rides));
           res.json(result);
         }
+        //======= i
+
+        else if (only === "exact") {
+          // console.log("initial rendering type", typeof (rides));
+          let onlyResult =[]
+          for (const ride of result) {           
+            if (to === ride.destination && from=== ride.origin) {
+              console.log(ride);
+              onlyResult.push(ride);
+            }
+          }   
+          res.json(onlyResult);
+        }
+        //===============================
         else {
           rides = [];
-          let result2=[];
+          let result2 = [];
           // console.log("in post result", result2);
           let axios_dist = [];
-          for(const ride of result){
-            if (to===ride.destination){
+          for (const ride of result) {
+            if (to === ride.destination) {
               console.log(ride);
               result2.push(ride);
 
-            }           
+            }
 
           }
 
@@ -68,15 +83,15 @@ module.exports = () => {
                 axios_dist.push(distance);
                 if (Number(distance) < 50) {
                   rides.push(ride);
-                 // console.log("rides", rides);
+                  // console.log("rides", rides);
                 }
                 console.log(axios_dist);
                 if (axios_dist.length === result2.length) {
-                  console.log("rides after dista axios", rides);                
-                  
+                  console.log("rides after dista axios", rides);
+
                   res.json(rides);
                 }
-                
+
               }).catch((err) => {
                 console.log(err.message);
               })  //axios    

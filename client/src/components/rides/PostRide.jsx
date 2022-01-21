@@ -178,19 +178,14 @@ function PostRide() {
                   </FormControl>
                 </HStack>
               </Stack>
-
-              <br />
-              
-              
-            
-             
-
+              <br />        
+        
             </FormControl >
             <Button onClick={post} disabled={loading} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
 
         <Modal onClose={closeEvent} isOpen={successful} isCentered>
-         <ModalOverlay />
-         <ModalContent>
+        <ModalOverlay />
+        <ModalContent>
           
           <ModalCloseButton />
           <ModalBody>
