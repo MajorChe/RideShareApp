@@ -38,13 +38,13 @@ function Places(props) {
           <FormControl isInvalid={isError}>
 
             <Input class="form-control" {...getInputProps({ placeholder: props.location })} />
-            {!isError ? (
+            {/* {!isError ? ( */}
               <FormHelperText>
                 Enter your {props.place} point
               </FormHelperText>
-            ) : (
-              <FormErrorMessage>{props.place} location is required.</FormErrorMessage>
-            )}
+            {/* // ) : (
+            //   <FormErrorMessage>{props.place} location is required.</FormErrorMessage>
+            // )} */}
 
             <div>
               {loading ? <div>...loading</div> : null}
