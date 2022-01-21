@@ -23,9 +23,9 @@ function Map(props) {
     lat: null,
     lng: null
   });
-  // const handleChange = () => {
-  //   props.updateSetChecked(!props.checked);
-  // };
+  const handleChange = () => {
+    props.updateOnly(!props.only);
+  };
   const onLoad = useCallback(function callback(map) {
 
     const google = window.google;
@@ -71,8 +71,16 @@ function Map(props) {
         }
       }
     );
+    setAddress("");
+    setAddress2("");
     
-  }
+    // setAddress(address);
+    // setAddress2(address2);
+    // props.updateAdress1(address);
+    // props.updateAdress2(address2);
+
+  //   props.updateSearch("");
+ }
 
   const handleSelect = async value => {
     props.updateSearch("");
@@ -91,7 +99,7 @@ function Map(props) {
     const latLng2 = await getLatLng(results2[0]);
     setAddress2(value);
     setCoordinates2(latLng2);    
-
+    props.updateAdress2(value);
   };
   const isError1 = address === '';
   const isError2 = address2 === '';
@@ -112,13 +120,13 @@ function Map(props) {
               <div>                
                 <FormControl isInvalid={isError1} >
                   <Input  value={props.address1} class="form-control" {...getInputProps({ placeholder: "From" })} />
-                  {!isError1 ? (
-                    <FormHelperText>
+                  {/* {/* {/* {!isError1 ? ( */}
+                    <FormHelperText> 
                       Enter your pick up point
-                    </FormHelperText>
-                  ) : (
+                     </FormHelperText>
+                  {/* ) : (
                     <FormErrorMessage>From is required.</FormErrorMessage>
-                  )}
+                  )} */}  
                   <div>
                     {loading ? <div>...loading</div> : null}
 
@@ -148,13 +156,13 @@ function Map(props) {
               <div >              
                 <FormControl isInvalid={isError2}>
                   <Input class="form-control" {...getInputProps({ placeholder: "To" })} required />
-                  {!isError2 ? (
+                  {/* {!isError2 ? ( */}
                     <FormHelperText>
-                      Enter your {props.place} point
+                      Enter your drop off point
                     </FormHelperText>
-                  ) : (
-                    <FormErrorMessage> To is required.</FormErrorMessage>
-                  )}
+                  {/* //  ) : (
+                  //   <FormErrorMessage> To is required.</FormErrorMessage>
+                  // )}  */}
 
                   <div>
                     {loading ? <div>...loading</div> : null}
@@ -178,7 +186,7 @@ function Map(props) {
           <br />
           <Stack direction='row'>
           <DatePicker placeholderText="Date"selected={props.selectedDate} onChange={date => props.updateSelectedDate(date)} minDate={new Date()} />
-        
+          <input type="checkbox" checked={props.only} onChange={handleChange}/>
           </Stack>
           <button id="submit" class="btn btn-dark" onClick={onSubmit}>
             Search

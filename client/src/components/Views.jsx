@@ -37,6 +37,7 @@ function Views() {
         <Route path="/trips/view" element={<ViewTrips />} />
         <Route path="/trips/postings" element={<ViewRidePostings />} />
         <Route path="/postRide" element={<PostRide />} />
+        
       </Route>
       <Route path="/*" element={<ErrorPage />}/>
     </Routes>

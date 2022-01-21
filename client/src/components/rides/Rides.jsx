@@ -12,7 +12,8 @@ function Rides() {
   const [search, setSearch] = useState("");
   const [rides, setRides] = useState([]);
   const [selectedDate,setSelectedDate]=useState(null);
-  // const [checked, setChecked] = React.useState(false);
+  const [only, setOnly] = useState(false);
+  let exact="false";
   let format = "";
   if(selectedDate){
   let month = selectedDate.getUTCMonth() + 1; //months from 1-12
@@ -25,18 +26,23 @@ function Rides() {
 
  }
   useEffect(() => {
+    if(only){
+      exact="exact";
+    }
     axios.get("/getRides",
       {
         params:
         {
+          only:exact,
           from: address1,
           to: address2,
           date :format,
           
         }
       }).then((res) => {
-        console.log("rides", res.data);
+        console.log("rides in search", res.data);
         setRides(res.data);
+        
          
       }).catch(console.log("error in finding rides"));
 
@@ -46,7 +52,7 @@ function Rides() {
       {
         params:
         {
-          from: "",
+          from: "initial",
           to: "",
           date:"",
         }
@@ -75,7 +81,10 @@ function Rides() {
     setSelectedDate(date);
     console.log(date);
   }
-  
+  function updateOnly(val) {    
+    setOnly(val);
+    console.log("only",only);
+  }
   return (
       <>
    
@@ -85,7 +94,10 @@ function Rides() {
         updateAdress2={updateAdress2}
         adresss1={address1} adresss2={address2}
         selectedDate={selectedDate} updateSelectedDate={updateSelectedDate}
-        updateSearch={updateSearch} />          
+        only={only} updateOnly={updateOnly}
+        updateSearch={updateSearch} 
+        
+        />          
       <RidesList rides={rides} />
       
       

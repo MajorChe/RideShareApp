@@ -21,6 +21,16 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Center,
+  Text,
+  VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  Input,
+  useFormControl,
 } from '@chakra-ui/react';
 import { Button } from "@chakra-ui/react";
 import 'react-datepicker/dist/react-datepicker.css'
@@ -46,11 +56,28 @@ function PostRide() {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const isError = selectedTime === '';
+  const isErrorDate = selectedDate === '';
+  const isErrorSeats = seats === '';
+
+  const isErrorAll= isError & isErrorDate && isErrorSeats ;
+  const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [price, setPrice] = useState('');  
+  const [value, setValue] = useState('');
+  
   const format = (val) => `$` + val;
   const parse = (val) => val.replace(/^\$/, '');
   console.log(selectedDate);
-  const handleSubmit = (e) => {
+
+  function closeEvent()
+  {
+    setSuccessful(false);
+    navigate('/rides');
+  }
+  
+  const post = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     var month = selectedDate.getUTCMonth() + 1; //months from 1-12
     var day = selectedDate.getUTCDate();
@@ -66,15 +93,21 @@ function PostRide() {
         destination: address2,
         available_seats: seats,
         date_of_ride: format,
-        time_of_ride: selectedTime,
-        ride_image: image,
+        time_of_ride: selectedTime,        
+        cost: price,
+        image: image
       }
     })
       .then((res) => {
-        if (!res) return;
-        console.log(res.data);
-        return res.data;
+        setLoading(false);
+        console.log("here",res);        
+        setSuccessful(true);
       })
+        .catch(()=>{
+          setLoading(false);
+        })
+       
+      
   }
   function updateAdress1(address1) {
     setAddress1(address1);
@@ -84,40 +117,61 @@ function PostRide() {
     setAddress2(address2);
     console.log(address2);
   }
+  const handleImage = (event) => setImage(event.target.value);
+  const handlePrice = (event) => setPrice(event.target.value);
+  console.log("err",isError);
+  console.log("err",isErrorAll);
+  console.log("err",isErrorDate);
+  console.log("err",isErrorSeats);
+  
   return (
     <>
-      <Navbar />     
+    <Navbar />   
+    <Center py={6}>
+    <VStack> 
+    <Text fontSize='4xl' mt={5} mb={5}>Ride Details</Text> 
+    <Box  boxShadow ={'dark-lg'}
+      rounded={'md'}
+      p={6}
+      >
+        
       <Container maxW='container.xl' centerContent>
-        <Box padding='10' bg='gray.100' maxW='4xl' mt='10'>
-          <form onSubmit={handleSubmit} class="form-horizontal">
+        <Box padding='5'  mt='5'>          
 
             <FormControl >
-              <Stack spacing={3}>
-                <Heading as='h3' size='lg' isTruncated>
-                  Post Ride
-                </Heading>
+              <Stack spacing={3}>                
                 <Places 
                   updateAdress={updateAdress1} 
                   adresss1={address1} 
                   location={"from"} 
-                  place={"pick-up"} />
+                  place={"pick-up"} required/>
 
                 <Places 
                   updateAdress={updateAdress2} 
                   adresss1={address2} 
                   location={"to"} 
-                  place={"drop-off"} />
+                  place={"drop-off"} required/>
 
 
+                <HStack>  
+                
+                  <Input placeholder='Image' value={image}
+                   onChange={handleImage} >                 
+                  </Input>
+                  <Input placeholder='Price per Km' value={price} onChange={handlePrice}>                 
+                  </Input>
+                </HStack> 
+
+                <FormHelperText>Required</FormHelperText>
                 <HStack spacing='10px'>
-                  <FormControl isInvalid={isError}>
+                  <FormControl isInvalid={isErrorDate}>
                     <InputGroup>
-                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} minDate={new Date()} />
+                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" nDate={new Date()} />
                     </InputGroup>
-                    <FormErrorMessage>Required</FormErrorMessage>
+                    <FormHelperText>Required</FormHelperText>
                   </FormControl>
 
-                  <FormControl >
+                  <FormControl isInvalid={isErrorSeats} >
                     <InputGroup>
                       <NumberInput size='sm' maxW={16} defaultValue={1} min={1}
                         onChange={seats => setSeats(seats)}
@@ -134,9 +188,8 @@ function PostRide() {
                     <FormHelperText>Seats</FormHelperText>
                   </FormControl>
 
-                  <FormControl isInvalid={isError}>
-
-                    <TimePicker
+                  <FormControl >
+                    <TimePicker isInvalid={isError}
                       placeholder="Select Time"
                       use24Hours
                       showSecond={false}
@@ -144,21 +197,38 @@ function PostRide() {
                       format="HH:mm"
                       onChange={e => setSelectedTime(e.format('HH:mm'))}
                     />
-                    <FormErrorMessage>Required</FormErrorMessage>
+                    <FormHelperText>Required</FormHelperText>
 
                   </FormControl>
                 </HStack>
               </Stack>
-
-              <br />
-              <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-block btn-dark">Post</button>
-              </div>
-
+              <br />        
+        
             </FormControl >
-          </form>
+            <Button onClick={!isError && post} 
+            
+            disabled={loading || isError} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
+
+        <Modal onClose={closeEvent} isOpen={successful} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          
+          <ModalCloseButton />
+          <ModalBody>
+            <br/>
+          Your Ride is Succesfully posted!
+          <br/>
+          </ModalBody>
+          
+        </ModalContent>
+      </Modal>
+          
         </Box>
-      </Container>    
+      </Container> 
+      
+    </Box>
+   </VStack>
+    </Center>
     </>
 
 

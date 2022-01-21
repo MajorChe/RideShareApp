@@ -6,10 +6,11 @@ const pool = require("../db/db");
 var axios = require("axios");
 
 module.exports = () => {
-  router.get("/", (req, res, next) => {
+  router.get("/", async (req, res, next) => {
     let from = req.query.from;
     let to = req.query.to;
     let date = req.query.date;
+    let only = req.query.only;
 
     console.log("from", from);
     console.log("to", to);
@@ -23,24 +24,48 @@ module.exports = () => {
     if (date) {
       queryParams.push(`${date}`);
       queryString += ` AND date_of_ride = $${queryParams.length}`;
-      console.log(queryString);
+      // console.log(queryString);
     }
 
-    return pool
+    pool
       .query(queryString, queryParams)
       .then((response) => {
         return response.rows;
       })
-      .then(result2 => {
+      .then(result => {
 
-        if (!from) {
-          console.log("initial rendering type", typeof (rides));
-          res.json(result2);
+        if (from === "initial") {
+          // console.log("initial rendering type", typeof (rides));
+          res.json(result);
         }
+        //======= i
+
+        else if (only === "exact") {
+          // console.log("initial rendering type", typeof (rides));
+          let onlyResult =[]
+          for (const ride of result) {           
+            if (to === ride.destination && from=== ride.origin) {
+              console.log(ride);
+              onlyResult.push(ride);
+            }
+          }   
+          res.json(onlyResult);
+        }
+        //===============================
         else {
           rides = [];
-          console.log("in post result", result2);
+          let result2 = [];
+          // console.log("in post result", result2);
           let axios_dist = [];
+          for (const ride of result) {
+            if (to === ride.destination) {
+              console.log(ride);
+              result2.push(ride);
+
+            }
+
+          }
+
           //compute distance for each entry and then only render based on distance < 50
           for (const ride of result2) {
             var config = {
@@ -58,14 +83,15 @@ module.exports = () => {
                 axios_dist.push(distance);
                 if (Number(distance) < 50) {
                   rides.push(ride);
-                  console.log("rides", rides);
+                  // console.log("rides", rides);
                 }
                 console.log(axios_dist);
                 if (axios_dist.length === result2.length) {
                   console.log("rides after dista axios", rides);
-                  console.log(typeof (rides));
+
                   res.json(rides);
                 }
+
               }).catch((err) => {
                 console.log(err.message);
               })  //axios    
