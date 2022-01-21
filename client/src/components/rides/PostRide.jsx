@@ -21,6 +21,14 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Center,
+  Text,
+  VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 } from '@chakra-ui/react';
 import { Button } from "@chakra-ui/react";
 import 'react-datepicker/dist/react-datepicker.css'
@@ -46,12 +54,23 @@ function PostRide() {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const isError = selectedTime === '';
+  const isErrorDate = selectedDate === '';
+  const isErrorSeats = seats === '';
+  const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const format = (val) => `$` + val;
   const parse = (val) => val.replace(/^\$/, '');
   console.log(selectedDate);
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+  function closeEvent()
+  {
+    setSuccessful(false);
+    navigate('/rides');
+  }
+  const post = (e) => {
+    e.preventDefault();
+    setLoading(true);
     var month = selectedDate.getUTCMonth() + 1; //months from 1-12
     var day = selectedDate.getUTCDate();
     var year = selectedDate.getUTCFullYear();
@@ -71,10 +90,15 @@ function PostRide() {
       }
     })
       .then((res) => {
-        if (!res) return;
-        console.log(res.data);
-        return res.data;
+        setLoading(false);
+        console.log("here",res);        
+        setSuccessful(true);
       })
+        .catch(()=>{
+          setLoading(false);
+        })
+       
+      
   }
   function updateAdress1(address1) {
     setAddress1(address1);
@@ -86,16 +110,21 @@ function PostRide() {
   }
   return (
     <>
-      <Navbar />     
+    <Navbar />   
+    <Center py={6}>
+    <VStack> 
+    <Text fontSize='4xl' mt={5} mb={5}>Ride Details</Text> 
+    <Box  boxShadow ={'dark-lg'}
+      rounded={'md'}
+      p={6}
+      overflow={'hidden'}>
+        
       <Container maxW='container.xl' centerContent>
-        <Box padding='10' bg='gray.100' maxW='4xl' mt='10'>
-          <form onSubmit={handleSubmit} class="form-horizontal">
+        <Box padding='5'  mt='5'>
+          
 
             <FormControl >
-              <Stack spacing={3}>
-                <Heading as='h3' size='lg' isTruncated>
-                  Post Ride
-                </Heading>
+              <Stack spacing={3}>                
                 <Places 
                   updateAdress={updateAdress1} 
                   adresss1={address1} 
@@ -110,14 +139,14 @@ function PostRide() {
 
 
                 <HStack spacing='10px'>
-                  <FormControl isInvalid={isError}>
+                  <FormControl isInvalid={isErrorDate}>
                     <InputGroup>
                       <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} minDate={new Date()} />
                     </InputGroup>
-                    <FormErrorMessage>Required</FormErrorMessage>
+                    <FormHelperText>Required</FormHelperText>
                   </FormControl>
 
-                  <FormControl >
+                  <FormControl isInvalid={isErrorSeats}>
                     <InputGroup>
                       <NumberInput size='sm' maxW={16} defaultValue={1} min={1}
                         onChange={seats => setSeats(seats)}
@@ -144,21 +173,41 @@ function PostRide() {
                       format="HH:mm"
                       onChange={e => setSelectedTime(e.format('HH:mm'))}
                     />
-                    <FormErrorMessage>Required</FormErrorMessage>
+                    <FormHelperText>Required</FormHelperText>
 
                   </FormControl>
                 </HStack>
               </Stack>
 
               <br />
-              <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-block btn-dark">Post</button>
-              </div>
+              
+              
+            
+             
 
             </FormControl >
-          </form>
+            <Button onClick={post} disabled={loading} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
+
+        <Modal onClose={closeEvent} isOpen={successful} isCentered>
+         <ModalOverlay />
+         <ModalContent>
+          
+          <ModalCloseButton />
+          <ModalBody>
+            <br/>
+          Your Ride is Succesfully posted!
+          <br/>
+          </ModalBody>
+          
+        </ModalContent>
+      </Modal>
+          
         </Box>
-      </Container>    
+      </Container> 
+      
+    </Box>
+   </VStack>
+    </Center>
     </>
 
 
