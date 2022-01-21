@@ -73,7 +73,7 @@ const getRidePostingsForUser = (owner_id) => {
 const getAllBookingsForOwner = (owner_id) => {
   return pool
   .query(
-    `SELECT bookings.booking_id, rides.ride_id, users.name, bookings.rider_id, bookings.seats_booked FROM bookings JOIN rides ON 
+    `SELECT bookings.booking_id, rides.ride_id, users.name, bookings.rider_id, bookings.seats_booked, bookings.booking_status FROM bookings JOIN rides ON 
     bookings.ride_id = rides.ride_id JOIN users ON bookings.rider_id = users.id WHERE owner_id = $1`,
     [owner_id]
   )
@@ -113,6 +113,34 @@ const deleteUserRidePosting = (ride_id) => {
   })
 };
 
+const approveIndividualBooking = (booking_id) => {
+  return pool
+  .query(
+    `UPDATE bookings SET booking_status='approved' WHERE booking_id = $1 RETURNING *`,[booking_id]
+  )
+  .then((response) => {
+    console.log("individual booking approved: ", response.rows[0])
+    return response.rows[0];
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+}
+
+const cancelIndividualBooking = (booking_id) => {
+  return pool
+  .query(
+    `UPDATE bookings SET booking_status='cancelled' WHERE booking_id = $1 RETURNING *`,[booking_id]
+  )
+  .then((response) => {
+    console.log("individual booking cancelled: ", response.rows[0])
+    return response.rows[0];
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+}
 
 module.exports = { getUser, postUser, updateUser, getRidesforUser,
-   getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide, deleteUserRidePosting };
+   getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide, 
+   deleteUserRidePosting, approveIndividualBooking, cancelIndividualBooking };

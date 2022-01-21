@@ -42,6 +42,24 @@ const ButtonComp = (props) => {
 const BookingComp = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const approvedAndPendingBookingStatus = props.booking_status==='pending' ? true : props.booking_status==='approved' ? true : false
+  const pendingBookingStatus = props.booking_status === "pending" ? true : false;
+  const cancelledBookingStatus = props.booking_status === "cancelled" ? true : false;
+
+  const approveIndividualBooking = async() => {
+    await axios.put(`/user/approve/${props.booking_id}`)
+    .then(() => {
+      window.location.reload();
+    })
+  }
+
+  const cancelIndividualBooking = async() => {
+    await axios.put(`/user/cancel/${props.booking_id}`)
+    .then(() => {
+      window.location.reload();
+    })
+  }
+
   return (
     <>
     <Modal isOpen={isOpen} onClose={onClose} motionPreset='slideInBottom' size={"sm"} blockScrollOnMount={false}>
@@ -58,8 +76,8 @@ const BookingComp = (props) => {
         </ModalContent>
     </Modal>
 
-    <VStack>
-      <Text fontWeight={"bold"} fontSize={"30px"} mt={5}>Booking: {props.id}</Text>
+    <Flex direction={"column"}>
+      <Text fontWeight={"bold"} fontSize={"30px"}>Booking: {props.id}</Text>
       <HStack>
         <Image
           borderRadius="full"
@@ -70,10 +88,11 @@ const BookingComp = (props) => {
           pos={"relative"}
         />
         <ButtonComp onClick={onOpen} color={"#3d9ad5"} name="VIEW" />
-        <ButtonComp color={"green"} name="APPROVE" />
-        <ButtonComp color={"#ee6055"} name="CANCEL" />
+        {pendingBookingStatus && <ButtonComp color={"green"} name="APPROVE" onClick={approveIndividualBooking}/>}
+        {approvedAndPendingBookingStatus && <ButtonComp color={"#ee6055"} name="CANCEL" onClick={cancelIndividualBooking}/>}
+        {cancelledBookingStatus && <ButtonComp color={"#ee6055"} name="CANCELLED" />}
       </HStack>
-    </VStack>
+    </Flex>
     </>
   );
 };
@@ -89,7 +108,7 @@ const PostRideCard = (props) => {
 
   const { bookings } = props;
   const bookingCompList = bookings.map((booking, index) => {
-    return <BookingComp key={index} id={index + 1} name={booking.name}/>;
+    return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} name={booking.name} booking_status={booking.booking_status}/>;
   });
 
   return (

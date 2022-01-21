@@ -7,13 +7,13 @@ import { AccountContext } from "../hooks/AccountContext";
 
 const ViewRidePostings = () => {
   const {user,setUser} = useContext(AccountContext);
-  const [postingList,SetpostingList] = useState([]);
+  const [postingList,SetPostingList] = useState([]);
   const[bookings, SetAllBookings] = useState([]);
   useEffect(() => {
     axios.get(`/user/viewpostings/${user.id}`)
     .then((res) => {
       console.log(res.data.result);
-      SetpostingList(res.data.result);
+      SetPostingList(res.data.result);
     })
   },[]);
 

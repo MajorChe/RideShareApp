@@ -46,4 +46,21 @@ const deleteRide = (req,res) => {
   })
 }
 
-module.exports = { userRidesViewer, userRidePostings, userRideBookings, cancelRide, deleteRide };
+const approveIndividualBooking = (req,res) => {
+  const {id} = req.params;
+  const new_id = parseInt(id);
+  userfn.approveIndividualBooking(new_id).then((result) => {
+    res.json({ result });
+  })
+}
+
+const cancelIndividualBooking = (req,res) => {
+  const {id} = req.params;
+  const new_id = parseInt(id);
+  userfn.cancelIndividualBooking(new_id).then((result) => {
+    res.json({ result });
+  })
+}
+
+module.exports = { userRidesViewer, userRidePostings, userRideBookings, 
+  cancelRide, deleteRide, approveIndividualBooking, cancelIndividualBooking };
