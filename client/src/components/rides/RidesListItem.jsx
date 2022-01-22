@@ -48,7 +48,7 @@ function RidesListItem(props) {
       <Center>
         <VStack>
 
-          <Box mt={5} w={"20rem"} boxShadow='dark-lg' p={8} rounded='md' bg='white'>
+          <Box mt={5} w={"20rem"} boxShadow='dark-lg' p={8} color={'black'}rounded='md' bg='white'>
 
 
             <Box>
@@ -60,7 +60,7 @@ function RidesListItem(props) {
                 <h2>{props.destination}</h2>
                 <HStack>
                 <h2><b>Seats </b>{props.available_seats}</h2>
-                <h2><b>Base Tariff: </b>{props.cost}</h2>
+                <h2><b> Cost: $</b>{props.cost}</h2>
                 </HStack>
                 <HStack>
                   <Text fontWeight={"small"} ><CalendarIcon />  <Moment format="D MMM YYYY">{props.date_of_ride}</Moment></Text>

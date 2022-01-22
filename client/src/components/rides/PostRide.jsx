@@ -50,7 +50,7 @@ function PostRide() {
   const navigate = useNavigate();
   const { user } = useContext(AccountContext);
   const [seats, setSeats] = useState("1");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const [image, setImage] = useState("");
   const [address1, setAddress1] = useState("");
@@ -59,7 +59,7 @@ function PostRide() {
   const isErrorDate = selectedDate === '';
   const isErrorSeats = seats === '';
 
-  const isErrorAll= isError & isErrorDate && isErrorSeats ;
+  const isErrorAll= isError || isErrorDate || isErrorSeats ;
   const [successful, setSuccessful] = useState(false);
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState('');  
@@ -153,8 +153,7 @@ function PostRide() {
                   place={"drop-off"} required/>
 
 
-                <HStack>  
-                
+                <HStack>                  
                   <Input placeholder='Image' value={image}
                    onChange={handleImage} >                 
                   </Input>
@@ -164,9 +163,14 @@ function PostRide() {
 
                 <FormHelperText>Required</FormHelperText>
                 <HStack spacing='10px'>
-                  <FormControl isInvalid={isErrorDate}>
+                  <FormControl >
                     <InputGroup>
-                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" nDate={new Date()} />
+                      <DatePicker 
+                      isInvalid={isErrorDate}
+                      selected={selectedDate} 
+                      onChange={date => setSelectedDate(date)} 
+                      dateFormat= "MMMM Do yyyy" Date={new Date()
+                      } />
                     </InputGroup>
                     <FormHelperText>Required</FormHelperText>
                   </FormControl>
@@ -205,9 +209,12 @@ function PostRide() {
               <br />        
         
             </FormControl >
-            <Button onClick={!isError && post} 
+            <Button 
+            onClick={!isError && post} 
             
-            disabled={loading || isError} colorScheme='teal' p={"40px"} w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
+            disabled={loading || isError} 
+            colorScheme='teal' p={"40px"} 
+            w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
 
         <Modal onClose={closeEvent} isOpen={successful} isCentered>
         <ModalOverlay />

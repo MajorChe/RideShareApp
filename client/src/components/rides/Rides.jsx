@@ -4,7 +4,7 @@ import axios from 'axios';
 import RidesList from './RidesList';
 import Moment from 'react-moment';
 import Navbar from '../Navbar';
-import { Flex, Spacer } from '@chakra-ui/react'
+import { Box, Center, Flex, Spacer, Text } from '@chakra-ui/react'
 function Rides() {
 
   const [address1, setAddress1] = useState("");
@@ -13,6 +13,7 @@ function Rides() {
   const [rides, setRides] = useState([]);
   const [selectedDate,setSelectedDate]=useState(null);
   const [only, setOnly] = useState(false);
+  const [note, setNote] = useState("All the rides listed");
   let exact="false";
   let format = "";
   if(selectedDate){
@@ -26,9 +27,20 @@ function Rides() {
 
  }
   useEffect(() => {
+    setRides([]);
+    setNote("");
+    setNote("");
+    setNote("");
+    setNote("No Rides Available For The Current Route,Please Refine Your Search");
     if(only){
       exact="exact";
     }
+    const source = axios.CancelToken.source();
+    const timeout = setTimeout(() => {
+      source.cancel();
+      // Timeout Logic
+    }, 10);
+
     axios.get("/getRides",
       {
         params:
@@ -39,12 +51,18 @@ function Rides() {
           date :format,
           
         }
-      }).then((res) => {
+      },{cancelToken: source.token})
+      .then((res) => {
+        clearTimeout(timeout);
         console.log("rides in search", res.data);
         setRides(res.data);
-        
+        setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
          
-      }).catch(console.log("error in finding rides"));
+      }).catch((err)=>{
+        console.log("error in finding rides");
+        setNote("No Rides For The Requested Route!!")
+          }
+        );
 
   }, [search]);
   useEffect(() => {
@@ -59,7 +77,7 @@ function Rides() {
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
-       
+        setNote("Listing All Rides");
       });
 
   }, []);
@@ -87,7 +105,7 @@ function Rides() {
   }
   return (
       <>
-   
+       
       <Navbar />
       <Map
         updateAdress1={updateAdress1}
@@ -97,8 +115,13 @@ function Rides() {
         only={only} updateOnly={updateOnly}
         updateSearch={updateSearch} 
         
-        />          
-      <RidesList rides={rides} />
+        /> 
+         <Center> 
+        <Box border='1px' borderColor='gray.600' w='50rem' p={4} color={'black'}rounded='md' bg='white'>
+        <Text fontSize='xl' fontWeight={500} mt={5} mb={5}>{note}</Text>
+        </Box>
+       </Center>          
+       <RidesList rides={rides} />
       
       
       </>

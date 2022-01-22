@@ -132,7 +132,7 @@ function Map(props) {
 
                     {suggestions.map(suggestion => {
                       const style = {
-                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                        backgroundColor: suggestion.active ? "#adb5bd" : "#fff"
                       };
 
                       return (
@@ -169,7 +169,7 @@ function Map(props) {
 
                     {suggestions.map(suggestion => {
                       const style = {
-                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                        backgroundColor: suggestion.active ? "#adb5bd" : "#fff"
                       };
 
                       return (

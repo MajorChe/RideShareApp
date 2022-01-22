@@ -20,7 +20,10 @@ module.exports = () => {
                             to_char(date_of_ride, 'DD/MM/YYYY') as date
                             FROM rides
                             JOIN users ON users.id = rides.owner_id 
-                            WHERE available_seats > 0 and 1=1 `;
+
+                            WHERE available_seats > 0 and
+                            date_of_ride > current_date                            
+                            and 1=1 `;
     if (date) {
       queryParams.push(`${date}`);
       queryString += ` AND date_of_ride = $${queryParams.length}`;
