@@ -28,8 +28,8 @@ const NavLink = ({ children }) => (
 );
 
 const NavLinks = () => {
-  const navigate = useNavigate()
-  const {user, setUser} = useContext(AccountContext)
+  const navigate = useNavigate();
+  const {user, setUser} = useContext(AccountContext);
   return (
     <>
       <Link as={ReachLink} to="/rides"><NavLink>Find Ride</NavLink></Link>
@@ -40,8 +40,9 @@ const NavLinks = () => {
       {user.loggedIn && 
       <Flex alignItems={"center"}> 
         <Menu>
-          <MenuButton as={Button} rounded={"full"} variant={"link"} ml={4} mr={6} cursor={"pointer"} minW={0} >
+          <MenuButton ml={4} mr={6} cursor={"pointer"} minW={0} >
             <Avatar size={"sm"} src={"https://bit.ly/ryan-florence"} />
+            <Text  fontWeight={"medium"}>{user.name}</Text>
           </MenuButton>
           <MenuList>
           <MenuItem onClick={() => navigate("/settings")}>Settings <SettingsIcon ml={6}/></MenuItem>
@@ -53,6 +54,7 @@ const NavLinks = () => {
             }}>Logout</MenuItem>
           </MenuList>
         </Menu>
+        
       </Flex>}              
     </>
   );
@@ -89,7 +91,12 @@ export default function Navbar() {
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}><NavLinks /></Stack>
+            <Stack as={'nav'} spacing={4}>
+              <NavLinks />
+              <Button onClick={() => toggleColorMode()} m="1rem">
+                {colorMode === "dark" ? (<SunIcon color="orange.200" />) : (<MoonIcon color="blue.700" />)}
+              </Button>  
+            </Stack>
           </Box>
         ) : null}
       </Box>

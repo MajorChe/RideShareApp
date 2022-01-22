@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import "./Map.css"
-import { Checkbox, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, Stack } from "@chakra-ui/react";
+import { Checkbox, FormControl, FormErrorMessage, FormHelperText, HStack, Input, InputGroup, Stack, Text, VStack } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from "react-datepicker";
@@ -184,9 +184,12 @@ function Map(props) {
             )}
           </PlacesAutocomplete>
           <br />
-          <Stack direction='row'>
+          <Stack direction='column'>
           <DatePicker placeholderText="Date"selected={props.selectedDate} onChange={date => props.updateSelectedDate(date)} minDate={new Date()} />
-          <input type="checkbox" checked={props.only} onChange={handleChange}/>
+          <HStack>
+          <Text>Show exact matches</Text>
+          <Checkbox type="checkbox" checked={props.only} onChange={handleChange}/>
+          </HStack>
           </Stack>
           <button id="submit" class="btn btn-dark" onClick={onSubmit}>
             Search

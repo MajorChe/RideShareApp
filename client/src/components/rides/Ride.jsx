@@ -132,6 +132,7 @@ function Ride({ props }) {
                       </InputGroup>
                     </FormControl>
                   </HStack>
+                  <Text fontWeight={"bold"}>Cost $:{rides.cost}</Text>
                 </VStack>
               </Box>
               
