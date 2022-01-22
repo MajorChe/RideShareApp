@@ -54,10 +54,20 @@ const BookingComp = (props) => {
   }
 
   const cancelIndividualBooking = async() => {
-    await axios.put(`/user/cancel/${props.booking_id}`)
-    .then(() => {
-      window.location.reload();
-    })
+    const available_seats = props.available_seats;
+    const updated_seats = available_seats + props.seats_booked;
+    axios.put("/user/cancelride",
+        {
+          params:
+          {
+            id: props.booking_id,
+            ride_id: props.ride_id,
+            updated_seats: updated_seats
+          }
+        })
+        .then(() => {
+          window.location.reload()
+        })
   }
 
   return (
@@ -98,17 +108,26 @@ const BookingComp = (props) => {
 };
 
 const PostRideCard = (props) => {
+  const { bookings } = props;
 
   const deleteRide = () => {
-    axios.put(`/user/deleteride/${props.ride_id}`)
-    .then(() => {
-      window.location.reload();
-    })
+    axios.put("/user/deleteride",
+        {
+          params:
+          {
+            ride_id: props.ride_id,
+            updated_seats: 0
+          }
+        })
+        .then(() => {
+          window.location.reload();
+        })
   };
 
-  const { bookings } = props;
   const bookingCompList = bookings.map((booking, index) => {
-    return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} name={booking.name} booking_status={booking.booking_status}/>;
+    return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} 
+    name={booking.name} booking_status={booking.booking_status} ride_id={props.ride_id} 
+    available_seats={props.available_seats} seats_booked={booking.seats_booked}/>;
   });
 
   return (
@@ -118,7 +137,8 @@ const PostRideCard = (props) => {
         <VStack spacing={"30px"}>
         <Stack direction={"row"} >
           <Text fontWeight={"600"} fontSize={"3xl"} alignSelf={"center"}>YOUR POST: {props.id}</Text>
-          <ButtonComp color={"#ee6055"} name="DELETE RIDE" onClick={deleteRide}/>
+          {props.available_seats!==0 && <ButtonComp color={"#ee6055"} name="DELETE RIDE" onClick={deleteRide}/>}
+          {props.available_seats===0 && <ButtonComp color={"#ee6055"} name="RIDE DELETED"/>}
         </Stack>
         <VStack>
           <Text fontWeight={"medium"} fontSize={"20px"}>Origin: {props.origin}</Text>

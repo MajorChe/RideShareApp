@@ -12,12 +12,10 @@ router.get("/viewpostings/:id", userRidePostings);
 
 router.get("/viewpostings/bookings/:id", userRideBookings);
 
-router.put("/cancelride/:id",cancelRide);
+router.put("/cancelride",cancelRide);
 
-router.put("/deleteride/:id",deleteRide);
+router.put("/deleteride",deleteRide);
 
 router.put("/approve/:id",approveIndividualBooking);
-
-router.put("/cancel/:id",cancelIndividualBooking);
 
 module.exports = router;

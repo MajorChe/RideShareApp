@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Heading,
   Image,
@@ -51,14 +51,39 @@ const CardComponentHorizontal = (props) => {
 }
 
 const TripCard = (props) => {
+  const[rides,SetRides] = useState({})
+ 
+  useEffect(() => {
+    axios.get("/ride",
+      {
+        params:
+        {
+          id: props.booked_ride_id,
+        }
+      }).then((res) => {
+        console.log("rides", res.data);
+        SetRides(res.data)
+      });
+  }, []);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const trueStatus = props.status==='pending' ? true : props.status==='approved' ? true : false
 
-  const cancelRide = async () => {
-    await axios.put(`/user/cancelride/${props.booking_id}`)
-    .then((res) => {
+  const cancelRide = () => {
+    const available_seats = rides.available_seats;
+    const updated_seats = available_seats + props.seats_booked;
+
+    axios.put("/user/cancelride",
+        {
+          params:
+          {
+            id: props.booking_id,
+            ride_id: rides.ride_id,
+            updated_seats: updated_seats
+          }
+        })
+    .then(() => {
       window.location.reload();
     })
   };

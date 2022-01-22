@@ -4,7 +4,7 @@ INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
             VALUES (2,'Hamilton, ON, Canada','Brampton, ON, Canada',3,'2022-02-02','8:00:00','https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
-            VALUES (1,'Mississauga, ON, Canada','Niagara Falls, ON, Canada',3,'2022-02-02','8:59:00','https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+            VALUES (1,'Mississauga, ON, Canada','Niagara Falls, ON, Canada',4,'2022-02-02','8:59:00','https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
             VALUES (2,'Churchville, Brampton, ON, Canada','Brampton, ON, Canada',3,'2022-02-02','12:00:00','https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)

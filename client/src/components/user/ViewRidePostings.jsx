@@ -12,7 +12,7 @@ const ViewRidePostings = () => {
   useEffect(() => {
     axios.get(`/user/viewpostings/${user.id}`)
     .then((res) => {
-      console.log(res.data.result);
+      console.log("All postings",res.data.result);
       SetPostingList(res.data.result);
     })
   },[]);
@@ -40,6 +40,7 @@ const ViewRidePostings = () => {
         destination={posting.destination}
         ride_id = {posting.ride_id}
         bookings={new_arr}
+        available_seats={posting.available_seats}
       />
     );
   })
