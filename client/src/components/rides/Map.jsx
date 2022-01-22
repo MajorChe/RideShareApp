@@ -183,6 +183,7 @@ const Map = (props) => {
                     value={props.address1}
                     class="form-control"
                     {...getInputProps({ placeholder: "From" })}
+                    w={"460px"}
                   />
                   <chakra.div>
                     {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -259,7 +260,7 @@ const Map = (props) => {
               ></Button>
               <HStack>
                 <Text>Show exact matches</Text>
-                <Checkbox
+                <input
                   type="checkbox"
                   checked={props.only}
                   onChange={handleChange}
@@ -280,7 +281,7 @@ const Map = (props) => {
             </p>
           </VStack>
         </HStack>
-        <div id="map" style={{ height: "300px" }}>
+        <div id="map" style={{ height: "400px", width: "800px"}}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,
