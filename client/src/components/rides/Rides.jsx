@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Map from "./Map";
-import axios from "axios";
-import RidesList from "./RidesList";
-import Moment from "react-moment";
-import Navbar from "../Navbar";
-import { Box, Center, Flex, Spacer, Text } from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react';
+import Map from './Map';
+import axios from 'axios';
+import RidesList from './RidesList';
+import Moment from 'react-moment';
+import Navbar from '../Navbar';
+import { Box, Center, Flex, Spacer, Text } from '@chakra-ui/react'
 function Rides() {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -31,49 +31,37 @@ function Rides() {
     if (only) {
       exact = "exact";
     }
-    const source = axios.CancelToken.source();
-    const timeout = setTimeout(() => {
-      source.cancel();
-      // Timeout Logic
-    }, 10);
-    axios
-      .get(
-        "/getRides",
+    axios.get("/getRides",
+      {
+        params:
         {
-          params: {
-            only: exact,
-            from: address1,
-            to: address2,
-            date: format,
-          },
-        },
-        { cancelToken: source.token }
-      )
+          only: exact,
+          from: address1,
+          to: address2,
+          date: format,
+        }
+      })
       .then((res) => {
-        clearTimeout(timeout);
         console.log("rides in search", res.data);
         setRides(res.data);
         setSelectedDate(null);
         setOnly(false);
-        setNote(
-          `Showing ${res.data.length} Ride Options For ${address2} To ${address1} `
-        );
-      })
-      .catch((err) => {
+        setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
+      }).catch((err) => {
         console.log("error in finding rides");
-        setNote("No Rides For The Requested Route!!");
-      });
+      }
+      );
   }, [search]);
   useEffect(() => {
-    axios
-      .get("/getRides", {
-        params: {
+    axios.get("/getRides",
+      {
+        params:
+        {
           from: "initial",
           to: "",
           date: "",
-        },
-      })
-      .then((res) => {
+        }
+      }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
         setNote(`Listing All Available Rides `);
@@ -105,26 +93,14 @@ function Rides() {
       <Map
         updateAdress1={updateAdress1}
         updateAdress2={updateAdress2}
-        adresss1={address1}
-        adresss2={address2}
-        selectedDate={selectedDate}
-        updateSelectedDate={updateSelectedDate}
-        only={only}
-        updateOnly={updateOnly}
+        adresss1={address1} adresss2={address2}
+        selectedDate={selectedDate} updateSelectedDate={updateSelectedDate}
+        only={only} updateOnly={updateOnly}
         updateSearch={updateSearch}
       />
       <Center>
-        <Box
-          borderColor="gray.600"
-          w="50rem"
-          p={4}
-          color={"black"}
-          rounded="md"
-          bg="white"
-        >
-          <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>
-            {note}
-          </Text>
+        <Box borderColor='gray.600' w='50rem' p={4} color={'black'} rounded='md' bg='white'>
+          <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>{note}</Text>
         </Box>
       </Center>
       <RidesList rides={rides} />
