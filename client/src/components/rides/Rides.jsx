@@ -29,9 +29,10 @@ function Rides() {
   useEffect(() => {
     setRides([]);
     setNote("");
-    setNote("");
-    setNote("");
-    setNote("No Rides Available For The Current Route,Please Refine Your Search");
+   
+      setNote(`Showing 0 Ride Options For ${address2} To ${address1}`); 
+   
+    
     if(only){
       exact="exact";
     }
@@ -56,6 +57,8 @@ function Rides() {
         clearTimeout(timeout);
         console.log("rides in search", res.data);
         setRides(res.data);
+        setSelectedDate(null);
+        setOnly(false);        
         setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
          
       }).catch((err)=>{
@@ -77,7 +80,10 @@ function Rides() {
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
-        setNote("Listing All Rides");
+        
+          setNote(`Listing All Available Rides `); 
+        
+        
       });
 
   }, []);
@@ -117,8 +123,8 @@ function Rides() {
         
         /> 
          <Center> 
-        <Box border='1px' borderColor='gray.600' w='50rem' p={4} color={'black'}rounded='md' bg='white'>
-        <Text fontSize='xl' fontWeight={500} mt={5} mb={5}>{note}</Text>
+        <Box borderColor='gray.600' w='50rem' p={4} color={'black'}rounded='md' bg='white'>
+        <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>{note}</Text>
         </Box>
        </Center>          
        <RidesList rides={rides} />
