@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 import Navbar from '../Navbar';
 import { Box, Center, Flex, Spacer, Text } from '@chakra-ui/react'
 function Rides() {
-
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
   const [search, setSearch] = useState("");
@@ -24,15 +23,11 @@ function Rides() {
     console.log(format);
   } else {
     format = "";
-
   }
   useEffect(() => {
     setRides([]);
     setNote("");
-
-    setNote(`Showing 0 Ride Options For ${address2} To ${address1}`);
-
-
+    setNote(`Showing 0 Ride Options For ${address2} To ${address1}`);    
     if (only) {
       exact = "exact";
     }
@@ -46,8 +41,8 @@ function Rides() {
           to: address2,
           date: format,
         }
-      })
-      .then((res) => {       
+      })     
+      .then((res) => {
         console.log("rides in search", res.data);
         setRides(res.data);
         setSelectedDate(null);
@@ -55,10 +50,9 @@ function Rides() {
         setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
 
       }).catch((err) => {
-        console.log("error in finding rides");        
+        console.log("error in finding rides");
       }
       );
-
   }, [search]);
   useEffect(() => {
     axios.get("/getRides",
@@ -75,12 +69,10 @@ function Rides() {
         setNote(`Listing All Available Rides `);
       });
   }, []);
-
   function updateAdress1(address) {
     setAddress1(address);
     console.log(address1);
   }
-
   function updateAdress2(address) {
     setAddress2(address);
     console.log(address2);
@@ -98,8 +90,7 @@ function Rides() {
     console.log("only", only);
   }
   return (
-    <>
-    
+    <>    
       <Navbar />
       <Map
         updateAdress1={updateAdress1}
@@ -108,7 +99,6 @@ function Rides() {
         selectedDate={selectedDate} updateSelectedDate={updateSelectedDate}
         only={only} updateOnly={updateOnly}
         updateSearch={updateSearch}
-
       />
       <Center>
         <Box borderColor='gray.600' w='50rem' p={4} color={'black'} rounded='md' bg='white'>
@@ -116,10 +106,7 @@ function Rides() {
         </Box>
       </Center>
       <RidesList rides={rides} />
-
-
     </>
   );
 }
-
 export default Rides;

@@ -59,7 +59,7 @@ function RidesListItem(props) {
                 <h2>{props.destination}</h2>
                 <HStack>
                 <h2><b>Seats </b>{props.available_seats}</h2>
-                <h2><b> Cost: $</b>{props.cost}</h2>
+                <h2><b>Cost: </b>${props.cost}</h2>
                 </HStack>
                 <HStack>
                   <Text fontWeight={"small"} ><CalendarIcon />  <Moment format="D MMM YYYY">{props.date_of_ride}</Moment></Text>

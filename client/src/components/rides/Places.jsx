@@ -39,9 +39,9 @@ function Places(props) {
                
             <Input name={props} class="form-control" {...getInputProps({ placeholder: props.location })} />
             {/* {!isError ? (  */}
-              <FormHelperText>
+              {/* <FormHelperText>
                 Enter your {props.place} point
-              </FormHelperText>
+              </FormHelperText> */}
              {/* ) : (
                <FormErrorMessage>{props.place} location is required.</FormErrorMessage>
             )}  */}
