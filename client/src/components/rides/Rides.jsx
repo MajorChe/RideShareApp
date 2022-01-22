@@ -99,8 +99,6 @@ function Rides() {
         
         />          
       <RidesList rides={rides} />
-      
-      
       </>
   );
 }

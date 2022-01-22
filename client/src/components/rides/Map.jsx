@@ -6,13 +6,18 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "./Map.css";
 import {
+  Button,
+  chakra,
   Checkbox,
+  Flex,
   FormControl,
   HStack,
   Input,
   Stack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
+import { CalendarIcon } from "@chakra-ui/icons";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -37,8 +42,8 @@ const Map = (props) => {
   const onLoad = useCallback(function callback() {
     const google = window.google;
     let mapProp = {
-      center: new google.maps.LatLng(38, -78),
-      zoom: 10,
+      center: new google.maps.LatLng(43.6, -79.3),
+      zoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
     new google.maps.Map(document.getElementById("map"), mapProp);
@@ -103,11 +108,11 @@ const Map = (props) => {
   const isError2 = address2 === "";
 
   return (
-    <div className="top">
-      <div className="container1">
-        <div class="form-horizontal">
+        <>
+        <Flex justifyContent={"space-around"} alignItems={"center"}>
+          <HStack mt={"100px"}>
+            <VStack>
           <PlacesAutocomplete
-            class="input-group mb-3"
             value={address}
             onChange={setAddress}
             onSelect={handleSelect}
@@ -118,22 +123,14 @@ const Map = (props) => {
               getSuggestionItemProps,
               loading,
             }) => (
-              <div>
                 <FormControl isInvalid={isError1}>
                   <Input
                     value={props.address1}
                     class="form-control"
                     {...getInputProps({ placeholder: "From" })}
                   />
-                  {/* {/* {/* {!isError1 ? ( */}
-                  {/* <FormHelperText> 
-                      Enter your pick up point
-                     </FormHelperText> */}
-                  {/* ) : (
-                    <FormErrorMessage>From is required.</FormErrorMessage>
-                  )} */}
-                  <div>
-                    {loading ? <div>...loading</div> : null}
+                  <chakra.div>
+                    {loading ? <chakra.div>...loading</chakra.div> : null}
 
                     {suggestions.map((suggestion) => {
                       const style = {
@@ -141,19 +138,17 @@ const Map = (props) => {
                       };
 
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <chakra.div {...getSuggestionItemProps(suggestion, { style })}>
                           {suggestion.description}
-                        </div>
+                        </chakra.div>
                       );
                     })}
-                  </div>
+                  </chakra.div>
                 </FormControl>
-              </div>
             )}
           </PlacesAutocomplete>
           <br />
           <PlacesAutocomplete
-            class="input-group mb-3"
             value={address2}
             onChange={setAddress2}
             onSelect={handleSelect2}
@@ -164,23 +159,15 @@ const Map = (props) => {
               getSuggestionItemProps,
               loading,
             }) => (
-              <div>
+              <chakra.div>
                 <FormControl isInvalid={isError2}>
                   <Input
                     class="form-control"
                     {...getInputProps({ placeholder: "To" })}
                     required
                   />
-                  {/* {!isError2 ? ( */}
-                  {/* <FormHelperText>
-                      Enter your drop off point
-                    </FormHelperText> */}
-                  {/* //  ) : (
-                  //   <FormErrorMessage> To is required.</FormErrorMessage>
-                  // )}  */}
-
-                  <div>
-                    {loading ? <div>...loading</div> : null}
+                  <chakra.div>
+                    {loading ? <chakra.div>...loading</chakra.div> : null}
 
                     {suggestions.map((suggestion) => {
                       const style = {
@@ -188,24 +175,26 @@ const Map = (props) => {
                       };
 
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <chakra.div {...getSuggestionItemProps(suggestion, { style })}>
                           {suggestion.description}
-                        </div>
+                        </chakra.div>
                       );
                     })}
-                  </div>
+                  </chakra.div>
                 </FormControl>
-              </div>
+              </chakra.div>
             )}
           </PlacesAutocomplete>
           <br />
           <Stack direction="column">
-            <DatePicker
+            <Button as={DatePicker}
               placeholderText="Date"
               selected={props.selectedDate}
               onChange={(date) => props.updateSelectedDate(date)}
               minDate={new Date()}
-            />
+              colorScheme='black' variant='outline'
+              >
+            </Button>
             <HStack>
               <Text>Show exact matches</Text>
               <Checkbox
@@ -224,8 +213,10 @@ const Map = (props) => {
           <p>
             Distance: {distance} Duration: {duration}
           </p>
-        </div>
-      </div>
+        {/* </div> */}
+      {/* </div> */}
+      </VStack>
+      </HStack>
       <div id="map" style={{ height: "300px" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -238,7 +229,9 @@ const Map = (props) => {
         ></GoogleMapReact>
         <br />
       </div>
-    </div>
+      {/* </div> */}
+      </Flex>
+      </>
   );
 }
 
