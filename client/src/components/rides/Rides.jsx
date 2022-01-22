@@ -11,61 +11,53 @@ function Rides() {
   const [address2, setAddress2] = useState("");
   const [search, setSearch] = useState("");
   const [rides, setRides] = useState([]);
-  const [selectedDate,setSelectedDate]=useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [only, setOnly] = useState(false);
   const [note, setNote] = useState("All the rides listed");
-  let exact="false";
+  let exact = "false";
   let format = "";
-  if(selectedDate){
-  let month = selectedDate.getUTCMonth() + 1; //months from 1-12
-  let day = selectedDate.getUTCDate();
-  let year = selectedDate.getUTCFullYear();
-   format = selectedDate.toUTCString();
-   console.log(format);
- }else{
-   format = "";
+  if (selectedDate) {
+    let month = selectedDate.getUTCMonth() + 1; //months from 1-12
+    let day = selectedDate.getUTCDate();
+    let year = selectedDate.getUTCFullYear();
+    format = selectedDate.toUTCString();
+    console.log(format);
+  } else {
+    format = "";
 
- }
+  }
   useEffect(() => {
     setRides([]);
     setNote("");
-   
-      setNote(`Showing 0 Ride Options For ${address2} To ${address1}`); 
-   
-    
-    if(only){
-      exact="exact";
-    }
-    const source = axios.CancelToken.source();
-    const timeout = setTimeout(() => {
-      source.cancel();
-      // Timeout Logic
-    }, 10);
 
+    setNote(`Showing 0 Ride Options For ${address2} To ${address1}`);
+
+
+    if (only) {
+      exact = "exact";
+    }
+    
     axios.get("/getRides",
       {
         params:
         {
-          only:exact,
+          only: exact,
           from: address1,
           to: address2,
-          date :format,
-          
+          date: format,
         }
-      },{cancelToken: source.token})
-      .then((res) => {
-        clearTimeout(timeout);
+      })
+      .then((res) => {       
         console.log("rides in search", res.data);
         setRides(res.data);
         setSelectedDate(null);
-        setOnly(false);        
+        setOnly(false);
         setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
-         
-      }).catch((err)=>{
-        console.log("error in finding rides");
-        setNote("No Rides For The Requested Route!!")
-          }
-        );
+
+      }).catch((err) => {
+        console.log("error in finding rides");        
+      }
+      );
 
   }, [search]);
   useEffect(() => {
@@ -75,17 +67,13 @@ function Rides() {
         {
           from: "initial",
           to: "",
-          date:"",
+          date: "",
         }
       }).then((res) => {
         console.log("rides", res.data);
         setRides(res.data);
-        
-          setNote(`Listing All Available Rides `); 
-        
-        
+        setNote(`Listing All Available Rides `);
       });
-
   }, []);
 
   function updateAdress1(address) {
@@ -101,17 +89,17 @@ function Rides() {
     setSearch(search);
     console.log(search);
   }
-  function updateSelectedDate(date) {    
+  function updateSelectedDate(date) {
     setSelectedDate(date);
     console.log(date);
   }
-  function updateOnly(val) {    
+  function updateOnly(val) {
     setOnly(val);
-    console.log("only",only);
+    console.log("only", only);
   }
   return (
-      <>
-       
+    <>
+    
       <Navbar />
       <Map
         updateAdress1={updateAdress1}
@@ -119,18 +107,18 @@ function Rides() {
         adresss1={address1} adresss2={address2}
         selectedDate={selectedDate} updateSelectedDate={updateSelectedDate}
         only={only} updateOnly={updateOnly}
-        updateSearch={updateSearch} 
-        
-        /> 
-         <Center> 
-        <Box borderColor='gray.600' w='50rem' p={4} color={'black'}rounded='md' bg='white'>
-        <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>{note}</Text>
+        updateSearch={updateSearch}
+
+      />
+      <Center>
+        <Box borderColor='gray.600' w='50rem' p={4} color={'black'} rounded='md' bg='white'>
+          <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>{note}</Text>
         </Box>
-       </Center>          
-       <RidesList rides={rides} />
-      
-      
-      </>
+      </Center>
+      <RidesList rides={rides} />
+
+
+    </>
   );
 }
 

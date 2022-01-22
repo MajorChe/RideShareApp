@@ -50,7 +50,6 @@ function RidesListItem(props) {
 
           <Box mt={5} w={"20rem"} boxShadow='dark-lg' p={8} color={'black'}rounded='md' bg='white'>
 
-
             <Box>
               <VStack>
                 <Image size='2xl' src={props.ride_image} mb={2} h={'80%'} />
