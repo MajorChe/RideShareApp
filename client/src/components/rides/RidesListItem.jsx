@@ -14,7 +14,7 @@ import {
 
 import { CalendarIcon, TimeIcon } from "@chakra-ui/icons";
 
-function RidesListItem(props) {
+const RidesListItem = (props) => {
   return (
     <>
       <Center>
@@ -91,6 +91,6 @@ function RidesListItem(props) {
       </Center>
     </>
   );
-}
+};
 
 export default RidesListItem;

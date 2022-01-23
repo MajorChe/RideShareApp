@@ -1,15 +1,13 @@
-import { SimpleGrid } from '@chakra-ui/react';
-import React from 'react';
-import RidesListItem from './RidesListItem';
+import { SimpleGrid } from "@chakra-ui/react";
+import React from "react";
+import RidesListItem from "./RidesListItem";
 
-function RidesList(props) {
-
-
-  function createRideItems() {
-    return props.rides.map(ride => {
-      return (      
+const RidesList = (props) => {
+  const createRideItems = () => {
+    return props.rides.map((ride) => {
+      return (
         <RidesListItem
-          ride_id ={ride.ride_id}
+          ride_id={ride.ride_id}
           name={ride.name}
           avatar={ride.avatar}
           contact={ride.contact}
@@ -24,17 +22,16 @@ function RidesList(props) {
           drop_off={ride.drop_off}
           ride_description=""
           ride_image={ride.ride_image}
-        />     
-      )
-    })
-  }
+        />
+      );
+    });
+  };
 
   return (
-      <SimpleGrid columns={{ base: 1, md: 4 }} mt={"50px"}>
+    <SimpleGrid columns={{ base: 1, md: 4 }} mt={"50px"}>
       {createRideItems()}
-      </SimpleGrid>
+    </SimpleGrid>
   );
-}
+};
 
 export default RidesList;
-
