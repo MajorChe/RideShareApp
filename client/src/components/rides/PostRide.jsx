@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Icon } from '@chakra-ui/react'
-import { FaDollarSign, FaCar, FaLocationArrow } from 'react-icons/fa'
+import { FaDollarSign, FaCar, FaCrosshairs,FaMapMarkerAlt} from 'react-icons/fa'
 import {
   Stack,
   FormControl,
@@ -36,31 +36,32 @@ import 'rc-time-picker/assets/index.css';
 import Places from './Places';
 import "./Post.css";
 import { useNavigate } from 'react-router-dom';
+import { CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 
 
 function PostRide() {
   const navigate = useNavigate();
   const { user } = useContext(AccountContext);
-  const [seats, setSeats] = useState("1");
+  const [seats, setSeats] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const [image, setImage] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
-  const isError = selectedTime === '';
-  const isErrorDate = selectedDate === '';
-  const isErrorSeats = seats === '';
-
-  const isErrorAll= isError || isErrorDate || isErrorSeats ;
   const [successful, setSuccessful] = useState(false);
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState('');  
-  // const [value, setValue] = useState('');
-  
-  // const format = (val) => `$` + val;
-  // const parse = (val) => val.replace(/^\$/, '');
-  console.log(selectedDate);
+  const isError = selectedTime === '';
+  const isErrorDate = selectedDate === null;
+  const isErrorSeats = seats === 0;
+  const isErrorImage = image === '';
+  const isErrorPrice = price === '';
+  const isErrorPlace1 = address1 === " ";
+  const isErrorPlace2 = address2 === " ";
+  const isErrorAll= isError || isErrorDate || isErrorSeats || isErrorPrice || isErrorImage;  
 
+  console.log(selectedDate);
+  
   function closeEvent()
   {
     setSuccessful(false);
@@ -111,10 +112,10 @@ function PostRide() {
   }
   const handleImage = (event) => setImage(event.target.value);
   const handlePrice = (event) => setPrice(event.target.value);
-  console.log("err",isError);
-  console.log("err",isErrorAll);
-  console.log("err",isErrorDate);
-  console.log("err",isErrorSeats);
+  console.log("err",isError,selectedTime);//t
+  console.log("errALL",isErrorAll);//f
+  console.log("errDATE",isErrorDate,selectedDate);//f
+  console.log("errSeats",isErrorSeats,seats);//f
   
   return (
     <>
@@ -133,16 +134,18 @@ function PostRide() {
             <FormControl >
               <Stack spacing={3}> 
               <HStack>
-              <Icon as={FaLocationArrow} color={"red.300"} fontSize={"2xl"}/>               
+              <Icon as={FaMapMarkerAlt} color={"skyblue"} fontSize={"2xl"} />               
                 <Places 
+                  isErrorplace={isErrorPlace1}
                   updateAdress={updateAdress1} 
                   adresss1={address1} 
                   location={"from"} 
                   place={"pick-up"} required/>
               </HStack>
               <HStack>
-              <Icon as={FaLocationArrow} color={"green.300"} fontSize={"2xl"}/>
+              <Icon as={FaCrosshairs} color={"green.300"} fontSize={"2xl"}  />
                 <Places 
+                  isErrorplace={isErrorPlace2}
                   updateAdress={updateAdress2} 
                   adresss1={address2} 
                   location={"to"} 
@@ -150,25 +153,28 @@ function PostRide() {
               </HStack>
 
                 <HStack>  
-                  <Icon as={FaCar}/>
-                  <Input placeholder='Image' value={image}
+                  <Icon as={FaCar} color={"skyblue"} mr="4px"/>
+                  <Input placeholder='Image' value={image} w={"375px"} 
                    onChange={handleImage} >                 
                   </Input>
-                  <Icon as={FaDollarSign} />
-                  <Input placeholder='Enter total cost' value={price} onChange={handlePrice}>                 
+                  <Icon as={FaDollarSign} color={"green.300"} />
+                  <Input placeholder='Enter total cost' w={"350px"} value={price}  onChange={handlePrice}>                 
                   </Input>
                 </HStack> 
 
-                <FormHelperText>Required</FormHelperText>
+                
                 <HStack spacing='10px'>
                   <FormControl >
+                    <HStack>
+                  <CalendarIcon color={"teal"} mr="4px"/>
                     <InputGroup>
-                      <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" minDate={new Date()} />
+                      <Button as={DatePicker} selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat= "MMMM Do yyyy" minDate={new Date()} />
                     </InputGroup>
-                    <FormHelperText>Required</FormHelperText>
+                    </HStack>
+                    <FormHelperText  ml={"5px"}>Date Required</FormHelperText>
                   </FormControl>
 
-                  <FormControl isInvalid={isErrorSeats} >
+                  <FormControl >                  
                     <InputGroup>
                       <NumberInput size='sm' maxW={16} defaultValue={1} min={1}
                         onChange={seats => setSeats(seats)}
@@ -186,6 +192,8 @@ function PostRide() {
                   </FormControl>
 
                   <FormControl>
+                  <HStack>
+                  <TimeIcon color={"teal"} mr="4px"/>
                     <TimePicker isInvalid={isError}
                       placeholder="Select Time"
                       use24Hours
@@ -194,8 +202,8 @@ function PostRide() {
                       format="HH:mm"
                       onChange={e => setSelectedTime(e.format('HH:mm'))}
                     />
-                    <FormHelperText>Required</FormHelperText>
-
+                    {/* <FormHelperText>Required</FormHelperText> */}
+                    </HStack>
                   </FormControl>
                 </HStack>
               </Stack>
@@ -203,9 +211,8 @@ function PostRide() {
         
             </FormControl >
             <Button 
-            onClick={!isError && post} 
-            
-            disabled={loading || isError} 
+            onClick={!isError && post}             
+            disabled={isErrorAll} 
             colorScheme='teal' p={"40px"} 
             w={"800px"} >{loading?"Requesting...":"Post Ride "}</Button>
 
