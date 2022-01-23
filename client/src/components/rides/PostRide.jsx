@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Icon } from "@chakra-ui/react";
 import {
@@ -62,17 +62,17 @@ function PostRide() {
   const isErrorPlace2 = address2 === " ";
   const isErrorAll =
     isError || isErrorDate || isErrorSeats || isErrorPrice || isErrorImage;
-  console.log(selectedDate);
-  function closeEvent() {
+
+  const closeEvent = () => {
     setSuccessful(false);
     navigate("/trips/postings");
-  }
+  };
   const post = (e) => {
     e.preventDefault();
     setLoading(true);
-    var month = selectedDate.getUTCMonth() + 1; //months from 1-12
-    var day = selectedDate.getUTCDate();
-    var year = selectedDate.getUTCFullYear();
+    let month = selectedDate.getUTCMonth() + 1;
+    let day = selectedDate.getUTCDate();
+    let year = selectedDate.getUTCFullYear();
     let format = year + "-" + month + "-" + day;
     axios
       .post("/postRide", {
@@ -96,20 +96,16 @@ function PostRide() {
         setLoading(false);
       });
   };
-  function updateAdress1(address1) {
+  const updateAdress1 = (address1) => {
     setAddress1(address1);
     console.log(address1);
-  }
-  function updateAdress2(address2) {
+  };
+  const updateAdress2 = (address2) => {
     setAddress2(address2);
     console.log(address2);
-  }
+  };
   const handleImage = (event) => setImage(event.target.value);
   const handlePrice = (event) => setPrice(event.target.value);
-  console.log("err", isError, selectedTime); //t
-  console.log("errALL", isErrorAll); //f
-  console.log("errDATE", isErrorDate, selectedDate); //f
-  console.log("errSeats", isErrorSeats, seats); //f
   return (
     <>
       <Navbar />
@@ -219,7 +215,6 @@ function PostRide() {
                             format="HH:mm"
                             onChange={(e) => setSelectedTime(e.format("HH:mm"))}
                           />
-                          {/* <FormHelperText>Required</FormHelperText> */}
                         </HStack>
                       </FormControl>
                     </HStack>

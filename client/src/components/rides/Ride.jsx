@@ -3,11 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AccountContext } from "../hooks/AccountContext";
 import axios from "axios";
 import {
-  Avatar,
   Box,
   Button,
   Center,
-  Container,
   VStack,
   Flex,
   FormControl,
@@ -19,21 +17,18 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  FormHelperText,
   HStack,
-  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   Heading,
 } from "@chakra-ui/react";
 import Moment from "react-moment";
 import Navbar from "../Navbar";
-import { CalendarIcon, InfoIcon, PhoneIcon, TimeIcon } from "@chakra-ui/icons";
+import { CalendarIcon, PhoneIcon, TimeIcon } from "@chakra-ui/icons";
 function Ride({ props }) {
   let { ride_id } = useParams();
   console.log(ride_id);
@@ -44,7 +39,6 @@ function Ride({ props }) {
   const [successInfo, setSuccessInfo] = useState([]);
   const { user } = useContext(AccountContext);
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     axios
@@ -54,17 +48,15 @@ function Ride({ props }) {
         },
       })
       .then((res) => {
-        console.log("rides", res.data);
         setRides(res.data);
       });
   }, []);
 
-  function book() {
+  const book = () => {
     if (!user.loggedIn) {
       navigate("/login");
     }
     setLoading(true);
-    console.log(ride_id, rides.available_seats - seats, user.id, seats);
     axios
       .put("/book/update", {
         params: {
@@ -95,11 +87,11 @@ function Ride({ props }) {
       .catch(() => {
         setLoading(false);
       });
-  }
-  function closeEvent() {
+  };
+  const closeEvent = () => {
     setSuccessful(false);
     navigate("/trips/view");
-  }
+  };
   return (
     <>
       <Navbar />
@@ -200,7 +192,12 @@ function Ride({ props }) {
             {loading ? "Requesting..." : "Book "}
           </Button>
 
-          <Modal onClose={closeEvent} isOpen={successful} isCentered size={"xl"}> 
+          <Modal
+            onClose={closeEvent}
+            isOpen={successful}
+            isCentered
+            size={"xl"}
+          >
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Booking Info</ModalHeader>
@@ -209,7 +206,8 @@ function Ride({ props }) {
                 <Heading>Booking Id : {successInfo.booking_id}</Heading>
                 <br />
                 <Heading>Booking Status : {successInfo.booking_status}</Heading>
-                <br /><br />
+                <br />
+                <br />
               </ModalBody>
             </ModalContent>
           </Modal>
