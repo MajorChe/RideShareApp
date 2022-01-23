@@ -4,7 +4,8 @@ import axios from 'axios';
 import RidesList from './RidesList';
 import Moment from 'react-moment';
 import Navbar from '../Navbar';
-import { Box, Center, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Box, Center, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
+import Footer from '../Footer';
 function Rides() {
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -90,6 +91,8 @@ function Rides() {
   return (
     <>
       <Navbar />
+      <Flex bgColor={"#e8e8e8"} direction={"column"}>
+      <Heading textAlign={"center"} mt={"30px"}>SEARCH FOR RIDES</Heading>
       <Map
         updateAdress1={updateAdress1}
         updateAdress2={updateAdress2}
@@ -98,12 +101,14 @@ function Rides() {
         only={only} updateOnly={updateOnly}
         updateSearch={updateSearch}
       />
-      <Center>
-        <Box borderColor='gray.600' w='50rem' p={4} color={'black'} rounded='md' bg='white'>
-          <Text textAlign={"center"} fontWeight={"bold"} fontSize={"20px"}>{note}</Text>
+      </Flex>
+      <Center mt={"20px"}>
+        <Box borderColor='gray.600' w='80rem' color={'black'} rounded='md' bg='white'>
+          <Text textAlign={"center"} fontWeight={"bold"} fontSize={"30px"}>{note}</Text>
         </Box>
       </Center>
       <RidesList rides={rides} />
+      <Footer/>
     </>
   );
 }

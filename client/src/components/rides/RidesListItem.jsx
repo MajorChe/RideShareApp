@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Moment from "react-moment";
 import {
   Box,
@@ -15,13 +15,14 @@ import {
 import { CalendarIcon, TimeIcon } from "@chakra-ui/icons";
 
 const RidesListItem = (props) => {
+  const navigate = useNavigate();
   return (
     <>
       <Center>
         <VStack>
           <Box
             mt={5}
-            w={"20rem"}
+            w={"22rem"}
             boxShadow="dark-lg"
             p={8}
             rounded="md"
@@ -64,26 +65,9 @@ const RidesListItem = (props) => {
                     <TimeIcon /> {props.time_of_ride}
                   </Text>
                 </HStack>
-
-                <FormControl>
-                  <Link
-                    to={{
-                      pathname: "/ride/" + props.ride_id,
-                    }}
-                  >
-                    <Button
-                      height="30px"
-                      color={"white"}
-                      _hover={{ bg: "teal.400" }}
-                      width="250px"
-                      bg={"teal"}
-                      mt={2}
-                      variant="outline"
-                    >
-                      View{" "}
-                    </Button>
-                  </Link>
-                </FormControl>
+                  <Button onClick={() => navigate(`/ride/${props.ride_id}`)} bgColor={"teal"} w={"200px"} color={"white"}>
+                    VIEW
+                  </Button>
               </VStack>
             </Box>
           </Box>

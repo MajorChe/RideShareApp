@@ -28,7 +28,7 @@ const RidesList = (props) => {
   };
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 4 }} mt={"50px"}>
+    <SimpleGrid columns={{ base: 1, md: 4 }} mt={"10px"}>
       {createRideItems()}
     </SimpleGrid>
   );

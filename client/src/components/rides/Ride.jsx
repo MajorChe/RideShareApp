@@ -33,7 +33,7 @@ function Ride({ props }) {
   let { ride_id } = useParams();
   console.log(ride_id);
   const [rides, setRides] = useState({});
-  const [seats, setSeats] = useState("1");
+  const [seats, setSeats] = useState(0);
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [successInfo, setSuccessInfo] = useState([]);
@@ -55,6 +55,9 @@ function Ride({ props }) {
   const book = () => {
     if (!user.loggedIn) {
       navigate("/login");
+    }
+    if(seats <= 0) {
+      navigate("/rides")
     }
     setLoading(true);
     axios
@@ -147,8 +150,7 @@ function Ride({ props }) {
                         <NumberInput
                           size="sm"
                           maxW={16}
-                          defaultValue={1}
-                          min={1}
+                          min={0}
                           onChange={(seats) => setSeats(seats)}
                           value={seats}
                           max={rides.available_seats}
@@ -163,6 +165,16 @@ function Ride({ props }) {
                     </FormControl>
                   </HStack>
                   <Text fontWeight={"bold"}>Cost $:{rides.cost}</Text>
+                  <Button
+            onClick={book}
+            disabled={loading}
+            colorScheme="teal"
+            p={"40px"}
+            w={"200px"}
+            height={"30px"}
+          >
+            {loading ? "Requesting..." : "Book "}
+          </Button>
                 </VStack>
               </Box>
 
@@ -182,7 +194,7 @@ function Ride({ props }) {
               </VStack>
             </Flex>
           </Box>
-          <Button
+          {/* <Button
             onClick={book}
             disabled={loading}
             colorScheme="teal"
@@ -190,7 +202,7 @@ function Ride({ props }) {
             w={"600px"}
           >
             {loading ? "Requesting..." : "Book "}
-          </Button>
+          </Button> */}
 
           <Modal
             onClose={closeEvent}

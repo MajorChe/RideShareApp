@@ -4,7 +4,6 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import "./Map.css";
 import {
   Button,
   chakra,
@@ -19,6 +18,8 @@ import {
   Text,
   VStack,
   Container,
+  Box,
+  Center,
 } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
 import { MdMyLocation, MdEditCalendar } from "react-icons/md";
@@ -163,10 +164,17 @@ const Map = (props) => {
     reverseGeocode(lat, lng);
   };
 
+  const ExampleCustomInput = ({ value, onClick }) => (
+    <Button onClick={onClick} width={"135px"} colorScheme='teal' variant={"outline"}>
+      DATE:  
+      {value}
+    </Button>
+  );
+
   return (
      <Container maxW={'8xl'} py={12}>
-      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
-        <Stack spacing={8}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"10px"}>
+        <Stack spacing={5}>
             <Flex>
               <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
               <PlacesAutocomplete
@@ -261,8 +269,8 @@ const Map = (props) => {
             </Flex>
             <br />
             <Flex alignSelf={"start"}>
-            <Flex width={"320px"}>
-              <Text fontSize={"17.5px"} fontWeight={"bold"}>Show exact matches</Text>
+            <Flex width={"320px"} ml={"50px"} mt={"7px"}>
+              <Text fontSize={"17.5px"} fontWeight={"bold"}>Show exact</Text>
               <input
                 type="checkbox"
                 checked={props.only}
@@ -270,27 +278,20 @@ const Map = (props) => {
                 style={{marginTop: "7px", marginLeft: "5px"}}
               />
             </Flex>
-              <Icon as={MdEditCalendar} w={8} h={8} color="blue.500" />
-              <Button
-                as={DatePicker}
-                placeholderText="Date"
+            <Icon as={MdEditCalendar} w={6} h={10} color="blue.500" />
+              <DatePicker
                 selected={props.selectedDate}
                 onChange={(date) => props.updateSelectedDate(date)}
                 minDate={new Date()}
-                colorScheme="black"
-                variant="outline"
-                width={"140px"}
+                customInput={<ExampleCustomInput/>}
               />
             </Flex>
-            <Button id="submit" onClick={onSubmit} width={"100px"}>
+            <Button padding={8} id="submit" onClick={onSubmit} width={"430px"} bgColor={"teal"} color={"white"}>
               Search
             </Button>
             <br />
-            <p>
-              Distance: {distance} Duration: {duration}
-            </p>
         </Stack>
-        <Flex flex={1} id="map" height={"400px"}>
+        <Flex flex={1} id="map" height={"400px"}  border={"5px solid black"} direction={"column"}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,
@@ -301,7 +302,11 @@ const Map = (props) => {
             onGoogleApiLoaded={({ map, maps }) => onLoad(map, maps)}
           ></GoogleMapReact>
         </Flex>
+        
         </SimpleGrid>
+        <Center mt={"30px"} fontSize={"20px"}>
+            Distance: {distance} Duration: {duration}
+          </Center>
       </Container>
   );
 };
