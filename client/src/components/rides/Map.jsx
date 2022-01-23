@@ -166,7 +166,7 @@ const Map = (props) => {
   return (
      <Container maxW={'8xl'} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
-        <Stack spacing={4}>
+        <Stack spacing={8}>
             <Flex>
               <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
               <PlacesAutocomplete
@@ -260,7 +260,16 @@ const Map = (props) => {
               </PlacesAutocomplete>
             </Flex>
             <br />
-            <Flex>
+            <Flex alignSelf={"start"}>
+            <Flex width={"320px"}>
+              <Text fontSize={"17.5px"} fontWeight={"bold"}>Show exact matches</Text>
+              <input
+                type="checkbox"
+                checked={props.only}
+                onChange={handleChange}
+                style={{marginTop: "7px", marginLeft: "5px"}}
+              />
+            </Flex>
               <Icon as={MdEditCalendar} w={8} h={8} color="blue.500" />
               <Button
                 as={DatePicker}
@@ -270,16 +279,9 @@ const Map = (props) => {
                 minDate={new Date()}
                 colorScheme="black"
                 variant="outline"
-              ></Button>
-            </Flex>
-            <HStack>
-              <Text>Show exact matches</Text>
-              <input
-                type="checkbox"
-                checked={props.only}
-                onChange={handleChange}
+                width={"140px"}
               />
-            </HStack>
+            </Flex>
             <Button id="submit" onClick={onSubmit} width={"100px"}>
               Search
             </Button>
@@ -288,7 +290,7 @@ const Map = (props) => {
               Distance: {distance} Duration: {duration}
             </p>
         </Stack>
-        <Flex flex={1} id="map" height={"400px"} alignSelf={"center"} >
+        <Flex flex={1} id="map" height={"400px"}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,

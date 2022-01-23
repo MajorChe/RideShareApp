@@ -20,28 +20,10 @@ import {
   ModalFooter,
 } from '@chakra-ui/react';
 
-import Navbar from '../Navbar';
 import { CalendarIcon, InfoIcon, PhoneIcon, TimeIcon } from '@chakra-ui/icons';
-import {
-  Heading,
 
-  Stack,
-  useColorModeValue,
-
-
-  Link as chakraLink,
-
-} from '@chakra-ui/react';
 function RidesListItem(props) {
 
-
-  // let format = new Date(props.date_of_ride).toUTCString();
-  // console.log(format);
-  // let month = new Date(props.date_of_ride).getUTCMonth() + 1; //months from 1-12
-  // let day = new Date(props.date_of_ride).getUTCDate();
-  // let year = new Date(props.date_of_ride).getUTCFullYear();
-
-  // console.log(formatted);
   return (
     <>
 
@@ -53,7 +35,14 @@ function RidesListItem(props) {
 
             <Box>
               <VStack>
-                <Image size='2xl' src={props.ride_image} mb={2} h={'80%'} />
+              <Image
+                  borderRadius="md"
+                  boxSize="230px"
+                  src={props.ride_image}
+                  alt={"Car"}
+                  mb={4}
+                  pos={"relative"}
+                />
                 <h2 ><b>Origin </b></h2>
                 <h2>{props.origin}</h2>
                 <h2><b>Destination </b></h2>

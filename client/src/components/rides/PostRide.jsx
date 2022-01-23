@@ -39,7 +39,6 @@ import Navbar from "../Navbar";
 import TimePicker from "rc-time-picker";
 import "rc-time-picker/assets/index.css";
 import Places from "./Places";
-import "./Post.css";
 import { useNavigate } from "react-router-dom";
 import { CalendarIcon, TimeIcon } from "@chakra-ui/icons";
 function PostRide() {

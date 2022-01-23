@@ -7,7 +7,6 @@ function RidesList(props) {
 
   function createRideItems() {
     return props.rides.map(ride => {
-      console.log("props in list");
       return (      
         <RidesListItem
           ride_id ={ride.ride_id}
@@ -31,11 +30,9 @@ function RidesList(props) {
   }
 
   return (
-    <div>
       <SimpleGrid columns={{ base: 1, md: 4 }} mt={"50px"}>
       {createRideItems()}
       </SimpleGrid>
-    </div>
   );
 }
 
