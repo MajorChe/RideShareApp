@@ -18,6 +18,7 @@ import {
   Stack,
   Text,
   VStack,
+  Container,
 } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
 import { MdMyLocation, MdEditCalendar } from "react-icons/md";
@@ -163,11 +164,10 @@ const Map = (props) => {
   };
 
   return (
-    <>
+     <Container maxW={'8xl'} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
-        <HStack mt={"50px"} ml={"50px"}>
-          <Flex direction={"column"}>
-            <HStack>
+        <Stack spacing={4}>
+            <Flex>
               <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
               <PlacesAutocomplete
                 value={address}
@@ -185,7 +185,7 @@ const Map = (props) => {
                       value={props.address1}
                       class="form-control"
                       {...getInputProps({ placeholder: "From" })}
-                      w={"400px"}
+                      w={"393px"}
                     />
                     <chakra.div style={{position: "absolute", zIndex: 10}}>
                       {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -205,15 +205,15 @@ const Map = (props) => {
                         );
                       })}
                     </chakra.div>
+                    <Button ml={2} onClick={getLocation}>
+                      <Icon as={MdMyLocation} />
+                    </Button>
                   </FormControl>
                 )}
               </PlacesAutocomplete>
-              <Button onClick={getLocation}>
-                <Icon as={MdMyLocation} />
-              </Button>
-            </HStack>
+            </Flex>
             <br />
-            <HStack>
+            <Flex>
               <Icon as={TiLocationArrowOutline} w={8} h={8} color="green.500" />
               <PlacesAutocomplete
                 value={address2}
@@ -232,7 +232,7 @@ const Map = (props) => {
                         class="form-control"
                         {...getInputProps({ placeholder: "To" })}
                         required
-                        w={"400px"}
+                        w={"393px"}
                       />
                       <chakra.div style={{position: "absolute", zIndex: 10}}>
                         {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -258,9 +258,9 @@ const Map = (props) => {
                   </chakra.div>
                 )}
               </PlacesAutocomplete>
-            </HStack>
+            </Flex>
             <br />
-            <HStack>
+            <Flex>
               <Icon as={MdEditCalendar} w={8} h={8} color="blue.500" />
               <Button
                 as={DatePicker}
@@ -271,7 +271,7 @@ const Map = (props) => {
                 colorScheme="black"
                 variant="outline"
               ></Button>
-            </HStack>
+            </Flex>
             <HStack>
               <Text>Show exact matches</Text>
               <input
@@ -280,18 +280,15 @@ const Map = (props) => {
                 onChange={handleChange}
               />
             </HStack>
-            <Button id="submit" onClick={onSubmit}>
+            <Button id="submit" onClick={onSubmit} width={"100px"}>
               Search
             </Button>
-            <br />
-            <br /> <br />
             <br />
             <p>
               Distance: {distance} Duration: {duration}
             </p>
-          </Flex>
-        </HStack>
-        <div id="map" style={{ height: "400px"}}>
+        </Stack>
+        <Flex flex={1} id="map" height={"400px"} alignSelf={"center"} >
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,
@@ -301,12 +298,9 @@ const Map = (props) => {
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => onLoad(map, maps)}
           ></GoogleMapReact>
-          <br />
-        </div>
-        {/* </div> */}
-        {/* </Flex> */}
-      </SimpleGrid>
-    </>
+        </Flex>
+        </SimpleGrid>
+      </Container>
   );
 };
 

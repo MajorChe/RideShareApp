@@ -44,8 +44,8 @@ const NavLinks = () => {
             <Text  fontWeight={"medium"}>{user.name}</Text>
           </MenuButton>
           <MenuList>
-          <MenuItem onClick={() => navigate("/settings")}>Settings <SettingsIcon ml={6}/></MenuItem>
-          <MenuItem onClick={async() => {
+          <MenuItem onClick={() => navigate("/settings")} color={"teal"}>Settings <SettingsIcon ml={6}/></MenuItem>
+          <MenuItem color={"red"} onClick={async() => {
              await axios.post("/auth/logout").then(() => {
             setUser({loggedIn: false})
             navigate("/login");
