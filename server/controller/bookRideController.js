@@ -37,21 +37,23 @@ const addBookingHandler = async (req, res) => {
 
   BookRideFn.addBooking(ride_id, rider_id, seats)
 
-    .then(res => {
+    .then(insertedData => {
 
-      console.log("successfully inserted data", res);
+      console.log("successfully inserted data", insertedData);
 
-      res.json(res);      
+      res.json(insertedData);      
 
-      console.log("result",res);
+      console.log("result",insertedData );
 
       client.messages
 
         .create({
-          body: `Booking is Successful !!Your Booking Id is ${res.booking_id} `,
+
+          body: `Booking is Successful `,
           messagingServiceSid: process.env.MSID,
           to: contact,
           from: process.env.FROM
+
         })
 
         .then(message => console.log(message.sid))
