@@ -13,7 +13,6 @@ import PrivateRoutes from "./PrivateRoutes";
 import { useContext } from "react";
 import { AccountContext } from "./hooks/AccountContext";
 import UserSettings from "./user/UserSettings";
-import Trips from "./user/Trips";
 import ErrorPage from "./ErrorPage";
 import ViewRidePostings from "./user/ViewRidePostings";
 
@@ -33,7 +32,6 @@ function Views() {
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<UserSettings />} />
-        <Route path="/trips" element={<Trips />} />
         <Route path="/trips/view" element={<ViewTrips />} />
         <Route path="/trips/postings" element={<ViewRidePostings />} />
         <Route path="/postRide" element={<PostRide />} />

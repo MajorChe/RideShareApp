@@ -77,7 +77,8 @@ export default function Navbar() {
           <HStack display={"flex"} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
               <Link to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
-              <Link ml={"30px"} to="/trips"><NavLink>Trips</NavLink></Link>
+              <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>
+              <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>
             </Flex>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               

@@ -11,7 +11,7 @@ function Dashboard() {
     <>
       <Navbar />
       <UserMetrics />
-      <Heading textAlign={"center"} mt={"40px"}>Your completed Rides</Heading>
+      <Heading textAlign={"center"} mt={"30px"}>COMPLETED RIDES</Heading>
       <Footer/>
     </>
   )

@@ -1,6 +1,7 @@
 import {
   Box,
   chakra,
+  Heading,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -30,14 +31,8 @@ function StatsCard(props) {
 export default function UserMetrics() {
   return (
     <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-      <chakra.h1
-        textAlign={'center'}
-        fontSize={'4xl'}
-        py={10}
-        fontWeight={'bold'}>
-        Your Ride Details
-      </chakra.h1>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+      <Heading textAlign={"center"} mt={"30px"}>YOUR RIDE DETAILS</Heading>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }} mt={"30px"}>
         <StatsCard title={'Number of trips'} stat={'20'} />
         <StatsCard title={'Total Kms'} stat={'1000kms'} />
         <StatsCard title={'Total Earnings'} stat={'$250'} />

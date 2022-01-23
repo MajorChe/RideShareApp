@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Icon } from "@chakra-ui/react";
+import { Heading, Icon } from "@chakra-ui/react";
 import {
   FaDollarSign,
   FaCar,
@@ -111,9 +111,7 @@ function PostRide() {
       <Navbar />
       <Center py={6}>
         <VStack>
-          <Text fontSize="4xl" mt={5} mb={5}>
-            POST A RIDE
-          </Text>
+        <Heading textAlign={"center"} mt={"30px"}>POST A RIDE</Heading>
           <Box boxShadow={"dark-lg"} rounded={"md"} p={6}>
             <Container maxW="container.xl" centerContent>
               <Box padding="5" mt="5">
