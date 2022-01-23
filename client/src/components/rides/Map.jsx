@@ -11,13 +11,17 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  Icon,
   HStack,
   Input,
+  SimpleGrid,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
+import { MdMyLocation, MdEditCalendar } from "react-icons/md";
+import { TiLocationArrowOutline } from "react-icons/ti";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -160,72 +164,30 @@ const Map = (props) => {
 
   return (
     <>
-      <Flex
-        justifyContent={"space-evenly"}
-        alignItems={"center"}
-        bg="blackAlpha.200"
-      >
-        <HStack mt={"100px"}>
-          <VStack>
-            <PlacesAutocomplete
-              value={address}
-              onChange={setAddress}
-              onSelect={handleSelect}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <FormControl isInvalid={isError1}>
-                  <Input
-                    value={props.address1}
-                    class="form-control"
-                    {...getInputProps({ placeholder: "From" })}
-                    w={"460px"}
-                  />
-                  <chakra.div>
-                    {loading ? <chakra.div>...loading</chakra.div> : null}
-
-                    {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: suggestion.active ? "teal" : "#fff",
-                        color: suggestion.active ? "white" : "black",
-                      };
-
-                      return (
-                        <chakra.div
-                          {...getSuggestionItemProps(suggestion, { style })}
-                        >
-                          {suggestion.description}
-                        </chakra.div>
-                      );
-                    })}
-                  </chakra.div>
-                </FormControl>
-              )}
-            </PlacesAutocomplete>
-            <br />
-            <PlacesAutocomplete
-              value={address2}
-              onChange={setAddress2}
-              onSelect={handleSelect2}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <chakra.div>
-                  <FormControl isInvalid={isError2}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"50px"}>
+        <HStack mt={"50px"} ml={"50px"}>
+          <Flex direction={"column"}>
+            <HStack>
+              <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <FormControl isInvalid={isError1}>
                     <Input
+                      value={props.address1}
                       class="form-control"
-                      {...getInputProps({ placeholder: "To" })}
-                      required
+                      {...getInputProps({ placeholder: "From" })}
+                      w={"400px"}
                     />
-                    <chakra.div>
+                    <chakra.div style={{position: "absolute", zIndex: 10}}>
                       {loading ? <chakra.div>...loading</chakra.div> : null}
 
                       {suggestions.map((suggestion) => {
@@ -244,11 +206,62 @@ const Map = (props) => {
                       })}
                     </chakra.div>
                   </FormControl>
-                </chakra.div>
-              )}
-            </PlacesAutocomplete>
+                )}
+              </PlacesAutocomplete>
+              <Button onClick={getLocation}>
+                <Icon as={MdMyLocation} />
+              </Button>
+            </HStack>
             <br />
-            <Stack direction="column">
+            <HStack>
+              <Icon as={TiLocationArrowOutline} w={8} h={8} color="green.500" />
+              <PlacesAutocomplete
+                value={address2}
+                onChange={setAddress2}
+                onSelect={handleSelect2}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <chakra.div>
+                    <FormControl isInvalid={isError2}>
+                      <Input
+                        class="form-control"
+                        {...getInputProps({ placeholder: "To" })}
+                        required
+                        w={"400px"}
+                      />
+                      <chakra.div style={{position: "absolute", zIndex: 10}}>
+                        {loading ? <chakra.div>...loading</chakra.div> : null}
+
+                        {suggestions.map((suggestion) => {
+                          const style = {
+                            backgroundColor: suggestion.active
+                              ? "teal"
+                              : "#fff",
+                            color: suggestion.active ? "white" : "black",
+                          };
+
+                          return (
+                            <chakra.div
+                              {...getSuggestionItemProps(suggestion, { style })}
+                            >
+                              {suggestion.description}
+                            </chakra.div>
+                          );
+                        })}
+                      </chakra.div>
+                    </FormControl>
+                  </chakra.div>
+                )}
+              </PlacesAutocomplete>
+            </HStack>
+            <br />
+            <HStack>
+              <Icon as={MdEditCalendar} w={8} h={8} color="blue.500" />
               <Button
                 as={DatePicker}
                 placeholderText="Date"
@@ -258,18 +271,15 @@ const Map = (props) => {
                 colorScheme="black"
                 variant="outline"
               ></Button>
-              <HStack>
-                <Text>Show exact matches</Text>
-                <input
-                  type="checkbox"
-                  checked={props.only}
-                  onChange={handleChange}
-                />
-              </HStack>
-            </Stack>
-            <Button onClick={getLocation}>
-             Use Current Location
-            </Button>
+            </HStack>
+            <HStack>
+              <Text>Show exact matches</Text>
+              <input
+                type="checkbox"
+                checked={props.only}
+                onChange={handleChange}
+              />
+            </HStack>
             <Button id="submit" onClick={onSubmit}>
               Search
             </Button>
@@ -279,9 +289,9 @@ const Map = (props) => {
             <p>
               Distance: {distance} Duration: {duration}
             </p>
-          </VStack>
+          </Flex>
         </HStack>
-        <div id="map" style={{ height: "400px", width: "800px"}}>
+        <div id="map" style={{ height: "400px"}}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,
@@ -294,7 +304,8 @@ const Map = (props) => {
           <br />
         </div>
         {/* </div> */}
-      </Flex>
+        {/* </Flex> */}
+      </SimpleGrid>
     </>
   );
 };

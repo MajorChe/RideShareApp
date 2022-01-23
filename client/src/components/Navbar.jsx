@@ -65,7 +65,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={useColorModeValue('teal', 'gray.900')} px={4} color={"white"}>
         <Flex h={20} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
             size={'md'}

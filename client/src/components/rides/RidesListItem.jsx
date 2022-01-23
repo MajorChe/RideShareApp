@@ -48,7 +48,7 @@ function RidesListItem(props) {
       <Center>
         <VStack>
 
-          <Box mt={5} w={"20rem"} boxShadow='dark-lg' p={8} rounded='md' bg='white'>
+          <Box mt={5} w={"20rem"} boxShadow='dark-lg' p={8} rounded='md' bgColor={"white"} color={"black"}>
 
 
             <Box>
