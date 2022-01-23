@@ -15,6 +15,7 @@ import { AccountContext } from "./hooks/AccountContext";
 import UserSettings from "./user/UserSettings";
 import ErrorPage from "./ErrorPage";
 import ViewRidePostings from "./user/ViewRidePostings";
+import ChatHome from "./chat/ChatHome";
 
 function Views() {
   const { user } = useContext(AccountContext);
@@ -30,6 +31,7 @@ function Views() {
       <Route path="/ride/:ride_id" element={<Ride />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/about" element={<About />} />
+        <Route path="/inbox" element={<ChatHome />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<UserSettings />} />
         <Route path="/trips/view" element={<ViewTrips />} />
