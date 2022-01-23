@@ -174,7 +174,7 @@ const Map = (props) => {
   return (
      <Container maxW={'8xl'} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} mt={"10px"}>
-        <Stack spacing={5}>
+        <Stack spacing={5} mt={"60px"}>
             <Flex>
               <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
               <PlacesAutocomplete

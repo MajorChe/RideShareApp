@@ -10,6 +10,8 @@ const user = require("./routes/user");
 const post = require("./routes/postRoute");
 const book = require("./routes/bookRoute");
 const session = require("express-session");
+const Redis = require("ioredis");
+const RedisStore = require("connect-redis")(session)
 const listRidesRoute = require("./routes/listRides");
 const dbConnection = require("./db/db");
 
@@ -19,6 +21,8 @@ app.use(
     credentials: true,
   })
 );
+
+const redisClient = new Redis();
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,6 +34,7 @@ app.use(
     credentials: true,
     saveUninitialized: false,
     name: "sid",
+    store: new RedisStore({client: redisClient}),
     resave: false,
     cookie: {
       secure: process.env.ENVIRONMENT === "production",
