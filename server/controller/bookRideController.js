@@ -28,7 +28,9 @@ const addBookingHandler = async (req,res) => {
 
   console.log(req.body.params);    
 
-  const {ride_id,rider_id,seats}= req.body.params;
+  const {ride_id,rider_id,seats,contact}= req.body.params;
+
+  console.log(contact);
 
   BookRideFn.addBooking(ride_id,rider_id,seats)
   

@@ -35,7 +35,7 @@ function Ride({ props }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
+console.log("In Book",user.contact);
   useEffect(() => {
     axios.get("/ride",
       {
@@ -73,6 +73,7 @@ function Ride({ props }) {
                 rider_id: user.id,
                 ride_id: ride_id,
                 seats: seats,
+                contact : user.contact
               }
             }).then((res) => {
               setLoading(false);
