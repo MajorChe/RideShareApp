@@ -194,6 +194,7 @@ const Map = (props) => {
                       class="form-control"
                       {...getInputProps({ placeholder: "From" })}
                       w={"393px"}
+                      border={"2px solid black"}
                     />
                     <chakra.div style={{position: "absolute", zIndex: 10}}>
                       {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -241,6 +242,7 @@ const Map = (props) => {
                         {...getInputProps({ placeholder: "To" })}
                         required
                         w={"393px"}
+                        border={"2px solid black"}
                       />
                       <chakra.div style={{position: "absolute", zIndex: 10}}>
                         {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -268,17 +270,17 @@ const Map = (props) => {
               </PlacesAutocomplete>
             </Flex>
             <br />
-            <Flex alignSelf={"start"}>
-            <Flex width={"320px"} ml={"50px"} mt={"7px"}>
-              <Text fontSize={"17.5px"} fontWeight={"bold"}>Show exact</Text>
+            <Flex >
+            <Flex width={"320px"} ml={"40px"} mt={"7px"}>
               <input
                 type="checkbox"
                 checked={props.only}
                 onChange={handleChange}
-                style={{marginTop: "7px", marginLeft: "5px"}}
+                style={{marginTop: "3px", zoom: 1.5}}
               />
+              <Text fontSize={"19.5px"} ml={2} color={"teal.800"}>Show Exact Match</Text>
             </Flex>
-            <Icon as={MdEditCalendar} w={6} h={10} color="blue.500" />
+            <Icon as={MdEditCalendar} w={6} h={10} ml={5} mr={4} color="blue.500" />
               <DatePicker
                 selected={props.selectedDate}
                 onChange={(date) => props.updateSelectedDate(date)}
@@ -286,9 +288,11 @@ const Map = (props) => {
                 customInput={<ExampleCustomInput/>}
               />
             </Flex>
-            <Button padding={8} id="submit" onClick={onSubmit} width={"430px"} bgColor={"teal"} color={"white"}>
+            <Box paddingLeft={"30px"}>
+            <Button _hover={{textDecoration: "none"}} padding={8} fontSize={"3xl"} fontWeight={"medium"} id="submit" onClick={onSubmit} width={"390px"} bgColor={"teal"} color={"white"}>
               Search
             </Button>
+            </Box>
             <br />
         </Stack>
         <Flex flex={1} id="map" height={"400px"}  border={"5px solid black"} direction={"column"}>

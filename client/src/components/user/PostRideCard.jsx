@@ -91,8 +91,8 @@ const BookingComp = (props) => {
       <HStack>
         <Image
           borderRadius="full"
-          boxSize="100px"
-          src={"https://bit.ly/ryan-florence"}
+          boxSize="78px"
+          src={props.avatar}
           alt={"Profile picture"}
           mb={4}
           pos={"relative"}
@@ -127,7 +127,7 @@ const PostRideCard = (props) => {
   const bookingCompList = bookings.map((booking, index) => {
     return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} 
     name={booking.name} booking_status={booking.booking_status} ride_id={props.ride_id} 
-    available_seats={props.available_seats} seats_booked={booking.seats_booked}/>;
+    available_seats={props.available_seats} seats_booked={booking.seats_booked} avatar = {booking.avatar}/>;
   });
 
   return (

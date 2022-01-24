@@ -73,7 +73,7 @@ const getRidePostingsForUser = (owner_id) => {
 const getAllBookingsForOwner = (owner_id) => {
   return pool
   .query(
-    `SELECT bookings.booking_id, rides.ride_id, users.name, bookings.rider_id, bookings.seats_booked, bookings.booking_status FROM bookings JOIN rides ON 
+    `SELECT bookings.booking_id, rides.ride_id, users.name, users.avatar, bookings.rider_id, bookings.seats_booked, bookings.booking_status FROM bookings JOIN rides ON 
     bookings.ride_id = rides.ride_id JOIN users ON bookings.rider_id = users.id WHERE owner_id = $1`,
     [owner_id]
   )
