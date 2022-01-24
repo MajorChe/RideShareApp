@@ -3,6 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const PORT = process.env.PORT || 8888;
+const { Server } = require("socket.io");
 const app = express();
 const rideRoute = require("./routes/ride");
 const auth = require("./routes/auth");
@@ -14,13 +15,20 @@ const Redis = require("ioredis");
 const RedisStore = require("connect-redis")(session)
 const listRidesRoute = require("./routes/listRides");
 const dbConnection = require("./db/db");
+const server = require("http").createServer(app);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   })
+// );
 
-app.use(
-  cors({
+const io = new Server(server, {
+  cors: {
     origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+    credentials: "true",
+  },
+});
 
 const redisClient = new Redis();
 app.use(logger("dev"));
@@ -49,10 +57,11 @@ app.use("/getRides", listRidesRoute(dbConnection));
 app.use("/ride", rideRoute(dbConnection));
 app.use("/auth", auth);
 app.use("/user",user);
-
-
 app.use("/postRide", post);
 app.use("/book",book);
-app.listen(PORT, () => {
+
+io.on("connect", socket => {});
+
+server.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
 });
