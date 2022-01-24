@@ -1,12 +1,12 @@
 import { Grid, GridItem, Tabs } from "@chakra-ui/react";
 import { createContext, useState } from "react";
-import Navbar from "../Navbar";
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";
+import Navbar from "../Navbar"
 
 export const FriendContext = createContext();
 
-const ChatHome = () => {
+const Home = () => {
   const [friendList, setFriendList] = useState([]);
   return (
     <>
@@ -25,4 +25,4 @@ const ChatHome = () => {
   );
 };
 
-export default ChatHome;
+export default Home;
