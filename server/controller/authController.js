@@ -6,7 +6,7 @@ const checkCookies = async (req,res) => {
   if(req.session.user && req.session.user.email) {
     console.log(req.session.user)
     console.log("loggedin")
-    await res.json({ loggedIn: true, email: req.session.user.email, name: req.session.user.name, id: req.session.user.id, contact: req.session.user.contact})
+    await res.json({ loggedIn: true, email: req.session.user.email, name: req.session.user.name, id: req.session.user.id, contact: req.session.user.contact, chatid: req.session.user.chatid})
   } else {
     await res.json({ loggedIn: false})
   }
@@ -24,7 +24,7 @@ const handleLogin = async (req,res) => {
           contact: result.contact,
           chatid: result.chatid
         };
-        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name, contact: result.contact});
+        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name, contact: result.contact, chatid: result.chatid});
       } else {
         console.log("password doesnt match");
         res.json({ loggedIn: false, status: "Wrong email or password" });
@@ -49,7 +49,7 @@ const handleRegister = async (req,res) => {
           name: result.name,
           chatid: result.chatid
         };
-        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name });
+        res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name, chatid: result.chatid });
       });
     }
   });
