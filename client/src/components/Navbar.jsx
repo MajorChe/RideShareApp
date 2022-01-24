@@ -5,13 +5,12 @@ import {
   Menu,MenuButton,Avatar,MenuList,MenuItem,
   Flex,Stack,
   HStack,useDisclosure,IconButton,
-  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon, SettingsIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { Link as ReachLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AccountContext } from "./hooks/AccountContext";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -20,7 +19,8 @@ const NavLink = ({ children }) => (
   <Text px={2} py={1} rounded={"md"} fontSize={"20px"}
     _hover={{
       textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
+      bg: useColorModeValue("white", "gray.700"),
+      color: "teal"
     }}
   >
     {children}
@@ -32,11 +32,11 @@ const NavLinks = () => {
   const {user, setUser} = useContext(AccountContext);
   return (
     <>
-      <Link as={ReachLink} to="/rides"><NavLink>Find Ride</NavLink></Link>
-      <Link as={ReachLink} to="/postRide"><NavLink>Post Ride</NavLink></Link>
-      {!user.loggedIn && <Link as={ReachLink} to="/login"><NavLink>Login</NavLink></Link>}
-      {!user.loggedIn && <Link as={ReachLink} to="/register"><NavLink>Register</NavLink></Link>}
-      {user.loggedIn && <Link as={ReachLink} to="/inbox"><NavLink>Inbox</NavLink></Link>}
+      <Link to="/rides"><NavLink>Find Ride</NavLink></Link>
+      <Link to="/postRide"><NavLink>Post Ride</NavLink></Link>
+      {!user.loggedIn && <Link to="/login"><NavLink>Login</NavLink></Link>}
+      {!user.loggedIn && <Link to="/register"><NavLink>Register</NavLink></Link>}
+      {user.loggedIn && <Link to="/inbox"><NavLink>Inbox</NavLink></Link>}
       {user.loggedIn && 
       <Flex alignItems={"center"}> 
         <Menu>
@@ -45,8 +45,8 @@ const NavLinks = () => {
             <Text  fontWeight={"medium"}>{user.name}</Text>
           </MenuButton>
           <MenuList>
-          <MenuItem onClick={() => navigate("/settings")}>Settings <SettingsIcon ml={6}/></MenuItem>
-          <MenuItem onClick={async() => {
+          <MenuItem onClick={() => navigate("/settings")} color={"teal"}>Settings <SettingsIcon ml={6}/></MenuItem>
+          <MenuItem color={"red"} onClick={async() => {
              await axios.post("/auth/logout").then(() => {
             setUser({loggedIn: false})
             navigate("/login");
@@ -65,7 +65,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={useColorModeValue('teal', 'gray.900')} px={4} color={"white"}>
         <Flex h={20} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
             size={'md'}
@@ -76,8 +76,9 @@ export default function Navbar() {
           />
           <HStack display={"flex"} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
-              <Link as={ReachLink} to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
-              <Link ml={"30px"} as={ReachLink} to="/trips"><NavLink>Trips</NavLink></Link>
+              <Link to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
+              <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>
+              <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>
             </Flex>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               

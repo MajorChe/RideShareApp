@@ -47,7 +47,7 @@ const ViewRidePostings = () => {
   return (
     <>
       <Navbar />
-      <Heading mt={"50px"} textAlign={"center"}>Your Ride Postings</Heading>
+      <Heading textAlign={"center"} mt={"30px"}>YOUR RIDE POSTINGS</Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
       {postListings}
       </SimpleGrid>

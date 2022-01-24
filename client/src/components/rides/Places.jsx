@@ -6,13 +6,9 @@ import PlacesAutocomplete, {
 import {
   Input,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from '@chakra-ui/react';
-import { IconButton } from '@chakra-ui/react';
 
-function Places(props) {
+const Places = (props) => {
 
   const [address, setAddress] = useState("");
 
@@ -21,7 +17,6 @@ function Places(props) {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
-    console.log("val", value);
     props.updateAdress(value);
   };
   const isError = address === '';

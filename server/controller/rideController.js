@@ -50,7 +50,6 @@ const deleteRide = (req, res) => {
     userfn
       .updateSeatsOnUserCancel(parsed_updated_seats, parsed_ride_id)
       .then((result2) => {
-        console.log("hello*****************************************************")
         res.json({ result, result2 });
       });
   });

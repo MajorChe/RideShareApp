@@ -4,20 +4,26 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import "./Map.css";
 import {
   Button,
   chakra,
   Checkbox,
   Flex,
   FormControl,
+  Icon,
   HStack,
   Input,
+  SimpleGrid,
   Stack,
   Text,
   VStack,
+  Container,
+  Box,
+  Center,
 } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
+import { MdMyLocation, MdEditCalendar } from "react-icons/md";
+import { TiLocationArrowOutline } from "react-icons/ti";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -162,74 +168,38 @@ const Map = (props) => {
     reverseGeocode(lat, lng);
   };
 
+  const ExampleCustomInput = ({ value, onClick }) => (
+    <Button onClick={onClick} width={"135px"} colorScheme='teal' variant={"outline"}>
+      DATE:  
+      {value}
+    </Button>
+  );
+
   return (
-    <>
-      <Flex
-        justifyContent={"space-evenly"}
-        alignItems={"center"}
-        bg="blackAlpha.200"
-      >
-        <HStack mt={"100px"}>
-          <VStack>
-            <PlacesAutocomplete
-              value={address}
-              onChange={setAddress}
-              onSelect={handleSelect}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <FormControl isInvalid={isError1}>
-                  <Input
-                    value={props.address1}
-                    class="form-control"
-                    {...getInputProps({ placeholder: "From" })}
-                    w={"460px"}
-                  />
-                  <chakra.div>
-                    {loading ? <chakra.div>...loading</chakra.div> : null}
-
-                    {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: suggestion.active ? "teal" : "#fff",
-                        color: suggestion.active ? "white" : "black",
-                      };
-
-                      return (
-                        <chakra.div
-                          {...getSuggestionItemProps(suggestion, { style })}
-                        >
-                          {suggestion.description}
-                        </chakra.div>
-                      );
-                    })}
-                  </chakra.div>
-                </FormControl>
-              )}
-            </PlacesAutocomplete>
-            <br />
-            <PlacesAutocomplete
-              value={address2}
-              onChange={setAddress2}
-              onSelect={handleSelect2}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <chakra.div>
-                  <FormControl isInvalid={isError2}>
+     <Container maxW={'8xl'} py={12}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} mt={"10px"}>
+        <Stack spacing={5}>
+            <Flex>
+              <Icon as={TiLocationArrowOutline} w={8} h={8} color="red.500" />
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <FormControl isInvalid={isError1}>
                     <Input
+                      value={props.address1}
                       class="form-control"
-                      {...getInputProps({ placeholder: "To" })}
-                      required
+                      {...getInputProps({ placeholder: "From" })}
+                      w={"393px"}
                     />
-                    <chakra.div>
+                    <chakra.div style={{position: "absolute", zIndex: 10}}>
                       {loading ? <chakra.div>...loading</chakra.div> : null}
 
                       {suggestions.map((suggestion) => {
@@ -247,45 +217,85 @@ const Map = (props) => {
                         );
                       })}
                     </chakra.div>
+                    <Button ml={2} onClick={getLocation}>
+                      <Icon as={MdMyLocation} />
+                    </Button>
                   </FormControl>
-                </chakra.div>
-              )}
-            </PlacesAutocomplete>
+                )}
+              </PlacesAutocomplete>
+            </Flex>
             <br />
-            <Stack direction="column">
-              <Button
-                as={DatePicker}
-                placeholderText="Date"
+            <Flex>
+              <Icon as={TiLocationArrowOutline} w={8} h={8} color="green.500" />
+              <PlacesAutocomplete
+                value={address2}
+                onChange={setAddress2}
+                onSelect={handleSelect2}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <chakra.div>
+                    <FormControl isInvalid={isError2}>
+                      <Input
+                        class="form-control"
+                        {...getInputProps({ placeholder: "To" })}
+                        required
+                        w={"393px"}
+                      />
+                      <chakra.div style={{position: "absolute", zIndex: 10}}>
+                        {loading ? <chakra.div>...loading</chakra.div> : null}
+
+                        {suggestions.map((suggestion) => {
+                          const style = {
+                            backgroundColor: suggestion.active
+                              ? "teal"
+                              : "#fff",
+                            color: suggestion.active ? "white" : "black",
+                          };
+
+                          return (
+                            <chakra.div
+                              {...getSuggestionItemProps(suggestion, { style })}
+                            >
+                              {suggestion.description}
+                            </chakra.div>
+                          );
+                        })}
+                      </chakra.div>
+                    </FormControl>
+                  </chakra.div>
+                )}
+              </PlacesAutocomplete>
+            </Flex>
+            <br />
+            <Flex alignSelf={"start"}>
+            <Flex width={"320px"} ml={"50px"} mt={"7px"}>
+              <Text fontSize={"17.5px"} fontWeight={"bold"}>Show exact</Text>
+              <input
+                type="checkbox"
+                checked={props.only}
+                onChange={handleChange}
+                style={{marginTop: "7px", marginLeft: "5px"}}
+              />
+            </Flex>
+            <Icon as={MdEditCalendar} w={6} h={10} color="blue.500" />
+              <DatePicker
                 selected={props.selectedDate}
                 onChange={(date) => props.updateSelectedDate(date)}
                 minDate={new Date()}
-                colorScheme="black"
-                variant="outline"
-              ></Button>
-              <HStack>
-                <Text>Show exact matches</Text>
-                <input
-                  type="checkbox"
-                  checked={props.only}
-                  onChange={handleChange}
-                />
-              </HStack>
-            </Stack>
-            <Button onClick={getLocation}>
-             Use Current Location
-            </Button>
-            <Button id="submit" onClick={onSubmit}>
+                customInput={<ExampleCustomInput/>}
+              />
+            </Flex>
+            <Button padding={8} id="submit" onClick={onSubmit} width={"430px"} bgColor={"teal"} color={"white"}>
               Search
             </Button>
             <br />
-            <br /> <br />
-            <br />
-            <p>
-              Distance: {distance} Duration: {duration}
-            </p>
-          </VStack>
-        </HStack>
-        <div id="map" style={{ height: "400px", width: "800px"}}>
+        </Stack>
+        <Flex flex={1} id="map" height={"400px"}  border={"5px solid black"} direction={"column"}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: process.env.REACT_APP_API_KEY,
@@ -295,11 +305,13 @@ const Map = (props) => {
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => onLoad(map, maps)}
           ></GoogleMapReact>
-          <br />
-        </div>
-        {/* </div> */}
-      </Flex>
-    </>
+        </Flex>
+        
+        </SimpleGrid>
+        <Center mt={"30px"} fontSize={"20px"}>
+            Distance: {distance} Duration: {duration}
+          </Center>
+      </Container>
   );
 };
 

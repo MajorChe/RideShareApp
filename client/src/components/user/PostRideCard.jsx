@@ -133,7 +133,7 @@ const PostRideCard = (props) => {
   return (
     <>
     <Flex justifyContent={"space-around"} mt={10}>
-      <Box maxW={'400px'} w={'full'} bg={useColorModeValue('orange.100', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
+      <Box maxW={'400px'} w={'full'} boxShadow="dark-lg" rounded={'lg'} p={6} textAlign={'center'} bgColor={"white"} color={"black"}>
         <VStack spacing={"30px"}>
         <Stack direction={"row"} >
           <Text fontWeight={"600"} fontSize={"3xl"} alignSelf={"center"}>YOUR POST: {props.id}</Text>

@@ -38,13 +38,12 @@ const CardComponentVertical = (props) => {
 const CardComponentHorizontal = (props) => {
   return(
     <Flex direction={"row"} pt={3}>
-      <Badge
+      <Text
         px={5}
-        bg={useColorModeValue('gray.50', 'gray.800')}
         fontWeight={'500'}
         fontSize={"2xl"}>
         {props.name} 
-      </Badge>
+      </Text>
       <Text fontSize={"2xl"}>{props.value}</Text>
     </Flex>
   )
@@ -101,7 +100,9 @@ const TripCard = (props) => {
         </ModalContent>
     </Modal>
     <Center pb={20}>
-      <Box maxW={'400px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'lg'} p={6} textAlign={'center'}>
+      <Box maxW={'400px'} w={'full'} boxShadow="dark-lg" rounded={'lg'} p={6} textAlign={'center'} 
+      bgColor={"white"} color={"black"}
+      >
         <Stack direction={"row"} spacing={10}>
         <Image borderRadius='full' boxSize='150px' src={props.owner_image} alt={'Profile picture'} mb={4} pos={'relative'}/>
         <Image onClick={onOpen} cursor={'pointer'} borderRadius='2xl' boxSize='150px' src={props.ride_image} alt={'Car'} mb={4} pos={'relative'}/>

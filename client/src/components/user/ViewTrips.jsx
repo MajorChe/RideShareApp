@@ -38,7 +38,7 @@ const ViewTrips = () => {
   return (
     <>
       <Navbar />
-      <Heading mt={"50px"} textAlign={"center"}>Upcoming Trips</Heading>
+      <Heading textAlign={"center"} mt={"30px"}>UPCOMING TRIPS</Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
         {ListTrips}
       </SimpleGrid>
