@@ -39,7 +39,6 @@ function Ride({ props }) {
   const [successInfo, setSuccessInfo] = useState([]);
   const { user } = useContext(AccountContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     axios
       .get("/ride", {
@@ -56,11 +55,13 @@ function Ride({ props }) {
     if (!user.loggedIn) {
       navigate("/login");
     }
-    if(seats <= 0) {
+    if (seats <= 0) {
       navigate("/rides")
     }
-    setLoading(true);
-    axios
+    // setLoading(true);
+
+    else {
+       axios
       .put("/book/update", {
         params: {
           ride_id: ride_id,
@@ -75,6 +76,7 @@ function Ride({ props }) {
               rider_id: user.id,
               ride_id: ride_id,
               seats: seats,
+              contact: user.contact,
             },
           })
           .then((res) => {
@@ -90,6 +92,8 @@ function Ride({ props }) {
       .catch(() => {
         setLoading(false);
       });
+    }
+
   };
   const closeEvent = () => {
     setSuccessful(false);
@@ -166,15 +170,15 @@ function Ride({ props }) {
                   </HStack>
                   <Text fontWeight={"bold"}>Cost $:{rides.cost}</Text>
                   <Button
-            onClick={book}
-            disabled={loading}
-            colorScheme="teal"
-            p={"40px"}
-            w={"200px"}
-            height={"30px"}
-          >
-            {loading ? "Requesting..." : "Book "}
-          </Button>
+                    onClick={book}
+                    disabled={loading || user.id === rides.owner_id || seats === 0}
+                    colorScheme="teal"
+                    p={"40px"}
+                    w={"200px"}
+                    height={"30px"}
+                  >
+                    {loading ? "Requesting..." : "Book "}
+                  </Button>
                 </VStack>
               </Box>
 

@@ -28,10 +28,11 @@ function Rides() {
   useEffect(() => {
     setRides([]);
     setNote("");
-    setNote(`Showing 0 Ride Options For ${address2} To ${address1}`);
+    setNote(`Showing 0 Ride Options For ${address2} To ${address1}`);    
     if (only) {
       exact = "exact";
     }
+    
     axios.get("/getRides",
       {
         params:
@@ -41,13 +42,14 @@ function Rides() {
           to: address2,
           date: format,
         }
-      })
+      })     
       .then((res) => {
         console.log("rides in search", res.data);
         setRides(res.data);
         setSelectedDate(null);
         setOnly(false);
         setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
+
       }).catch((err) => {
         console.log("error in finding rides");
       }
@@ -89,7 +91,7 @@ function Rides() {
     console.log("only", only);
   }
   return (
-    <>
+    <>    
       <Navbar />
       <Flex bgColor={"#e8e8e8"} direction={"column"}>
       <Heading textAlign={"center"} mt={"30px"}>SEARCH FOR RIDES</Heading>

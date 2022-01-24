@@ -32,7 +32,7 @@ const Map = (props) => {
   const [distance, setDistance] = useState(0);
   const [duration, setDuration] = useState(0);
   const [address, setAddress] = useState("");
-  const [address2, setAddress2] = useState("");
+  const [address2, setAddress2] = useState(""); 
   const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null,
@@ -70,6 +70,9 @@ const Map = (props) => {
     };
     let map1 = new google.maps.Map(document.getElementById("map"), mapProp);
     directionsRenderer.setMap(map1);
+
+
+
     directionsService.route(
       {
         origin: address,
@@ -88,6 +91,7 @@ const Map = (props) => {
         }
       }
     );
+
     setAddress("");
     setAddress2("");
   };

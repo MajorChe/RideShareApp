@@ -40,6 +40,7 @@ const ViewRidePostings = () => {
         destination={posting.destination}
         ride_id = {posting.ride_id}
         bookings={new_arr}
+        is_active={posting.is_active}
         available_seats={posting.available_seats}
       />
     );

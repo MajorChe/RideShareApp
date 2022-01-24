@@ -30,15 +30,16 @@ const Places = (props) => {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 
         <div>
-          <FormControl isInvalid={isError}>
+          <FormControl >
                
-            <Input name={props} class="form-control" {...getInputProps({ placeholder: props.location })} />
-
+            <Input isInvalid={props.isErrorPlace} name={props} class="form-control" {...getInputProps({ placeholder: props.location })} w={"750px"} />
+         
             <div>
               {loading ? <div>...loading</div> : null}
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "#adb5bd" : "#fff"
+                  backgroundColor: suggestion.active ? "teal" : "#fff",
+                  color:suggestion.active ?  "#fff" :"black"
                 };
                 return (
                   <div {...getSuggestionItemProps(suggestion, { style })}>

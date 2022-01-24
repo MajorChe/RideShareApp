@@ -16,4 +16,4 @@ INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
             VALUES (3,'Vancouver, ON, Canada','Niagara Falls, ON, Canada',3,'2022-02-04','3:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&d');
 INSERT INTO rides (owner_id,origin,destination,available_seats,date_of_ride,time_of_ride,ride_image)
-            VALUES (3,'Vancouver, ON, Canada','Niagara Falls, ON, Canada',3,'2022-02-03','3:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&d');
+            VALUES (3,'Vancouver, ON, Canada','Niagara Falls, ON, Canada',3,'2022-01-20','3:00:00','https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&d');

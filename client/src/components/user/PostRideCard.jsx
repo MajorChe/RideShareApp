@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
+
 const ButtonComp = (props) => {
   return (
     <Button
@@ -41,18 +42,28 @@ const ButtonComp = (props) => {
 
 const BookingComp = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [successful, setSuccessful] = useState(false);
   const approvedAndPendingBookingStatus = props.booking_status==='pending' ? true : props.booking_status==='approved' ? true : false
   const pendingBookingStatus = props.booking_status === "pending" ? true : false;
   const cancelledBookingStatus = props.booking_status === "cancelled" ? true : false;
 
   const approveIndividualBooking = async() => {
-    await axios.put(`/user/approve/${props.booking_id}`)
+    await axios.put(`/user/approve/${props.booking_id}`,
+    {
+      params:
+      {
+       contact : props.contact        
+      }
+    })    
     .then(() => {
-      window.location.reload();
+      setSuccessful(true);
+      // window.location.reload();
     })
   }
-
+  const closeEvent = () => {
+    setSuccessful(false);
+    window.location.reload();
+  };
   const cancelIndividualBooking = async() => {
     const available_seats = props.available_seats;
     const updated_seats = available_seats + props.seats_booked;
@@ -80,7 +91,20 @@ const BookingComp = (props) => {
           <ModalBody>
             <br></br>
             <Text>{props.name}</Text>
-            <Text>Contact: 987654321</Text>
+            <Text>Contact:{props.contact}</Text>
+            <br></br><br></br>
+          </ModalBody>
+        </ModalContent>
+    </Modal>
+
+    <Modal onClose={closeEvent} isOpen={successful} motionPreset='slideInBottom' size={"sm"} blockScrollOnMount={false}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Approvel confirmation</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <br></br>
+            <Text>Booking Approved.Confirmation sent to rider!</Text>            
             <br></br><br></br>
           </ModalBody>
         </ModalContent>
@@ -88,6 +112,8 @@ const BookingComp = (props) => {
 
     <Flex direction={"column"}>
       <Text fontWeight={"bold"} fontSize={"30px"}>Booking: {props.id}</Text>
+      <Text fontSize={"20px"}>Seats Booked: {props.seats_booked}</Text>
+      <Text fontSize={"20px"}>Booking Id: {props.booking_id}</Text>
       <HStack>
         <Image
           borderRadius="full"
@@ -125,7 +151,7 @@ const PostRideCard = (props) => {
   };
 
   const bookingCompList = bookings.map((booking, index) => {
-    return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} 
+    return <BookingComp key={index} id={index + 1} booking_id={booking.booking_id} contact={booking.contact}
     name={booking.name} booking_status={booking.booking_status} ride_id={props.ride_id} 
     available_seats={props.available_seats} seats_booked={booking.seats_booked} avatar = {booking.avatar}/>;
   });
@@ -137,8 +163,8 @@ const PostRideCard = (props) => {
         <VStack spacing={"30px"}>
         <Stack direction={"row"} >
           <Text fontWeight={"600"} fontSize={"3xl"} alignSelf={"center"}>YOUR POST: {props.id}</Text>
-          {props.available_seats!==0 && <ButtonComp color={"#ee6055"} name="DELETE RIDE" onClick={deleteRide}/>}
-          {props.available_seats===0 && <ButtonComp color={"#ee6055"} name="RIDE DELETED"/>}
+            {props.is_active === true && <ButtonComp color={"#ee6055"} name="DELETE RIDE" onClick={deleteRide}/>}
+            {props.is_active === false && <ButtonComp color={"#ee6055"} name="RIDE DELETED"/>} 
         </Stack>
         <VStack>
           <Text fontWeight={"medium"} fontSize={"20px"}>Origin: {props.origin}</Text>
