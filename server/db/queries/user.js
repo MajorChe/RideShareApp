@@ -1,4 +1,5 @@
 const pool = require("../db");
+const {v4:uuidv4} = require("uuid")
 
 const getUser = (email) => {
   return pool
@@ -10,8 +11,8 @@ const getUser = (email) => {
 const postUser = (name, email, password) => {
   return pool
     .query(
-      `INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;`,
-      [name, email, password]
+      `INSERT INTO users (name,email,password,chatid) VALUES ($1,$2,$3,$4) RETURNING *;`,
+      [name, email, password, uuidv4()]
     )
     .then((response) => {
       console.log(response.rows[0]);

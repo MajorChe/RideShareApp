@@ -63,6 +63,7 @@ const NavLinks = () => {
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const {user, setUser} = useContext(AccountContext);
   return (
     <>
       <Box bg={useColorModeValue('teal', 'gray.900')} px={4} color={"white"}>
@@ -77,8 +78,8 @@ export default function Navbar() {
           <Link to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
           <HStack display={{ base: "none", md: "flex" }} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
-              <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>
-              <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>
+              {user.loggedIn && <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>}
+              {user.loggedIn && <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>}
             </Flex>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               <NavLinks />
@@ -93,8 +94,8 @@ export default function Navbar() {
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               <NavLinks />
-              <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>
-              <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>
+              {user.loggedIn && <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>}
+              {user.loggedIn && <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>}
               <Button onClick={() => toggleColorMode()} m="1rem">
                 {colorMode === "dark" ? (<SunIcon color="orange.200" />) : (<MoonIcon color="blue.700" />)}
               </Button>  

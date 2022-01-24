@@ -3,11 +3,13 @@ import { createContext, useState } from "react";
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";
 import Navbar from "../Navbar"
+import useSocketSetup from "../hooks/UseSocketSetup"
 
 export const FriendContext = createContext();
 
 const Home = () => {
   const [friendList, setFriendList] = useState([]);
+  useSocketSetup();
   return (
     <>
     <Navbar />

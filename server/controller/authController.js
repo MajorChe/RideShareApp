@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const userfn = require("../db/queries/user");
+const {v4: uuidv4} = require("uuid");
 
 const checkCookies = async (req,res) => {
   if(req.session.user && req.session.user.email) {
@@ -20,7 +21,8 @@ const handleLogin = async (req,res) => {
           email: req.body.email,
           id: result.id,
           name: result.name,
-          contact: result.contact
+          contact: result.contact,
+          chatid: result.chatid
         };
         res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name, contact: result.contact});
       } else {
@@ -44,7 +46,8 @@ const handleRegister = async (req,res) => {
         req.session.user = {
           email: req.body.email,
           id: result.id,
-          name: result.name
+          name: result.name,
+          chatid: result.chatid
         };
         res.json({ loggedIn: true, id: result.id, email: req.body.email, name: result.name });
       });

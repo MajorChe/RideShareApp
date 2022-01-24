@@ -5,7 +5,8 @@ CREATE TABLE users (
   avatar VARCHAR(255) DEFAULT 'https://bit.ly/ryan-florence',
   contact VARCHAR(255),
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
+  password VARCHAR(255) NOT NULL,
+  chatid VARCHAR(255) NOT NULL UNIQUE
 );
 
   
