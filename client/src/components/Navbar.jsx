@@ -42,7 +42,7 @@ const NavLinks = () => {
       <Flex alignItems={"center"}> 
         <Menu>
           <MenuButton ml={4} mr={6} cursor={"pointer"} minW={0} >
-            <Avatar size={"sm"} src={"https://bit.ly/ryan-florence"} />
+            <Avatar size={"sm"} src={user.avatar} />
             <Text  fontWeight={"medium"}>{user.name}</Text>
           </MenuButton>
           <MenuList>
