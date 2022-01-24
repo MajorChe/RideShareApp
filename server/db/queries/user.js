@@ -59,7 +59,7 @@ const getRidesforUser = async (id) => {
 const getRidePostingsForUser = (owner_id) => {
   return pool
   .query(
-    `SELECT ride_id, origin, destination, available_seats FROM rides WHERE owner_id = $1;`,
+    `SELECT ride_id, origin, is_active, destination, available_seats FROM rides WHERE owner_id = $1;`,
     [owner_id]
   )
   .then((response) => {
@@ -73,7 +73,7 @@ const getRidePostingsForUser = (owner_id) => {
 const getAllBookingsForOwner = (owner_id) => {
   return pool
   .query(
-    `SELECT bookings.booking_id, rides.ride_id, users.name, bookings.rider_id, bookings.seats_booked, bookings.booking_status FROM bookings JOIN rides ON 
+    `SELECT bookings.booking_id, rides.ride_id, users.name, users.contact, bookings.rider_id, bookings.seats_booked, bookings.booking_status FROM bookings JOIN rides ON 
     bookings.ride_id = rides.ride_id JOIN users ON bookings.rider_id = users.id WHERE owner_id = $1`,
     [owner_id]
   )
@@ -126,6 +126,22 @@ const deleteUserRidePosting = (ride_id) => {
   })
 };
 
+const updateActive = (ride_id) =>{
+  return pool
+  .query(
+    `UPDATE rides SET is_active = false WHERE ride_id = $1 RETURNING *;`,[ride_id]
+  )
+  .then((response) => {
+    console.log("IS ACTIVE TO FALSE",response.rows[0])
+    return response.rows[0]
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+
+
+}
+
 const approveIndividualBooking = (booking_id) => {
   return pool
   .query(
@@ -143,4 +159,4 @@ const approveIndividualBooking = (booking_id) => {
 
 module.exports = { getUser, postUser, updateUser, getRidesforUser,
    getRidePostingsForUser, getAllBookingsForOwner, cancelUserRide, 
-   deleteUserRidePosting, approveIndividualBooking, updateSeatsOnUserCancel };
+   deleteUserRidePosting, updateActive, approveIndividualBooking, updateSeatsOnUserCancel };

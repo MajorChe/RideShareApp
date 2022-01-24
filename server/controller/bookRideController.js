@@ -45,11 +45,13 @@ const addBookingHandler = async (req, res) => {
 
       console.log("result",insertedData );
 
+      const a = insertedData.booking_id;
+
       client.messages
 
         .create({
 
-          body: `Booking is Successful `,
+          body: `Booking is Successful ${a} `,
           messagingServiceSid: process.env.MSID,
           to: contact,
           from: process.env.FROM
@@ -62,7 +64,8 @@ const addBookingHandler = async (req, res) => {
 
         .done();    
 
-    }).catch((err) => {
+    })
+    .catch((err) => {
 
       console.log(err.message);
 

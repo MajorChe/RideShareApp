@@ -9,5 +9,6 @@ CREATE TABLE rides (
   time_of_ride TIME NOT NULL,
   cost INTEGER NOT NULL DEFAULT 11,
   available_seats INTEGER NOT NULL,
-  ride_image VARCHAR(255) DEFAULT 'https://tinyurl.com/2s3kna33'
+  ride_image VARCHAR(255) DEFAULT 'https://tinyurl.com/2s3kna33',
+  is_active BOOLEAN NOT NULL DEFAULT TRUE
   );

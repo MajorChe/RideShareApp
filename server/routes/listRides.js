@@ -22,7 +22,8 @@ module.exports = () => {
                             JOIN users ON users.id = rides.owner_id 
 
                             WHERE available_seats > 0 and
-                            date_of_ride > current_date                            
+                            date_of_ride > current_date  and 
+                            is_active = true
                             and 1=1 `;
     if (date) {
       queryParams.push(`${date}`);

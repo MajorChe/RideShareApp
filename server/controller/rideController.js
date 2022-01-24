@@ -1,4 +1,7 @@
 const userfn = require("../db/queries/user");
+const accountSid = process.env.ASID;
+const authToken = process.env.AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 const userRidesViewer = async (req, res) => {
   const { id } = req.params;
@@ -43,23 +46,48 @@ const cancelRide = (req, res) => {
 };
 
 const deleteRide = (req, res) => {
-  const { ride_id, updated_seats } = req.body.params;
+  // const { ride_id, updated_seats } = req.body.params;
+  const { ride_id } = req.body.params;
   const parsed_ride_id = parseInt(ride_id);
-  const parsed_updated_seats = parseInt(updated_seats);
+  // const parsed_updated_seats = parseInt(updated_seats);
   userfn.deleteUserRidePosting(parsed_ride_id).then((result) => {
-    userfn
-      .updateSeatsOnUserCancel(parsed_updated_seats, parsed_ride_id)
-      .then((result2) => {
-        res.json({ result, result2 });
-      });
+    userfn.updateActive(parsed_ride_id)
+    .then((result2) => {
+          res.json({ result, result2 });
+        });
+
+    // userfn
+    //   .updateSeatsOnUserCancel(parsed_updated_seats, parsed_ride_id)
+    //   .then((result2) => {
+    //     res.json({ result, result2 });
+    //   });
   });
 };
 
 const approveIndividualBooking = (req, res) => {
   const { id } = req.params;
+  const {contact} = req.body.params;
   const new_id = parseInt(id);
   userfn.approveIndividualBooking(new_id).then((result) => {
     res.json({ result });
+    
+    client.messages
+
+    .create({
+
+      body: `Booking is Approved !see you soon `,
+      messagingServiceSid: process.env.MSID,
+      to: contact,
+      from: process.env.FROM
+
+    })
+
+    .then(message => console.log(message.sid))
+
+    .catch(err=> console.log(err))
+
+    .done();    
+  
   });
 };
 
