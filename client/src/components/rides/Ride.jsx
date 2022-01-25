@@ -192,9 +192,6 @@ function Ride({ props }) {
                   pos={"relative"}
                 />
                 <Text ml={5}>{rides.name}</Text>
-                <Text ml={5} spacing={5}>
-                  <PhoneIcon /> {rides.contact}
-                </Text>
               </VStack>
             </Flex>
           </Box>

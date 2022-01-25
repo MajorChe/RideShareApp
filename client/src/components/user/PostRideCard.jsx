@@ -18,6 +18,7 @@ import {
   ModalFooter,
   useDisclosure,
   ModalHeader,
+  Divider,
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -25,9 +26,10 @@ import axios from "axios";
 const ButtonComp = (props) => {
   return (
     <Button
-      fontSize={"md"}
+      fontSize={"lg"}
       rounded={"full"}
       bg={props.color}
+      alignSelf={"center"}
       onClick={props.onClick}
       color={"white"}
       boxShadow={
@@ -111,23 +113,30 @@ const BookingComp = (props) => {
     </Modal>
 
     <Flex direction={"column"}>
-      <Text fontWeight={"bold"} fontSize={"30px"}>Booking: {props.id}</Text>
-      <Text fontSize={"20px"}>Seats Booked: {props.seats_booked}</Text>
-      <Text fontSize={"20px"}>Booking Id: {props.booking_id}</Text>
-      <HStack>
+        <Text fontWeight={"bold"} fontSize={"30px"}>Booking: {props.id}</Text>
+      <HStack spacing={5}>
         <Image
           borderRadius="full"
-          boxSize="78px"
+          width={"120px"}
+          height={"120px"}
           src={props.avatar}
           alt={"Profile picture"}
           mb={4}
           pos={"relative"}
         />
+        <VStack>
+        <Text fontSize={"20px"}>Booking Id: {props.booking_id}</Text>
+        <Text fontSize={"20px"}>Seats Booked: {props.seats_booked}</Text>
+        </VStack>
+      </HStack>
+      <HStack>
         <ButtonComp onClick={onOpen} color={"#3d9ad5"} name="VIEW" />
         {pendingBookingStatus && <ButtonComp color={"green"} name="APPROVE" onClick={approveIndividualBooking}/>}
         {approvedAndPendingBookingStatus && <ButtonComp color={"#ee6055"} name="CANCEL" onClick={cancelIndividualBooking}/>}
         {cancelledBookingStatus && <ButtonComp color={"#ee6055"} name="CANCELLED" />}
       </HStack>
+      <br/>
+      <Divider/>
     </Flex>
     </>
   );
@@ -159,17 +168,18 @@ const PostRideCard = (props) => {
   return (
     <>
     <Flex justifyContent={"space-around"} mt={10}>
-      <Box maxW={'400px'} w={'full'} boxShadow="dark-lg" rounded={'lg'} p={6} textAlign={'center'} bgColor={"white"} color={"black"}>
+      <Box maxW={'420px'} w={'full'} boxShadow="dark-lg" rounded={'lg'} p={6} textAlign={'center'} bgColor={"white"} color={"black"}>
         <VStack spacing={"30px"}>
         <Stack direction={"row"} >
-          <Text fontWeight={"600"} fontSize={"3xl"} alignSelf={"center"}>YOUR POST: {props.id}</Text>
-            {props.is_active === true && <ButtonComp color={"#ee6055"} name="DELETE RIDE" onClick={deleteRide}/>}
+          <Text fontWeight={"600"} fontSize={"4xl"} alignSelf={"center"}>POST: {props.id}</Text>
+            {props.is_active === true && <ButtonComp color={"#ee6055"} name="DELETE ENTIRE RIDE" onClick={deleteRide}/>}
             {props.is_active === false && <ButtonComp color={"#ee6055"} name="RIDE DELETED"/>} 
         </Stack>
         <VStack>
           <Text fontWeight={"medium"} fontSize={"20px"}>Origin: {props.origin}</Text>
           <Text fontWeight={"medium"} fontSize={"20px"}>Destination: {props.destination}</Text>
         </VStack>
+      <Divider/>
         {bookingCompList}
         </VStack>
       </Box>

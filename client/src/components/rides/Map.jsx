@@ -192,13 +192,14 @@ const Map = (props) => {
                   getSuggestionItemProps,
                   loading,
                 }) => (
-                  <FormControl isInvalid={isError1}>
+                  <FormControl>
                     <Input
                       value={props.address1}
                       class="form-control"
                       {...getInputProps({ placeholder: "From" })}
                       w={"393px"}
-                      border={"2px solid black"}
+                      borderWidth={"2px"}
+                      borderColor={"black"}
                     />
                     <chakra.div style={{position: "absolute", zIndex: 10}}>
                       {loading ? <chakra.div>...loading</chakra.div> : null}
@@ -240,13 +241,13 @@ const Map = (props) => {
                   loading,
                 }) => (
                   <chakra.div>
-                    <FormControl isInvalid={isError2}>
+                    <FormControl>
                       <Input
                         class="form-control"
                         {...getInputProps({ placeholder: "To" })}
-                        required
                         w={"393px"}
-                        border={"2px solid black"}
+                        borderColor={"black"}
+                        borderWidth={"2px"}
                       />
                       <chakra.div style={{position: "absolute", zIndex: 10}}>
                         {loading ? <chakra.div>...loading</chakra.div> : null}

@@ -48,7 +48,7 @@ function UserSettings() {
         <VStack>
           <Heading mt={"50px"}>Profile Page</Heading>
           <Flex flexDirection={"column"} alignContent={"center"}>
-            <Avatar alignSelf={"center"} mt={"50px"} mb={"40px"}size={"2xl"} src={"https://bit.ly/ryan-florence"} />
+            <Avatar alignSelf={"center"} mt={"50px"} mb={"40px"}size={"2xl"} src={user.avatar} />
             <VStack
               as={Form}
               w={{ base: "90%", md: "500px" }}

@@ -48,7 +48,7 @@ function Rides() {
         setRides(res.data);
         setSelectedDate(null);
         setOnly(false);
-        setNote(`Showing ${res.data.length} Ride Options For ${address2} To ${address1} `);
+        setNote(`Showing ${res.data.length} Ride Options to ${address2} from ${address1} `);
 
       }).catch((err) => {
         console.log("error in finding rides");
