@@ -111,7 +111,7 @@ function PostRide() {
       <Navbar />
       <Center py={6}>
         <VStack>
-        <Heading textAlign={"center"} mt={"30px"}>POST A RIDE</Heading>
+        <Heading textAlign={"center"} mt={"30px"} mb={"30px"}>POST A RIDE</Heading>
           <Box boxShadow={"dark-lg"} rounded={"md"} p={6}>
             <Container maxW="container.xl" centerContent>
               <Box padding="5" mt="5">
@@ -222,7 +222,7 @@ function PostRide() {
                 <Button
                   onClick={!isError && post}
                   disabled={isErrorAll}
-                  colorScheme="teal"
+                  colorScheme="blue"
                   p={"40px"}
                   w={"800px"}
                 >

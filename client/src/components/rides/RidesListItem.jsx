@@ -57,7 +57,7 @@ const RidesListItem = (props) => {
                     <TimeIcon /> {props.time_of_ride}
                   </Text>
                 </HStack>
-                  <Button onClick={() => navigate(`/ride/${props.ride_id}`)} bgColor={"teal"} w={"200px"} color={"white"}>
+                  <Button onClick={() => navigate(`/ride/${props.ride_id}`)} colorScheme="#3d9ad5" bgGradient="linear(to-r, blue.300, blue.400, blue.600)" w={"200px"} color={"white"}>
                     VIEW
                   </Button>
               </VStack>

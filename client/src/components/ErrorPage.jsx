@@ -7,9 +7,9 @@ const ErrorPage = () => {
   const navigate = useNavigate();
   // useEffect(() => {
   //   setTimeout(() => {
-  //     navigate(-1);
+  //     navigate("/")
   //   }, 3000);
-  // }, []);
+  // },[])
   return (
     <>
       <Navbar />
@@ -18,7 +18,7 @@ const ErrorPage = () => {
         display="inline-block"
         as="h2"
         size="2xl"
-        bgGradient="linear(to-r, teal.400, teal.600)"
+        bgGradient="linear(to-r, #3d9ad5, #3d9ad5)"
         backgroundClip="text">
         404
       </Heading>
@@ -26,12 +26,12 @@ const ErrorPage = () => {
         Page Not Found
       </Text>
       <Text color={'gray.500'} mb={6}>
-        The page you're looking for does not seem to exist, Navigating you back to previous page in 5 seconds
+        The page you're looking for does not seem to exist.
       </Text>
 
       <Button
-        colorScheme="teal"
-        bgGradient="linear(to-r, teal.400, teal.500, teal.600)"
+        colorScheme="#3d9ad5"
+        bgGradient="linear(to-r, blue.200, blue.300, #3d9ad5)"
         color="white"
         variant="solid"
         onClick={() => navigate("/")}>

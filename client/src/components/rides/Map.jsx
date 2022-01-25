@@ -84,8 +84,8 @@ const Map = (props) => {
         if (status === google.maps.DirectionsStatus.OK) {
           directionsRenderer.setDirections(result);
           console.log(result.routes[0].legs[0].distance.value / 1000);
-          setDistance(result.routes[0].legs[0].distance.value / 1000);
-          setDuration(result.routes[0].legs[0].duration.value / 60);
+          setDistance(parseInt(result.routes[0].legs[0].distance.value / 1000));
+          setDuration(parseInt(result.routes[0].legs[0].duration.value / 60));
         } else {
           console.error("error fetching directions", result, status);
         }
@@ -169,7 +169,7 @@ const Map = (props) => {
   };
 
   const ExampleCustomInput = ({ value, onClick }) => (
-    <Button onClick={onClick} width={"135px"} colorScheme='teal' variant={"outline"}>
+    <Button onClick={onClick} width={"135px"} colorScheme='#3d9ad5' variant={"outline"}>
       DATE:  
       {value}
     </Button>
@@ -206,7 +206,7 @@ const Map = (props) => {
 
                       {suggestions.map((suggestion) => {
                         const style = {
-                          backgroundColor: suggestion.active ? "teal" : "#fff",
+                          backgroundColor: suggestion.active ? "black" : "#fff",
                           color: suggestion.active ? "white" : "black",
                         };
 
@@ -219,8 +219,8 @@ const Map = (props) => {
                         );
                       })}
                     </chakra.div>
-                    <Button ml={2} onClick={getLocation}>
-                      <Icon as={MdMyLocation} />
+                    <Button ml={2} onClick={getLocation} bgColor={"black"}>
+                      <Icon as={MdMyLocation} color={"white"} />
                     </Button>
                   </FormControl>
                 )}
@@ -255,7 +255,7 @@ const Map = (props) => {
                         {suggestions.map((suggestion) => {
                           const style = {
                             backgroundColor: suggestion.active
-                              ? "teal"
+                              ? "black"
                               : "#fff",
                             color: suggestion.active ? "white" : "black",
                           };
@@ -283,7 +283,7 @@ const Map = (props) => {
                 onChange={handleChange}
                 style={{marginTop: "3px", zoom: 1.5}}
               />
-              <Text fontSize={"19.5px"} ml={2} color={"teal.800"}>Show Exact Match</Text>
+              <Text fontSize={"19.5px"} ml={2} color={"blue.800"}>Show Exact Match</Text>
             </Flex>
             <Icon as={MdEditCalendar} w={6} h={10} ml={5} mr={4} color="blue.500" />
               <DatePicker
@@ -294,7 +294,7 @@ const Map = (props) => {
               />
             </Flex>
             <Box paddingLeft={"30px"}>
-            <Button _hover={{textDecoration: "none"}} padding={8} fontSize={"3xl"} fontWeight={"medium"} id="submit" onClick={onSubmit} width={"390px"} bgColor={"teal"} color={"white"}>
+            <Button padding={8} fontSize={"3xl"} fontWeight={"medium"} id="submit" onClick={onSubmit} width={"390px"} colorScheme="#3d9ad5" bgGradient="linear(to-r, blue.300, blue.400, blue.600)" color={"white"}>
               Search
             </Button>
             </Box>
@@ -314,7 +314,7 @@ const Map = (props) => {
         
         </SimpleGrid>
         <Center mt={"30px"} fontSize={"20px"}>
-            Distance: {distance} Duration: {duration}
+            <b>Distance:{<span>&nbsp;</span>}</b> {distance} Kms ,{<span>&nbsp;</span>}<b> Duration:{<span>&nbsp;</span>}</b> {duration} minutes
           </Center>
       </Container>
   );

@@ -78,7 +78,7 @@ function UserSettings() {
                 label="Contact"
                 type="tel"
               />
-              <Button colorScheme="blue" type="submit">
+              <Button colorScheme="#3d9ad5" bgGradient="linear(to-r, blue.300, blue.400, blue.600)" type="submit">
                 Update Details
               </Button>
             </VStack>

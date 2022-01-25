@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-  <Box as="footer" mt={"40px"} role="contentinfo"  left={"0"} bottom={"0"} width={"100%"} py="5" px={{ base: '4', md: '8' }} bgColor={"teal"} color={"white"}>
+  <Box as="footer" mt={"40px"} role="contentinfo"  left={"0"} bottom={"0"} width={"100%"} py="5" px={{ base: '4', md: '8' }} bgColor={"#3d9ad5"} color={"white"}>
   <VStack>
     <HStack>
       <IconButton as="a" href="#" aria-label="LinkedIn" color={"black"} icon={<FaLinkedin fontSize="20px" />} />

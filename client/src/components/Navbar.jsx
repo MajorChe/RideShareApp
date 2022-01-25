@@ -21,7 +21,7 @@ const NavLink = ({ children }) => (
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("white", "gray.700"),
-      color: "teal"
+      color: "#3d9ad5"
     }}
   >
     {children}
@@ -46,7 +46,7 @@ const NavLinks = () => {
             <Text  fontWeight={"medium"}>{user.name}</Text>
           </MenuButton>
           <MenuList>
-          <MenuItem onClick={() => navigate("/settings")} color={"teal"}>Settings <SettingsIcon ml={6}/></MenuItem>
+          <MenuItem onClick={() => navigate("/settings")} color={"#3d9ad5"}>Settings <SettingsIcon ml={6}/></MenuItem>
           <MenuItem color={"red"} onClick={async() => {
              await axios.post("/auth/logout").then(() => {
             setUser({loggedIn: false})
@@ -75,7 +75,7 @@ export default function Navbar() {
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
-            bgColor={"teal"}
+            bgColor={"#3d9ad5"}
             _hover={{textDecoration:"none"}}
           />
           <Link to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>

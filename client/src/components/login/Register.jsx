@@ -92,7 +92,7 @@ const Register = () => {
           />
 
           <ButtonGroup pt="1rem">
-            <Button colorScheme="orange" type="submit">
+            <Button colorScheme="#3d9ad5" bgGradient="linear(to-r, blue.300, blue.400, blue.600)" type="submit">
               Register
             </Button>
             <Button

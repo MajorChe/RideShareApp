@@ -45,11 +45,13 @@ const Login = () => {
               if(!data.loggedIn) {
                 setError(data.status)
               } else if (data.loggedIn) {
-                if (location.state?.from) {
-                navigate(location.state.from);
-                } else {
-                  navigate("/dashboard");
-                }
+                // if (location.state?.from) {
+                // navigate(location.state.from);
+                // } 
+                // else {
+                  // navigate("/dashboard");
+                  navigate(-1)
+                // }
                 console.log(data);
               }
             })
@@ -86,7 +88,7 @@ const Login = () => {
           />
 
           <ButtonGroup pt="1rem">
-            <Button colorScheme="teal" type="submit">
+            <Button type="submit" colorScheme="#3d9ad5" bgGradient="linear(to-r, blue.300, blue.400, blue.600)">
               Log In
             </Button>
             <Button onClick={() => navigate("/register")}>

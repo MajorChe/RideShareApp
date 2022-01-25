@@ -172,7 +172,8 @@ function Ride({ props }) {
                   <Button
                     onClick={book}
                     disabled={loading || user.id === rides.owner_id || seats === 0}
-                    colorScheme="teal"
+                    bgColor="#3d9ad5"
+                    _hover={{textDecoration:"none"}}
                     p={"40px"}
                     w={"200px"}
                     height={"30px"}
@@ -195,16 +196,6 @@ function Ride({ props }) {
               </VStack>
             </Flex>
           </Box>
-          {/* <Button
-            onClick={book}
-            disabled={loading}
-            colorScheme="teal"
-            p={"40px"}
-            w={"600px"}
-          >
-            {loading ? "Requesting..." : "Book "}
-          </Button> */}
-
           <Modal
             onClose={closeEvent}
             isOpen={successful}
