@@ -78,9 +78,10 @@ export default function Navbar() {
             bgColor={"#3d9ad5"}
             _hover={{textDecoration:"none"}}
           />
-          <Link to="/"><NavLink>RIDESHARE LOGO</NavLink></Link>
+          <Link to="/"><NavLink><Avatar size='md' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHbGOlQqZ_YWld7WBQPb4Iw_tXU0vloMTLYA&usqp=CAU"></Avatar></NavLink></Link>
           <HStack display={{ base: "none", md: "flex" }} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
+              <Text >Ride Share</Text>
               {user.loggedIn && <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>}
               {user.loggedIn && <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>}
             </Flex>

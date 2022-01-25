@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { Intro } from "./Intro";
+import { Services } from "./Services";
+import { Aboutus } from "./Aboutus";
 
 function Home() {
   return (
     <>
     <Navbar />
-    <h1> This is home landing page</h1>
-    <Footer />
+    <Intro/>
+    <Services/>
+    <Aboutus/>
     </>
   );
 }
