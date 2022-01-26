@@ -38,7 +38,7 @@ const Places = (props) => {
               {loading ? <div>...loading</div> : null}
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "teal" : "#fff",
+                  backgroundColor: suggestion.active ? "black" : "#fff",
                   color:suggestion.active ?  "#fff" :"black"
                 };
                 return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Moment from "react-moment";
 import {
@@ -13,24 +13,27 @@ import {
 } from "@chakra-ui/react";
 
 import { CalendarIcon, TimeIcon } from "@chakra-ui/icons";
+import { AccountContext } from "../hooks/AccountContext";
 
 const RidesListItem = (props) => {
+  const {user} = useContext(AccountContext);
   const navigate = useNavigate();
   return (
     <>
-      <Center>
-        <VStack>
+        <VStack align={"center"}>
           <Box
             mt={5}
+            height={"36rem"}
             w={"24rem"}
             boxShadow="dark-lg"
             p={8}
             rounded="md"
             bgColor={"white"}
             color={"black"}
+            
           >
-            <Box>
               <VStack>
+                {props.owner_id === user.id ? <Text fontWeight={"bold"} fontSize={"xl"} color={"red"}>YOUR RIDE</Text> : <Text fontWeight={"bold"} fontSize={"xl"} color={"white"}>BOOK RIDE</Text>}
                 <Image
                   borderRadius="md"
                   width={"280px"}
@@ -61,10 +64,8 @@ const RidesListItem = (props) => {
                     VIEW
                   </Button>
               </VStack>
-            </Box>
           </Box>
         </VStack>
-      </Center>
     </>
   );
 };

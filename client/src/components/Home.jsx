@@ -12,6 +12,7 @@ function Home() {
     <Intro/>
     <Services/>
     <Aboutus/>
+    <Footer/>
     </>
   );
 }

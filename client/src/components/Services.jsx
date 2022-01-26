@@ -7,7 +7,7 @@ import { FiArrowUpRight } from 'react-icons/fi';
 
 const Feature = ({ title, text, icon1, icon2 }) => {
   return (
-    <Stack spacing={3} bg="yellow.50" padding={"40px"}>
+    <Stack spacing={3} bg="blackAlpha.200" padding={"40px"}>
       <Flex
         w={16}
         h={16}
@@ -29,7 +29,7 @@ const Feature = ({ title, text, icon1, icon2 }) => {
 
 export function Services() {
   return (
-    <Box p={4} mt={"200px"} mb={"70px"}>
+    <Box p={4} mt={"130px"} mb={"70px"}>
       <Heading align={"center"} color={"blue.600"}>USING RIDE SHARE ?</Heading>
       <SimpleGrid columns={{ base: 1, md: 5 }} spacing={10} mt={"70px"}>
         

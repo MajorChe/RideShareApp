@@ -3,14 +3,14 @@ import { FiArrowUpRight } from "react-icons/fi";
 import carshare from "../assets/carshare.png";
 export const Aboutus = () => {
   return (
-    <Box height={"600px"} bg="#3D9AD5">
+    <Box height={"600px"} bg="#3D9AD5" mb={"150px"}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={"30px"} mt={"70px"}>
         <Flex direction={"column"}>
         <Heading  fontSize={"5xl"} letterSpacing="4px" color="white" align={"center"} mt={{base: "70px", md: "150px"}}>
           ABOUT US
         </Heading>
 
-        <Text fontSize={20} color={'white'} p={8} align={"center"}> 
+        <Text fontSize={20} color={'white'} pl={{base: "0px", md: "100px"}} align={"center"}> 
           Proident aliquip elit nostrud dolore cupidatat id reprehenderit
           magna enim ullamco eu consequat labore. Laboris irure ea pariatu 
         </Text>

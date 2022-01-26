@@ -8,6 +8,8 @@ import {
   Text,
   useColorModeValue,
   textDecoration,
+  Divider,
+  Image,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon, SettingsIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
@@ -15,6 +17,7 @@ import { Link } from "react-router-dom";
 import { AccountContext } from "./hooks/AccountContext";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import logo from "../assets/logo.png"
 
 const NavLink = ({ children }) => (
   <Text px={2} py={1} rounded={"md"} fontSize={"20px"}
@@ -67,7 +70,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box bg={useColorModeValue('#3d9ad5', 'gray.900')} px={4} color={"white"}>
+      <Box bg={useColorModeValue('#3d9ad5', 'gray.900')} px={4} color={"white"} width={"full"}>
         <Flex h={20} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
             size={'md'}
@@ -78,10 +81,9 @@ export default function Navbar() {
             bgColor={"#3d9ad5"}
             _hover={{textDecoration:"none"}}
           />
-          <Link to="/"><NavLink><Avatar size='md' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHbGOlQqZ_YWld7WBQPb4Iw_tXU0vloMTLYA&usqp=CAU"></Avatar></NavLink></Link>
+          <Link to="/"><Image src={logo} width={"150px"}></Image></Link>
           <HStack display={{ base: "none", md: "flex" }} alignItems={"center"} justifyContent={"space-between"} flexGrow={"2"}>
             <Flex>
-              <Text >Ride Share</Text>
               {user.loggedIn && <Link ml={"30px"} to="/trips/view"><NavLink>Booked Rides</NavLink></Link>}
               {user.loggedIn && <Link ml={"30px"} to="/trips/postings"><NavLink>Posted Rides</NavLink></Link>}
             </Flex>
@@ -107,6 +109,7 @@ export default function Navbar() {
           </Box>
         ) : null}
       </Box>
+      
     </>
   );
 }

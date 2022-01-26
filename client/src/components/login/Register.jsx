@@ -65,7 +65,7 @@ const Register = () => {
           w={{ base: "90%", md: "500px" }}
           m="auto"
           justify="center"
-          h="50vh"
+          h="60vh"
           spacing="1rem"
         >
           <Heading>Register</Heading>

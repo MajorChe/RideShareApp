@@ -4,7 +4,7 @@ import axios from 'axios';
 import RidesList from './RidesList';
 import Moment from 'react-moment';
 import Navbar from '../Navbar';
-import { Box, Center, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
+import { Box, Center, Divider, Flex, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import Footer from '../Footer';
 function Rides() {
   const [address1, setAddress1] = useState("");
@@ -93,7 +93,7 @@ function Rides() {
   return (
     <>    
       <Navbar />
-      <Flex bgColor={"#e8e8e8"} direction={"column"}>
+      <Flex bg={useColorModeValue('white', 'white')} direction={"column"}>
       <Heading textAlign={"center"} mt={"30px"}>SEARCH FOR RIDES</Heading>
       <Map
         updateAdress1={updateAdress1}
@@ -104,12 +104,15 @@ function Rides() {
         updateSearch={updateSearch}
       />
       </Flex>
+      <hr style={{height:"5px", color:"black", backgroundColor:"black"}}></hr>
       <Center mt={"20px"}>
         <Box borderColor='gray.600' w='80rem' color={'black'} rounded='md' bg='white'>
           <Text textAlign={"center"} fontWeight={"bold"} fontSize={"30px"}>{note}</Text>
         </Box>
       </Center>
       <RidesList rides={rides} />
+      <br></br>
+      <br></br>
       <Footer/>
     </>
   );

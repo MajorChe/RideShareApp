@@ -65,7 +65,7 @@ function PostRide() {
 
   const closeEvent = () => {
     setSuccessful(false);
-    navigate("/trips/postings");
+    navigate("/rides");
   };
   const post = (e) => {
     e.preventDefault();
@@ -172,7 +172,7 @@ function PostRide() {
                               as={DatePicker}
                               selected={selectedDate}
                               onChange={(date) => setSelectedDate(date)}
-                              dateFormat="MMMM Do yyyy"
+                              dateFormat="MMMM d, yyyy"
                               minDate={new Date()}
                             />
                           </InputGroup>
@@ -190,7 +190,7 @@ function PostRide() {
                             min={1}
                             onChange={(seats) => setSeats(seats)}
                             value={seats}
-                            max={4}
+                            max={6}
                           >
                             <NumberInputField />
                             <NumberInputStepper>

@@ -8,6 +8,7 @@ const RidesList = (props) => {
       return (
         <RidesListItem
           ride_id={ride.ride_id}
+          owner_id={ride.owner_id}
           name={ride.name}
           avatar={ride.avatar}
           contact={ride.contact}
