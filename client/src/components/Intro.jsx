@@ -19,23 +19,23 @@ export const Intro = () => {
   return (
     <Box h={{ base: "1000px", md: "750px" }} bg="#3D9AD5" mb={"100px"}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={"30px"}>
-        <Flex pt={{ base: "70px", md: "100px" }}>
+        <Flex pt={{ base: "70px", md: "90px" }}>
           <VStack w={{ base: "500px", md: "1200px" }}>
             <Heading
               fontSize={{ base: "35px", md: "59px" }}
-              ml={{ base: "65px", md: "270px" }}
+              ml={{ base: "5px", md: "270px" }}
               letterSpacing="2px"
               color="whiteAlpha.900"
             >
               SHARE your Ride & <br />
               earn your SHARE!
             </Heading>
-            <Box  pt={{base:"0px", md:"80px"}}>
+            <Box  pt={{base:"0px", md:"50px"}}>
               <Image
-                w={{ base: "550px", md: "820px" }}
+                w={{ base: "400px", md: "820px" }}
                 borderRadius="md"
                 h={{base: "300px", md: "520px"}}
-                ml={{ base: "50px", md: "220px" }}
+                ml={{ base: "30px", md: "300px" }}
                 src={pic}
               />
               </Box>

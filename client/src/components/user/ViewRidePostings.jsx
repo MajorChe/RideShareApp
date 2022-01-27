@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../Navbar";
+import Footer from "../Footer"
 import PostRideCard from "./PostRideCard";
 import { Heading, propNames, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
@@ -40,6 +41,7 @@ const ViewRidePostings = () => {
         destination={posting.destination}
         ride_id = {posting.ride_id}
         bookings={new_arr}
+        date={posting.date_of_ride}
         is_active={posting.is_active}
         available_seats={posting.available_seats}
       />
@@ -49,9 +51,10 @@ const ViewRidePostings = () => {
     <>
       <Navbar />
       <Heading textAlign={"center"} mt={"30px"}>YOUR RIDE POSTINGS</Heading>
-      <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"} mb={"80px"}>
       {postListings}
       </SimpleGrid>
+      <Footer />
     </>
   );
 };

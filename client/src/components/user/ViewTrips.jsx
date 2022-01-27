@@ -6,6 +6,7 @@ import { AccountContext } from "../hooks/AccountContext";
 import Navbar from "../Navbar";
 import TripCard from "./TripCard";
 import Moment from "react-moment";
+import Footer from "../Footer";
 
 const ViewTrips = () => {
   const {user, setUser} = useContext(AccountContext);
@@ -42,6 +43,7 @@ const ViewTrips = () => {
       <SimpleGrid columns={{ base: 1, md: 3 }} mt={"50px"}>
         {ListTrips}
       </SimpleGrid>
+      <Footer />
     </>
   );
 };

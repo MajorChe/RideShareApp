@@ -168,7 +168,7 @@ function Ride({ props }) {
                       </InputGroup>
                     </FormControl>
                   </HStack>
-                  <Text fontWeight={"bold"}>Cost $:{rides.cost}</Text>
+                  <Text fontWeight={"bold"}>Cost: ${rides.cost}</Text>
                   <Button
                     onClick={book}
                     disabled={loading || user.id === rides.owner_id || seats === 0}

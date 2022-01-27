@@ -106,9 +106,7 @@ function Rides() {
       </Flex>
       <hr style={{height:"5px", color:"black", backgroundColor:"black"}}></hr>
       <Center mt={"20px"}>
-        <Box borderColor='gray.600' w='80rem' color={'black'} rounded='md' bg='white'>
           <Text textAlign={"center"} fontWeight={"bold"} fontSize={"30px"}>{note}</Text>
-        </Box>
       </Center>
       <RidesList rides={rides} />
       <br></br>

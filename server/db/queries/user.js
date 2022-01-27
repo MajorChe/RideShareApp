@@ -59,7 +59,7 @@ const getRidesforUser = async (id) => {
 const getRidePostingsForUser = (owner_id) => {
   return pool
   .query(
-    `SELECT ride_id, origin, is_active, destination, available_seats FROM rides WHERE owner_id = $1;`,
+    `SELECT ride_id, origin, is_active, date_of_ride, destination, available_seats FROM rides WHERE owner_id = $1;`,
     [owner_id]
   )
   .then((response) => {

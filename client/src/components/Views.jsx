@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
-import About from "./About";
 import Rides from "./rides/Rides";
 import Ride from "./rides/Ride";
 import Login from "./login/Login";
@@ -29,7 +28,6 @@ function Views() {
       <Route path="/rides" element={<Rides />} />
       <Route path="/ride/:ride_id" element={<Ride />} />
       <Route element={<PrivateRoutes />}>
-        <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/settings" element={<UserSettings />} />
         <Route path="/trips/view" element={<ViewTrips />} />

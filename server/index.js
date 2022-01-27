@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8888;
 const app = express();
 const rideRoute = require("./routes/ride");
 const auth = require("./routes/auth");
@@ -17,7 +17,7 @@ const dbConnection = require("./db/db");
 
 app.use(
   cors({
-    origin: "http://localhost:3002",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );

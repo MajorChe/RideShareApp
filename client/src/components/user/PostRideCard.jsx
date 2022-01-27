@@ -21,6 +21,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import axios from "axios";
+import Moment from "react-moment";
 
 
 const ButtonComp = (props) => {
@@ -178,6 +179,7 @@ const PostRideCard = (props) => {
         <VStack>
           <Text fontWeight={"medium"} fontSize={"20px"}>Origin: {props.origin}</Text>
           <Text fontWeight={"medium"} fontSize={"20px"}>Destination: {props.destination}</Text>
+          <Text fontWeight={"medium"} fontSize={"20px"}>Date: <Moment format="D MMM YYYY">{props.date}</Moment></Text>
         </VStack>
       <Divider/>
         {bookingCompList}
