@@ -5,11 +5,6 @@ import Navbar from "./Navbar";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigate("/")
-  //   }, 3000);
-  // },[])
   return (
     <>
       <Navbar />

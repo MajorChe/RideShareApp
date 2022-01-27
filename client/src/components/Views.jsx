@@ -14,6 +14,7 @@ import { AccountContext } from "./hooks/AccountContext";
 import UserSettings from "./user/UserSettings";
 import ErrorPage from "./ErrorPage";
 import ViewRidePostings from "./user/ViewRidePostings";
+import { TechStack } from "./TechStack";
 
 function Views() {
   const { user } = useContext(AccountContext);
@@ -22,6 +23,7 @@ function Views() {
   ) : (
     <Routes>
       {user.loggedIn && <Route path="/" element={<Dashboard />} />}
+      <Route path="/1" element={<TechStack />} />
       {!user.loggedIn && <Route path="/" element={<Home />} />}
       {!user.loggedIn && <Route path="/login" element={<Login />} />}
       {!user.loggedIn && <Route path="/register" element={<Register />} />}

@@ -73,7 +73,7 @@ export const Intro = () => {
                 </Box>
               </VStack>
               <VStack>
-                <Box borderRadius={"10%"} h={"200px"} w={"200px"}>
+                <Box borderRadius={"10%"} h={"200px"} w={"220px"}>
                   <Text fontSize={30} color="white" w={"150px"}>
                     Driver ?
                   </Text>
