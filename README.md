@@ -1,7 +1,7 @@
 
-<img color= "black" src="./blob/logo.jpg"
+<img src="./blob/logo.jpg"
      alt="Banner_Logo"
-     width=90%;/>
+     width=100%;/>
 
 # RideShare
 ## A Peer-to-Peer Car pooling Application.
