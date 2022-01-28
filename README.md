@@ -1,5 +1,5 @@
 
-<img src="./blob/logo.png"
+<img color= "black" src="./blob/logo.jpg"
      alt="Banner_Logo"
      width=90%;/>
 
