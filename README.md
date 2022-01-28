@@ -30,6 +30,10 @@
 <img src="./blob/Upcoming.png" width=49%> <img src="./blob/Approval.png" width=49%>
 <img src="./blob/PostARide.png" width=49%> <img src="./blob/ViewRide.png" width=49%>
 
+### Dark mode and mobile responsive on all pages
+
+<img src="./blob/darkmode.png" width=49% height="200px"> <img src="./blob/mobile.png" width=49% height="200px">
+
 ## Setup
 ### To get a local copy of RideShare and running, follow these steps:
 
