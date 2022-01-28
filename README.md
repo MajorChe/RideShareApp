@@ -93,5 +93,8 @@ Please go inside client and server folders and do:
 npm install
 ```
 
+## Feel free to Chat 
+* charit.sharma@outlook.com
+
 
 
