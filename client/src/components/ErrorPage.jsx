@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, SimpleGrid, Image } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -8,7 +8,7 @@ const ErrorPage = () => {
   return (
     <>
       <Navbar />
-      <Box textAlign="center" py={10} px={6}>
+      <Box textAlign="center" py={5} px={6}>
       <Heading
         display="inline-block"
         as="h2"
